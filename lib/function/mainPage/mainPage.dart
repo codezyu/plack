@@ -5,6 +5,7 @@ import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:plack/common/scaleFactor.dart';
 import 'package:plack/function/aboutPage/aboutPage.dart';
+import 'package:plack/function/favouritePage/FavoritePage.dart';
 import 'package:plack/function/newsPage/newsPage.dart';
 import 'package:plack/function/settingPage/settingPage.dart';
 
@@ -112,7 +113,7 @@ class _mainPageState extends State<mainPage>{
                                   index: indexOfMenu.value,
                                   children: [
                                     HomePage(),
-                                    AboutPage(),
+                                    FavoritePage(),
                                     AboutPage(),
                                     AboutPage(),
                                     AboutPage(),

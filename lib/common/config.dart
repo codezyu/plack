@@ -6,8 +6,8 @@ bool isSettingsOpen = false;
 bool isFavouriteOpen=false;
 bool openedAfterDbUpdate = false;
 const Map<String, int> Menu = {
-  'news':-1,
-  'favourite':0,
+  'news':0,
+  'favourite':1,
   'camera':2,
   'login':3,
   'about':4,

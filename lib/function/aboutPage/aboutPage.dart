@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -16,6 +17,7 @@ class AboutPage extends StatefulWidget {
   _AboutPageState createState() => _AboutPageState();
 }
 class _AboutPageState extends State<AboutPage> {
+  ValueNotifier<String> _titleName=ValueNotifier<String>("About");
   late double screenWidth;
   double xOffset = 0;
   double yOffset = 0;

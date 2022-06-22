@@ -34,7 +34,7 @@ void main() {
           ),
           initialRoute: '/home',
           routes: {
-            '/home': (context) => AboutPage(),
+            '/home': (context) =>mainPage(),
             '/login':(context)=>mainPage(),
           },
         ),

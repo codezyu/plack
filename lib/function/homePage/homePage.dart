@@ -10,6 +10,7 @@ import '../../common/providers.dart';
 import '../../models/CategoryModel.dart';
 import 'getCategories.dart';
 
+//主页
 class HomePage extends StatefulWidget{
   @override
   _HomePageState createState()=> _HomePageState();

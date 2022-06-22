@@ -10,7 +10,7 @@ import '../../style/NeuButton.dart';
 class FavoritePage extends StatefulWidget{
   @override
   _FavoritePageState createState()=>_FavoritePageState();
-  
+
 }
 class _FavoritePageState extends State<FavoritePage>{
   ValueNotifier<String> _titleName = ValueNotifier<String>('Favourite');
@@ -56,20 +56,16 @@ class _FavoritePageState extends State<FavoritePage>{
               return child!;
             },
             child: AnimatedContainer(
-              padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
               duration: Duration(milliseconds: drawerAnimDur),
               curve: Curves.easeInOutQuart,
               transform: Matrix4.translationValues(xOffset, yOffset, 100)
                 ..scale(scaleFactor),
               height: MediaQuery.of(context).size.height,
-              width: double.infinity,
+              width: MediaQuery.of(context).size.width,
               onEnd: (() {
                 if (isFavouriteOpen && indexOfMenu.value == Menu['favourite']) {
                   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
                     statusBarColor: Colors.transparent,
-                    // isHomeOpen
-                    //     ? backgroundColor
-                    //     : drawerColor,
                     statusBarIconBrightness:
                     isFavouriteOpen ? Brightness.dark : Brightness.light,
                     systemNavigationBarColor:
@@ -83,7 +79,7 @@ class _FavoritePageState extends State<FavoritePage>{
               }),
               decoration: BoxDecoration(
                 color: backgroundColor,
-                borderRadius: BorderRadius.circular(isFavouriteOpen ? 0 : 28),
+                borderRadius: BorderRadius.circular(isDrawerOpen ? 28 : 0),
               ),
               child: GestureDetector(
                 onTap: (() {
@@ -108,228 +104,240 @@ class _FavoritePageState extends State<FavoritePage>{
                     });
                   }
                 }),
-                child: AnimatedOpacity(
-                  duration: Duration(milliseconds: 200),
-                  opacity: _opacity,
-                  child: AbsorbPointer(
-                    absorbing: !isFavouriteOpen,
-                    child: Column(
-                      // mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          flex: 6,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(left: 27),
-                                child: ValueListenableBuilder<String>(
-                                  valueListenable: _titleName,
-                                  builder: (context, value, child) {
-                                    return Text(
-                                      _titleName.value,
-                                      style: TextStyle(
-                                        color: textColor,
-                                        letterSpacing: 2.0,
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                              Stack(
-                                children: [
-                                  NeuButton(
-                                    ico: Icon(
-                                      Icons.menu_rounded,
-                                      size: 30,
-                                      color: textColor,
-                                    ),
-                                    onPress: (() {
-                                      setState(() {
-                                        FocusScope.of(context).unfocus();
-                                        isBackPressed = true;
-                                        xOffset = 250;
-                                        yOffset = 140;
-                                        scaleFactor = 0.7;
-                                        isDrawerOpen = true;
-                                        isHomeOpen = false;
-                                        SystemChrome.setSystemUIOverlayStyle(
-                                            SystemUiOverlayStyle(
-                                              statusBarColor: Colors.transparent,
-                                              // isHomeOpen
-                                              //     ? backgroundColor
-                                              //     : drawerColor,
-                                              statusBarIconBrightness: isHomeOpen
-                                                  ? Brightness.dark
-                                                  : Brightness.light,
-                                              systemNavigationBarColor: isHomeOpen
-                                                  ? backgroundColor
-                                                  : drawerColor,
-                                              systemNavigationBarIconBrightness:
-                                              isHomeOpen
-                                                  ? Brightness.dark
-                                                  : Brightness.light,
-                                              systemNavigationBarDividerColor:
-                                              isHomeOpen
-                                                  ? backgroundColor
-                                                  : drawerColor,
-                                            ));
-                                      });
-                                    }),
+                child: AbsorbPointer(
+                  //根据页 面是否打开确定是否可以点击
+                  absorbing: !isFavouriteOpen,
+                  child: Container(
+                      height: double.infinity,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: backgroundColor,
+                        borderRadius: BorderRadius.circular(isFavouriteOpen ? 0 : 28),
+                      ),
+                      child:Column(
+                        // mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          //界面标题和菜单按钮
+                          Expanded(
+                            flex: 6,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(left: 27),
+                                  child: ValueListenableBuilder<String>(
+                                    valueListenable: _titleName,
+                                    builder: (context, value, child) {
+                                      return Text(
+                                        _titleName.value,
+                                        style: TextStyle(
+                                          color: textColor,
+                                          letterSpacing: 2.0,
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      );
+                                    },
                                   ),
-                                  if (!openedAfterDbUpdate)
-                                    Positioned(
-                                      // draw a red marble
-                                      top: 0.0,
-                                      right: 15.0,
-                                      child: new Icon(Icons.brightness_1_rounded,
-                                          size: 15.0, color: Colors.redAccent),
-                                    )
-                                ],
-                              ),
-                            ],
+                                ),
+                                //层叠布局
+                                Stack(
+                                  children: [
+                                    NeuButton(
+                                      ico: Icon(
+                                        Icons.menu_rounded,
+                                        size: 30,
+                                        color: textColor,
+                                      ),
+                                      onPress: (() {
+                                        setState(() {
+                                          FocusScope.of(context).unfocus();
+                                          isBackPressed = true;
+                                          xOffset = 250;
+                                          yOffset = 140;
+                                          scaleFactor = 0.7;
+                                          isDrawerOpen = true;
+                                          isHomeOpen = false;
+                                          SystemChrome.setSystemUIOverlayStyle(
+                                              SystemUiOverlayStyle(
+                                                statusBarColor: Colors.transparent,
+                                                // isHomeOpen
+                                                //     ? backgroundColor
+                                                //     : drawerColor,
+                                                statusBarIconBrightness: isHomeOpen
+                                                    ? Brightness.dark
+                                                    : Brightness.light,
+                                                systemNavigationBarColor: isHomeOpen
+                                                    ? backgroundColor
+                                                    : drawerColor,
+                                                systemNavigationBarIconBrightness:
+                                                isHomeOpen
+                                                    ? Brightness.dark
+                                                    : Brightness.light,
+                                                systemNavigationBarDividerColor:
+                                                isHomeOpen
+                                                    ? backgroundColor
+                                                    : drawerColor,
+                                              ));
+                                        });
+                                      }),
+                                    ),
+                                    if (!openedAfterDbUpdate)
+                                      Positioned(
+                                        // draw a red marble
+                                        top: 0.0,
+                                        right: 15.0,
+                                        child: new Icon(Icons.brightness_1_rounded,
+                                            size: 15.0, color: Colors.redAccent),
+                                      )
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 0,
-                          child: SizedBox(),
-                        ),
-                        Expanded(
-                          flex: 6,
-                          child: Column(
-                            children: [
-                              Container(
+                          //间隔
+                          Expanded(
+                            flex: 0,
+                            child: SizedBox(),
+                          ),
+                          //阅读数
+                          Expanded(
+                            flex: 6,
+                            child: Column(
+                              children: [
+                                Container(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Reading / Num',
+                                      style: kTextStyle.copyWith(
+                                        color: isDark ? Colors.white : Colors.black,
+                                      ),
+                                    )),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  alignment: Alignment.center,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                          child: Text(
+                                            '130',
+                                            style: kTextStyle.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 25,
+                                              color: textColor,
+                                            ),
+                                          )),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          //收藏数
+                          Expanded(
+                            flex: 6,
+                            child: Column(
+                              children: [
+                                Container(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    'Reading / Num',
+                                    'Collection',
                                     style: kTextStyle.copyWith(
                                       color: isDark ? Colors.white : Colors.black,
                                     ),
-                                  )),
-                              Container(
-                                margin: EdgeInsets.only(top: 10),
-                                alignment: Alignment.center,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  alignment: Alignment.center,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
                                         child: Text(
-                                          '130',
+                                          '250',
                                           style: kTextStyle.copyWith(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 25,
                                             color: textColor,
                                           ),
-                                        )),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          flex: 6,
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'Collection',
-                                  style: kTextStyle.copyWith(
-                                    color: isDark ? Colors.white : Colors.black,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 10),
-                                alignment: Alignment.center,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      child: Text(
-                                        '250',
-                                        style: kTextStyle.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                          color: textColor,
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          flex: 6,
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'Topic',
-                                  style: kTextStyle.copyWith(
-                                    color: isDark ? Colors.white : Colors.black,
+                                    ],
                                   ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 10),
-                                alignment: Alignment.center,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      child: Text(
-                                        '250',
-                                        style: kTextStyle.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                          color: textColor,
+                              ],
+                            ),
+                          ),
+                          //喜欢的主题
+                          Expanded(
+                            flex: 6,
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Topic',
+                                    style: kTextStyle.copyWith(
+                                      color: isDark ? Colors.white : Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  alignment: Alignment.center,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        child: Text(
+                                          '250',
+                                          style: kTextStyle.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 25,
+                                            color: textColor,
+                                          ),
                                         ),
                                       ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          //左右按钮
+                          Expanded(
+                            flex: 5,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Hero(
+                                  tag: 'leftButton',
+                                  child: NeuButton(
+                                    ico: Icon(
+                                      Icons.bookmark_border_rounded,
+                                      size: 30,
+                                      color: textColor,
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          flex: 5,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Hero(
-                                tag: 'leftButton',
-                                child: NeuButton(
-                                  ico: Icon(
-                                    Icons.bookmark_border_rounded,
-                                    size: 30,
-                                    color: textColor,
                                   ),
                                 ),
-                              ),
-                              Hero(
-                                tag: 'rightButton',
-                                child: NeuButton(
-                                  ico: Icon(
-                                    Icons.save_outlined,
-                                    size: 30,
-                                    color: textColor,
+                                Hero(
+                                  tag: 'rightButton',
+                                  child: NeuButton(
+                                    ico: Icon(
+                                      Icons.save_outlined,
+                                      size: 30,
+                                      color: textColor,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      )
                   ),
                 ),
               ),

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+//新闻页面
 class NewsPage extends StatefulWidget{
   final String id;
   NewsPage({required this.id});
