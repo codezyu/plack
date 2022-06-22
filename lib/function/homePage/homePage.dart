@@ -108,11 +108,12 @@ class _HomePageState extends State<HomePage>{
                       child: AbsorbPointer(
                         absorbing: !isHomeOpen,
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             //icon
                             Expanded(
-                              flex: 6,
+                              flex: 13,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -188,7 +189,7 @@ class _HomePageState extends State<HomePage>{
                               ),
                             ),
                             Expanded(
-                              flex: 0,
+                              flex: 1,
                               child: SizedBox(),
                             ),
                             //Categories
@@ -202,7 +203,12 @@ class _HomePageState extends State<HomePage>{
                                     return NeumorphicCard(CategoryCard(imageAssetUrl: categories[index].url, categoryName: categories[index].name));
                                   }
                               ),
-                            )
+                            ),
+                            //填充
+                            Expanded(
+                              flex: 50,
+                              child: SizedBox(),
+                            ),
                           ],
                         )
                       )

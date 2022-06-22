@@ -324,11 +324,11 @@ class _AboutPageState extends State<AboutPage> {
                             GestureDetector(
                               onTap: (() async {
                                 if (await canLaunchUrl(
-                                    Uri.parse('https://www.linkedin.com/in/soham-rakhunde/'))) {
+                                    Uri.parse('https://www.google.com/search?q=%E5%8E%A6%E9%97%A8%E5%A4%A7%E5%AD%A6'))) {
                                   await launchUrl(Uri.parse(
-                                      'https://www.linkedin.com/in/soham-rakhunde/'));
+                                      'https://www.google.com/search?q=%E5%8E%A6%E9%97%A8%E5%A4%A7%E5%AD%A6'));
                                 } else {
-                                  throw 'Could not launch https://www.linkedin.com/in/soham-rakhunde/}';
+                                  throw 'https://www.google.com/search?q=%E5%8E%A6%E9%97%A8%E5%A4%A7%E5%AD%A6';
                                 }
                               }),
                               child: Container(
@@ -352,7 +352,7 @@ class _AboutPageState extends State<AboutPage> {
                                 ),
                                 child: Center(
                                   child: FaIcon(
-                                    FontAwesomeIcons.linkedinIn,
+                                    FontAwesomeIcons.school,
                                     size: 30,
                                     color: textColor,
                                   ),
