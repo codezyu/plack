@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:plack/function/aboutPage/aboutPage.dart';
+import 'package:plack/function/drawerPage/drawerPage.dart';
 import 'package:plack/function/mainPage/mainpage.dart';
 import 'package:plack/function/settingPage/settingPage.dart';
 

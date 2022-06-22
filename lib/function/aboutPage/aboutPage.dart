@@ -249,7 +249,7 @@ class _AboutPageState extends State<AboutPage> {
                           duration: Duration(milliseconds: 600),
                           child: ClipOval(
                             child: Image.asset(
-                              'assets/logoblender.png',
+                              'assets/img/logo/logo.jpg',
                               color: isDark
                                   ? backgroundC[0].withAlpha(243)
                                   : Colors.transparent,

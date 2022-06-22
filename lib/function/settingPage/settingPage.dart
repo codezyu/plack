@@ -11,7 +11,7 @@ import '../../common/colorEllipse.dart';
 import '../../common/config.dart';
 import '../../common/constants.dart';
 import '../../common/providers.dart';
-
+//设置界面
 class SettingsPage extends StatefulWidget {
   @override
   _SettingsPageState createState() => _SettingsPageState();

@@ -6,11 +6,11 @@ bool isSettingsOpen = false;
 bool isFavouriteOpen=false;
 bool openedAfterDbUpdate = false;
 const Map<String, int> Menu = {
-  'news':0,
+  'home':0,
   'favourite':1,
   'camera':2,
   'login':3,
   'about':4,
   'setting':5,
-  'home':6
+  'news':6
 };
