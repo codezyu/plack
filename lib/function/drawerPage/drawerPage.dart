@@ -163,6 +163,48 @@ class _drawerPageState extends State<drawerPage> {
                                 .height * 4 / 85,
                           ),
                           GestureDetector(
+                            //发送通知
+                            onTap: (() {
+                              setState(() {
+                                indexOfMenu.value = 1;
+                              });
+                            }),
+                            child: FittedBox(
+                              fit: BoxFit.fitHeight,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.camera_alt_outlined,
+                                    size: 25,
+                                    color: Colors
+                                        .teal[indexOfMenu.value == 0
+                                        ? 200
+                                        : 500],
+                                  ),
+                                  SizedBox(width: screenWidth / 20),
+                                  Text(
+                                    'Camera',
+                                    style: TextStyle(
+                                      fontFamily: 'MontserratBold',
+                                      color: Colors.yellow[
+                                      indexOfMenu.value == 0 ? 200 : 500],
+                                      letterSpacing: 1.5,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: MediaQuery
+                                .of(context)
+                                .size
+                                .height * 4 / 85,
+                          ),
+                          GestureDetector(
                             onTap: (() {
                               setState(() {
                                 indexOfMenu.value = 3;

@@ -3,20 +3,6 @@ import 'package:flutter/material.dart';
 final drawerAnimDur = 350;
 ValueNotifier<int> indexOfMenu =
     ValueNotifier<int>(0); //Timer,Stats,Donate,About,Rate
-Map retain = {
-  'sets': '-1',
-  'breakMin': '-1',
-  'breakSec': '-1',
-  'periodMin': '-1',
-  'periodSec': '-1'
-};
-Map controller = {
-  'sets': TextEditingController(text: '3'),
-  'breakSec': TextEditingController(text: '30'),
-  'breakMin': TextEditingController(text: '30'),
-  'periodSec': TextEditingController(text: '30'),
-  'periodMin': TextEditingController(text: '30'),
-};
 const kTextStyle = TextStyle(
   letterSpacing: 2.0,
   fontSize: 20,
@@ -62,7 +48,6 @@ const redGradient = [
   Color.fromRGBO(254, 154, 92, 1),
   Color.fromRGBO(255, 93, 91, 1),
 ];
-
 List<List<Color>> gradientList = [
   sunset,
   sea,
@@ -75,16 +60,6 @@ List<Color> sunset = [Color(0xFFFE6197), Color(0xFFFFB463)];
 List<Color> sea = [Color(0xFF61A3FE), Color(0xFF63FFD5)];
 List<Color> mango = [Color(0xFFFFA738), Color(0xFFFFE130)];
 List<Color> fire = [Color(0xFFFF5DCD), Color(0xFFFF8484)];
-final List<String> voiceModels = [
-  'Amy',
-  'Brian',
-  'Emma',
-  'Joanna',
-  'Joey',
-  'Matthew',
-  'Olivia',
-  'Salli'
-];
 //Color.fromRGBO(10, 90, 85, 1);
 final drawerColor = Color(0xFF23395d);
 final seekBarLight = Color(0xFFB8ECED);
