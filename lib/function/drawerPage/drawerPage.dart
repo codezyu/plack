@@ -82,7 +82,7 @@ class _drawerPageState extends State<drawerPage> {
                             //发送通知
                             onTap: (() {
                               setState(() {
-                                indexOfMenu.value = 0;
+                                indexOfMenu.value = Menu['home']!;
                               });
                             }),
                             child: FittedBox(
@@ -124,7 +124,7 @@ class _drawerPageState extends State<drawerPage> {
                             //发送通知
                             onTap: (() {
                               setState(() {
-                                indexOfMenu.value = 1;
+                                indexOfMenu.value = Menu['favourite']!;
                               });
                             }),
                             child: FittedBox(
@@ -166,7 +166,7 @@ class _drawerPageState extends State<drawerPage> {
                             //发送通知
                             onTap: (() {
                               setState(() {
-                                indexOfMenu.value = 1;
+                                indexOfMenu.value = Menu['favourite']!;
                               });
                             }),
                             child: FittedBox(

@@ -25,7 +25,7 @@ class _AboutPageState extends State<AboutPage> {
   double logoAnim = 0;
   bool isBackPressed = false;
   @override
-  void initState() {
+  void initState(){
     super.initState();
     //后退拦截
     BackButtonInterceptor.add(myInterceptor);
@@ -279,7 +279,7 @@ class _AboutPageState extends State<AboutPage> {
                       Padding(
                         padding: const EdgeInsets.only(top: 20, bottom: 50),
                         child: Text(
-                          'Version 0.0.1',
+                          'Version'+ version,
                           style: kTextStyle.copyWith(
                             color: isDark ? Colors.white : Colors.black,
                           ),

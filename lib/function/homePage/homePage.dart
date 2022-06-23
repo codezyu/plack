@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage>{
           return ValueListenableBuilder(
               valueListenable: indexOfMenu,
               builder: (context, dynamic val, child){
-                if (!isHomeOpen && indexOfMenu.value == 0 && !isBackPressed) {
+                if (!isHomeOpen && indexOfMenu.value == Menu['home'] && !isBackPressed) {
 
                 } else if (indexOfMenu.value != Menu['home']) isBackPressed = false;
                 return child!;
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage>{
                 ),
                 child: GestureDetector(
                   onTap: (() {
-                    if (!isHomeOpen && indexOfMenu.value == 0) {
+                    if (!isHomeOpen && indexOfMenu.value == Menu['home']) {
                       setState(() {
                         xOffset = 0;
                         yOffset = 0;
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage>{
                     }
                   }),
                   onHorizontalDragEnd: ((_) {
-                    if (!isHomeOpen && indexOfMenu.value == 0) {
+                    if (!isHomeOpen && indexOfMenu.value == Menu['home']) {
                       setState(() {
                         xOffset = 0;
                         yOffset = 0;

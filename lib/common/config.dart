@@ -14,3 +14,4 @@ const Map<String, int> Menu = {
   'setting':5,
   'news':6
 };
+const version='0.0.1';

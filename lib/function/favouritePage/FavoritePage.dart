@@ -56,6 +56,7 @@ class _FavoritePageState extends State<FavoritePage>{
               return child!;
             },
             child: AnimatedContainer(
+              padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
               duration: Duration(milliseconds: drawerAnimDur),
               curve: Curves.easeInOutQuart,
               transform: Matrix4.translationValues(xOffset, yOffset, 100)
