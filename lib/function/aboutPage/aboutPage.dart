@@ -73,6 +73,8 @@ class _AboutPageState extends State<AboutPage> {
 
   @override
   Widget build(BuildContext context) {
+    print('isAboutOpen');
+    print(isAboutOpen);
     screenWidth = MediaQuery.of(context).size.width;
     return Consumer(
       builder: (context, ref, child) {
@@ -185,6 +187,7 @@ class _AboutPageState extends State<AboutPage> {
                                 ),
                                 onPress: (() {
                                   setState(() {
+                                    FocusScope.of(context).unfocus();
                                     isBackPressed = true;
                                     xOffset = adjusted(250);
                                     yOffset = adjusted(140);

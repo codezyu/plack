@@ -9,9 +9,9 @@ const Map<String, int> Menu = {
   'home':0,
   'favourite':1,
   'camera':2,
-  'login':3,
-  'about':4,
-  'setting':5,
-  'news':6
+  'login':-1,
+  'about':3,
+  'setting':4,
+  'news':5,
 };
 const version='0.0.1';

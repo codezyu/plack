@@ -14,7 +14,6 @@ class FavoritePage extends StatefulWidget{
 }
 class _FavoritePageState extends State<FavoritePage>{
   ValueNotifier<String> _titleName = ValueNotifier<String>('Favourite');
-  late AnimationController playGradientControl;
   late Animation<Color?> colAnim1, colAnim2;
   TextEditingController dialogController = TextEditingController();
   double _opacity = 1;
@@ -27,10 +26,10 @@ class _FavoritePageState extends State<FavoritePage>{
   @override
   void initState() {
     super.initState();
-    isFavouriteOpen=true;
   }
   @override
   Widget build(BuildContext context) {
+    print(isFavouriteOpen);
     return Consumer(
         builder: (context, ref, child) {
           bool isDark = ref.read(isDarkProvider);
@@ -45,7 +44,6 @@ class _FavoritePageState extends State<FavoritePage>{
                 Future.delayed(Duration(microseconds: 1)).then((value) {
                   setState(() {
                     xOffset = 0;
-                    playGradientControl.reverse();
                     yOffset = 0;
                     scaleFactor = 1;
                     isDrawerOpen = false;
@@ -163,7 +161,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                               yOffset = 140;
                                               scaleFactor = 0.7;
                                               isDrawerOpen = true;
-                                              isHomeOpen = false;
+                                              isFavouriteOpen = false;
                                               SystemChrome.setSystemUIOverlayStyle(
                                                   SystemUiOverlayStyle(
                                                     statusBarColor: Colors.transparent,

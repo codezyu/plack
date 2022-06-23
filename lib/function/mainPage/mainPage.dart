@@ -54,18 +54,19 @@ class _mainPageState extends State<mainPage>{
     //退出管理
     return WillPopScope(
       onWillPop: () async{
-        if (_lastQuitTime == null ||
-            DateTime
-                .now()
-                .difference(_lastQuitTime)
-                .inSeconds > 1){
-          Scaffold.of(context)
-              .showSnackBar(SnackBar(content: Text('再按一次 Back 按钮退出')));
-          _lastQuitTime = DateTime.now();
-          return false;
-        }else{
-          return true;
-        }
+        // if (_lastQuitTime == null ||
+        //     DateTime
+        //         .now()
+        //         .difference(_lastQuitTime)
+        //         .inSeconds > 1){
+        //   Scaffold.of(context)
+        //       .showSnackBar(SnackBar(content: Text('再按一次 Back 按钮退出')));
+        //   _lastQuitTime = DateTime.now();
+        //   return false;
+        // }else{
+        //   return true;
+        // }
+        return true;
       },
       //状态管理
       child: Consumer(
@@ -94,16 +95,6 @@ class _mainPageState extends State<mainPage>{
                         children: [
                           drawerPage(),
                           //层叠布局
-                          Positioned(
-                            left: 200,
-                            top: 140 + SizeConfig.screenHeight * 0.05,
-                            child: GestureDetector(
-                              onTap: ()async{
-
-                              },
-                            ),
-
-                          ),
                           ValueListenableBuilder<int>(
                             //监听对象
                               valueListenable: indexOfMenu,
@@ -116,7 +107,7 @@ class _mainPageState extends State<mainPage>{
                                     FavoritePage(),
                                     AboutPage(),
                                     AboutPage(),
-                                    AboutPage(),
+                                    SettingsPage(),
                                     SettingsPage(),
                                   ],
                                 );

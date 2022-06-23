@@ -19,6 +19,7 @@ class HomePage extends StatefulWidget{
 }
 class _HomePageState extends State<HomePage>{
   ValueNotifier<String> _titleName = ValueNotifier<String>('News');
+  late AnimationController playGradientControl;
   bool isBackPressed = false;
   late double screenWidth;
   //缩放系数
@@ -46,7 +47,16 @@ class _HomePageState extends State<HomePage>{
               valueListenable: indexOfMenu,
               builder: (context, dynamic val, child){
                 if (!isHomeOpen && indexOfMenu.value == Menu['home'] && !isBackPressed) {
-
+                  Future.delayed(Duration(microseconds: 1)).then((value) {
+                    setState(() {
+                      xOffset = 0;
+                      playGradientControl.reverse();
+                      yOffset = 0;
+                      scaleFactor = 1;
+                      isDrawerOpen = false;
+                      isHomeOpen = true;
+                    });
+                  });
                 } else if (indexOfMenu.value != Menu['home']) isBackPressed = false;
                 return child!;
               },
