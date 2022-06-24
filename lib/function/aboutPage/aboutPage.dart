@@ -73,8 +73,6 @@ class _AboutPageState extends State<AboutPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('isAboutOpen');
-    print(isAboutOpen);
     screenWidth = MediaQuery.of(context).size.width;
     return Consumer(
       builder: (context, ref, child) {

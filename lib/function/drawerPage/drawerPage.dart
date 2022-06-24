@@ -166,7 +166,7 @@ class _drawerPageState extends State<drawerPage> {
                             //发送通知
                             onTap: (() {
                               setState(() {
-                                indexOfMenu.value = Menu['favourite']!;
+                                indexOfMenu.value = Menu['camera']!;
                               });
                             }),
                             child: FittedBox(
@@ -184,7 +184,7 @@ class _drawerPageState extends State<drawerPage> {
                                   ),
                                   SizedBox(width: screenWidth / 20),
                                   Text(
-                                    'Camera',
+                                    'Assit',
                                     style: TextStyle(
                                       fontFamily: 'MontserratBold',
                                       color: Colors.yellow[

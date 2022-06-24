@@ -11,7 +11,7 @@ class NeuButton extends StatefulWidget {
   AnimatedIcon? animatedIco;
   bool flag = false;
   bool animated = false;
-  double length, breadth, radii;
+  double length, breadth, radii,size;
   Function? onPress;
 
   NeuButton(
@@ -22,6 +22,7 @@ class NeuButton extends StatefulWidget {
         this.length = 60,
         this.breadth = 60,
         this.animated = false,
+        this.size=30,
         this.animatedIco});
 
   @override
@@ -106,7 +107,7 @@ class _NeuButtonState extends State<NeuButton> with SingleTickerProviderStateMix
                     ? Center(
                   child: AnimatedIcon(
                     icon: widget.ico,
-                    size: 30,
+                    size: widget.size,
                     color: textColor,
                     progress: playPauseController,
                   ),

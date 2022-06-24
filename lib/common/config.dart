@@ -5,6 +5,7 @@ bool isHomeOpen = true;
 bool isSettingsOpen = false;
 bool isFavouriteOpen=false;
 bool openedAfterDbUpdate = false;
+bool isCameraOpen=false;
 const Map<String, int> Menu = {
   'home':0,
   'favourite':1,
