@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:plack/function/homePage/CategoryCard.dart';
+import 'package:plack/function/newsPage/newsPage.dart';
 import 'package:plack/style/NeuCard.dart';
 
 import '../../common/config.dart';
@@ -226,7 +227,7 @@ class _HomePageState extends State<HomePage>{
                                   child: NotificationListener(
                                       child: AnimatedList(
                                           controller: scrollController,
-                                          initialItemCount: 2,
+                                          initialItemCount: 1,
                                           key: ValueKey('2'),
                                           //允许滚动超出边界，但之后内容会反弹回来
                                           physics: BouncingScrollPhysics(),
@@ -239,7 +240,7 @@ class _HomePageState extends State<HomePage>{
                                               padding: EdgeInsets.symmetric(
                                                   vertical: 15, horizontal: 15),
                                               width: screenWidth,
-                                              height: 180,
+                                              height: 200,
                                               decoration: BoxDecoration(
                                                 color: backgroundColor,
                                                 // gradient: LinearGradient(
@@ -258,61 +259,92 @@ class _HomePageState extends State<HomePage>{
                                                       blurRadius: 12),
                                                 ],
                                               ),
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                mainAxisSize: MainAxisSize.min,
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                children: [
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Container(
-                                                    alignment: Alignment.centerLeft,
-                                                    child:  Text(
-                                                      'XX : 到达世界最高层123212312343424314123412341421',
-                                                      style: TitleTextStyle.copyWith(
-                                                        color: textColor,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 20,
+                                              child: GestureDetector(
+                                                child:Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Container(
+                                                      alignment: Alignment.centerLeft,
+                                                      child:  Text(
+                                                        'XX : 到达世界最高层123212312343424314123412341421',
+                                                        style: TitleTextStyle.copyWith(
+                                                          color: textColor,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 20,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  Expanded(
+                                                    Expanded(
                                                       child: SizedBox(),
-                                                    flex: 1,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        '分类:',
-                                                        style: TextStyle(
-                                                          color: Colors.lightGreen,
-                                                          fontWeight: FontWeight.w500,
+                                                      flex: 1,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          '分类:',
+                                                          style: TextStyle(
+                                                            color: Colors.lightGreen,
+                                                            fontWeight: FontWeight.w500,
+                                                          ),
                                                         ),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
-                                                      Text(
-                                                        '政治',
-                                                        style: TextStyle(
-                                                          fontWeight:FontWeight.bold,
+                                                        SizedBox(
+                                                          width: 10,
                                                         ),
-                                                      ),
-                                                      Expanded(
-                                                        child: SizedBox(),
-                                                        flex: 1,
-                                                      ),
-                                                      Text(
-                                                        '推荐',
-                                                        style: TextStyle(
-                                                          color: Colors.cyan,
+                                                        Text(
+                                                          '政治',
+                                                          style: TextStyle(
+                                                            fontWeight:FontWeight.bold,
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
+                                                        Expanded(
+                                                          child: SizedBox(),
+                                                          flex: 1,
+                                                        ),
+                                                        Text(
+                                                          '推荐',
+                                                          style: TextStyle(
+                                                            color: Colors.cyan,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                                onTap:() async {
+                                                  FocusScopeNode currentFocus =
+                                                  FocusScope.of(context);
+                                                  if (!currentFocus.hasPrimaryFocus) {
+                                                    currentFocus.unfocus();
+                                                  }
+                                                  await Navigator.push(
+                                                      context,
+                                                      PageRouteBuilder(
+                                                          transitionDuration:
+                                                          Duration(milliseconds: 250),
+                                                          reverseTransitionDuration:
+                                                          Duration(milliseconds: 150),
+                                                          transitionsBuilder: (BuildContext
+                                                          context,
+                                                              Animation<double> animation,
+                                                              Animation<double> secAnimation,
+                                                              Widget child) {
+                                                            return FadeTransition(
+                                                              opacity: animation,
+                                                              child: child,
+                                                            );
+                                                          },
+                                                          pageBuilder: (BuildContext context,
+                                                              Animation<double> animation,
+                                                              Animation<double>
+                                                              secAnimation) {
+                                                            return NewsPage(id: '1');
+                                                          }));
+                                                },),
                                             );
 
                                           }

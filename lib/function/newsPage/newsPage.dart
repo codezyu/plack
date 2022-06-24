@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:plack/style/NeuButton.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 //新闻页面
 class NewsPage extends StatefulWidget{
@@ -14,7 +16,14 @@ class _NewsPageState extends State<NewsPage>{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+      floatingActionButton: NeuButton(
+        ico: FaIcon(
+          FontAwesomeIcons.heart,
+          size: 30,
+          color: Colors.red,
+        )
+      ),
+    );
   }
 }
