@@ -1,3 +1,5 @@
+import 'package:camera/camera.dart';
+
 const perPixel = 0.0025641025641026;
 bool isDrawerOpen = false;
 bool isAboutOpen = false;
@@ -6,6 +8,7 @@ bool isSettingsOpen = false;
 bool isFavouriteOpen=false;
 bool openedAfterDbUpdate = false;
 bool isCameraOpen=false;
+List<CameraDescription> cameras = [];
 const Map<String, int> Menu = {
   'home':0,
   'favourite':1,

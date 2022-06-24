@@ -1,8 +1,10 @@
 import 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:plack/function/cameraPage/cameraScreen.dart';
 
 import '../../common/config.dart';
 import '../../common/constants.dart';
@@ -54,6 +56,7 @@ class _CameraPageState extends State<CameraPage> {
   @override
   void initState(){
     super.initState();
+    WidgetsFlutterBinding.ensureInitialized();
     //后退拦截
     BackButtonInterceptor.add(myInterceptor);
     setState(() {
@@ -232,6 +235,29 @@ class _CameraPageState extends State<CameraPage> {
                              length: 250,
                               breadth: 250,
                               radii: 50,
+                              onPress: (() async{
+                                await Navigator.push(context,
+                                    PageRouteBuilder(
+                                        transitionDuration:
+                                        Duration(milliseconds: 250),
+                                        reverseTransitionDuration:
+                                        Duration(milliseconds: 150),
+                                        transitionsBuilder: (BuildContext
+                                        context,
+                                            Animation<double> animation,
+                                            Animation<double> secAnimation,
+                                            Widget child) {
+                                          return FadeTransition(
+                                            opacity: animation,
+                                            child: child,
+                                          );
+                                        },
+                                        pageBuilder: (BuildContext context,
+                                            Animation<double> animation,
+                                            Animation<double> secAnimation) {
+                                          return CameraScreen();
+                                        }));
+                              }),
                             ),
                             Expanded(
                               flex: 13,

@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,10 +7,18 @@ import 'package:plack/function/drawerPage/drawerPage.dart';
 import 'package:plack/function/mainPage/mainpage.dart';
 import 'package:plack/function/settingPage/settingPage.dart';
 
+import 'common/config.dart';
 import 'function/favouritePage/FavoritePage.dart';
 import 'function/homePage/homePage.dart';
 
-void main() {
+Future<void> main() async {
+  try{
+    //初始化相机
+    WidgetsFlutterBinding.ensureInitialized();
+    cameras = await availableCameras();
+  }catch(e){
+
+  }
   //方向
   Future.delayed(Duration(milliseconds: 1)).then(
           (value) => SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
