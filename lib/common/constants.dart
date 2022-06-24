@@ -6,6 +6,12 @@ ValueNotifier<int> indexOfMenu =
 const kTextStyle = TextStyle(
   letterSpacing: 2.0,
   fontSize: 20,
+  fontWeight: FontWeight.w700,
+);
+const TitleTextStyle = TextStyle(
+  letterSpacing: 2.0,
+  fontSize: 20,
+
 );
 const kInputDecor = InputDecoration(
   border: InputBorder.none,

@@ -28,10 +28,12 @@ class _HomePageState extends State<HomePage>{
   double yOffset = 0;
   double _opacity = 1;
   List<CategoryModel> categories=<CategoryModel>[];
+  var scrollController;
   @override
   void initState() {
     super.initState();
     categories=getCategories();
+    scrollController = ScrollController();
   }
   @override
   Widget build(BuildContext context) {
@@ -116,111 +118,208 @@ class _HomePageState extends State<HomePage>{
                       //1为完全可见
                       opacity: _opacity,
                       child: AbsorbPointer(
-                        absorbing: !isHomeOpen,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            //icon
-                            Expanded(
-                              flex: 13,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.only(left: 27),
-                                    child: ValueListenableBuilder<String>(
-                                      valueListenable: _titleName,
-                                      builder: (context, value, child) {
-                                        return Text(
-                                          _titleName.value,
-                                          style: TextStyle(
-                                            color: textColor,
-                                            letterSpacing: 2.0,
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                  Stack(
-                                    children: [
-                                      NeuButton(
-                                        ico: Icon(
-                                          Icons.menu_rounded,
-                                          size: 30,
-                                          color: textColor,
-                                        ),
-                                        onPress: (() {
-                                          setState(() {
-                                            FocusScope.of(context).unfocus();
-                                            isBackPressed = true;
-                                            xOffset = 250;
-                                            yOffset = 140;
-                                            scaleFactor = 0.7;
-                                            isDrawerOpen = true;
-                                            isHomeOpen = false;
-                                            SystemChrome.setSystemUIOverlayStyle(
-                                                SystemUiOverlayStyle(
-                                                  statusBarColor: Colors.transparent,
-                                                  // isHomeOpen
-                                                  //     ? backgroundColor
-                                                  //     : drawerColor,
-                                                  statusBarIconBrightness: isHomeOpen
-                                                      ? Brightness.dark
-                                                      : Brightness.light,
-                                                  systemNavigationBarColor: isHomeOpen
-                                                      ? backgroundColor
-                                                      : drawerColor,
-                                                  systemNavigationBarIconBrightness:
-                                                  isHomeOpen
-                                                      ? Brightness.dark
-                                                      : Brightness.light,
-                                                  systemNavigationBarDividerColor:
-                                                  isHomeOpen
-                                                      ? backgroundColor
-                                                      : drawerColor,
-                                                ));
-                                          });
-                                        }),
+                          absorbing: !isHomeOpen,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              //icon
+                              Expanded(
+                                flex: 10,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.only(left: 27),
+                                      child: ValueListenableBuilder<String>(
+                                        valueListenable: _titleName,
+                                        builder: (context, value, child) {
+                                          return Text(
+                                            _titleName.value,
+                                            style: TextStyle(
+                                              color: textColor,
+                                              letterSpacing: 2.0,
+                                              fontSize: 30,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          );
+                                        },
                                       ),
-                                      if (!openedAfterDbUpdate)
-                                        Positioned(
-                                          // draw a red marble
-                                          top: 0.0,
-                                          right: 15.0,
-                                          child: new Icon(Icons.brightness_1_rounded,
-                                              size: 15.0, color: Colors.redAccent),
-                                        )
-                                    ],
-                                  ),
-                                ],
+                                    ),
+                                    Stack(
+                                      children: [
+                                        NeuButton(
+                                          ico: Icon(
+                                            Icons.menu_rounded,
+                                            size: 30,
+                                            color: textColor,
+                                          ),
+                                          onPress: (() {
+                                            setState(() {
+                                              FocusScope.of(context).unfocus();
+                                              isBackPressed = true;
+                                              xOffset = 250;
+                                              yOffset = 140;
+                                              scaleFactor = 0.7;
+                                              isDrawerOpen = true;
+                                              isHomeOpen = false;
+                                              SystemChrome.setSystemUIOverlayStyle(
+                                                  SystemUiOverlayStyle(
+                                                    statusBarColor: Colors.transparent,
+                                                    // isHomeOpen
+                                                    //     ? backgroundColor
+                                                    //     : drawerColor,
+                                                    statusBarIconBrightness: isHomeOpen
+                                                        ? Brightness.dark
+                                                        : Brightness.light,
+                                                    systemNavigationBarColor: isHomeOpen
+                                                        ? backgroundColor
+                                                        : drawerColor,
+                                                    systemNavigationBarIconBrightness:
+                                                    isHomeOpen
+                                                        ? Brightness.dark
+                                                        : Brightness.light,
+                                                    systemNavigationBarDividerColor:
+                                                    isHomeOpen
+                                                        ? backgroundColor
+                                                        : drawerColor,
+                                                  ));
+                                            });
+                                          }),
+                                        ),
+                                        if (!openedAfterDbUpdate)
+                                          Positioned(
+                                            // draw a red marble
+                                            top: 0.0,
+                                            right: 15.0,
+                                            child: new Icon(Icons.brightness_1_rounded,
+                                                size: 15.0, color: Colors.redAccent),
+                                          )
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: SizedBox(),
-                            ),
-                            //Categories
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 16),
-                              height: 70,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: categories.length,
-                                  itemBuilder: (context,index){
-                                    return NeumorphicCard(CategoryCard(imageAssetUrl: categories[index].url, categoryName: categories[index].name));
-                                  }
+                              Expanded(
+                                flex: 1,
+                                child: SizedBox(),
                               ),
-                            ),
-                            //填充
-                            Expanded(
-                              flex: 50,
-                              child: SizedBox(),
-                            ),
-                          ],
-                        )
+                              //Categories
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                height: 70,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: categories.length,
+                                    itemBuilder: (context,index){
+                                      return NeumorphicCard(CategoryCard(imageAssetUrl: categories[index].url, categoryName: categories[index].name));
+                                    }
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: SizedBox(),
+                              ),
+                              //新闻推荐
+                              Expanded(
+                                  flex: 30,
+                                  child: NotificationListener(
+                                      child: AnimatedList(
+                                          controller: scrollController,
+                                          initialItemCount: 2,
+                                          key: ValueKey('2'),
+                                          //允许滚动超出边界，但之后内容会反弹回来
+                                          physics: BouncingScrollPhysics(),
+                                          itemBuilder:
+                                              (BuildContext context, int index, animation) {
+                                            return AnimatedContainer(
+                                              duration:Duration(milliseconds: 300),
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 15, horizontal: 20),
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 15, horizontal: 15),
+                                              width: screenWidth,
+                                              height: 180,
+                                              decoration: BoxDecoration(
+                                                color: backgroundColor,
+                                                // gradient: LinearGradient(
+                                                //     colors: gradientList[index % 5],
+                                                //     begin: Alignment.centerLeft,
+                                                //     end: Alignment.centerRight),
+                                                borderRadius: BorderRadius.circular(32),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color: shadowColor,
+                                                      offset: Offset(8, 6),
+                                                      blurRadius: 12),
+                                                  BoxShadow(
+                                                      color: lightShadowColor,
+                                                      offset: Offset(-8, -6),
+                                                      blurRadius: 12),
+                                                ],
+                                              ),
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Container(
+                                                    alignment: Alignment.centerLeft,
+                                                    child:  Text(
+                                                      'XX : 到达世界最高层123212312343424314123412341421',
+                                                      style: TitleTextStyle.copyWith(
+                                                        color: textColor,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 20,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                      child: SizedBox(),
+                                                    flex: 1,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        '分类:',
+                                                        style: TextStyle(
+                                                          color: Colors.lightGreen,
+                                                          fontWeight: FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        '政治',
+                                                        style: TextStyle(
+                                                          fontWeight:FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: SizedBox(),
+                                                        flex: 1,
+                                                      ),
+                                                      Text(
+                                                        '推荐',
+                                                        style: TextStyle(
+                                                          color: Colors.cyan,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            );
+
+                                          }
+                                      ))
+                              )
+                            ],
+                          )
                       )
                   ),
                 ),
