@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:restart_app/restart_app.dart';
 
 import '../../common/config.dart';
 import '../../common/constants.dart';
@@ -13,7 +14,7 @@ class FavoritePage extends StatefulWidget{
 
 }
 class _FavoritePageState extends State<FavoritePage>{
-  ValueNotifier<String> _titleName = ValueNotifier<String>('Favourite');
+  ValueNotifier<String> _titleName = ValueNotifier<String>('User info');
   late Animation<Color?> colAnim1, colAnim2;
   TextEditingController dialogController = TextEditingController();
   double _opacity = 1;
@@ -29,7 +30,6 @@ class _FavoritePageState extends State<FavoritePage>{
   }
   @override
   Widget build(BuildContext context) {
-    print(isFavouriteOpen);
     return Consumer(
         builder: (context, ref, child) {
           bool isDark = ref.read(isDarkProvider);
@@ -209,7 +209,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                     Container(
                                         alignment: Alignment.center,
                                         child: Text(
-                                          'Reading / Num',
+                                          '我的阅读数',
                                           style: kTextStyle.copyWith(
                                             color: isDark ? Colors.white : Colors.black,
                                           ),
@@ -243,7 +243,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                     Container(
                                       alignment: Alignment.center,
                                       child: Text(
-                                        'Collection',
+                                        '我的收藏',
                                         style: kTextStyle.copyWith(
                                           color: isDark ? Colors.white : Colors.black,
                                         ),
@@ -279,7 +279,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                     Container(
                                       alignment: Alignment.center,
                                       child: Text(
-                                        'Topic',
+                                        '我的喜爱',
                                         style: kTextStyle.copyWith(
                                           color: isDark ? Colors.white : Colors.black,
                                         ),
@@ -313,26 +313,82 @@ class _FavoritePageState extends State<FavoritePage>{
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Hero(
-                                      tag: 'leftButton',
-                                      child: NeuButton(
-                                        ico: Icon(
-                                          Icons.bookmark_border_rounded,
-                                          size: 30,
-                                          color: textColor,
+                                    Column(
+                                      children: [
+                                        Text(
+                                          '我的收藏',
+                                          style: TextStyle(
+                                            color: Colors.deepOrange[200],
+                                            fontWeight: FontWeight.w700,
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                    Hero(
-                                      tag: 'rightButton',
-                                      child: NeuButton(
-                                        ico: Icon(
-                                          Icons.save_outlined,
-                                          size: 30,
-                                          color: textColor,
+                                        SizedBox(
+                                          height: 10,
                                         ),
-                                      ),
+                                        Hero(
+                                          tag: 'leftButton',
+                                          child: NeuButton(
+                                            ico: Icon(
+                                              Icons.bookmark_border_rounded,
+                                              size: 30,
+                                              color: textColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          '修改密码',
+                                          style: TextStyle(
+                                            color: Colors.pinkAccent[200],
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Hero(
+                                          tag: 'leftButton',
+                                          child: NeuButton(
+                                            ico: Icon(
+                                              Icons.edit_note,
+                                              size: 30,
+                                              color: textColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          '退出登录',
+                                          style: TextStyle(
+                                            color: Colors.redAccent[200],
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Hero(
+                                          tag: 'rightButton',
+                                          child: NeuButton(
+                                            onPress: (){
+                                              Restart.restartApp(webOrigin:'/login');
+                                            },
+                                            ico: Icon(
+                                              Icons.logout,
+                                              size: 30,
+                                              color: textColor,
+                                            ),
+                                          ),
+                                        ),
+                                        ]
+
+                                    )
                                   ],
                                 ),
                               ),

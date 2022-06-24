@@ -46,6 +46,8 @@ dependencies:
   share_plus: ^4.0.9
   cached_network_image: ^3.2.1
   flutter_neumorphic: ^3.2.0
+  focused_menu: ^1.0.5
+  restart_app: ^1.1.0+1
 
 dev_dependencies:
   flutter_test:

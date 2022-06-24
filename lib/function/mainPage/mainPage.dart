@@ -29,6 +29,7 @@ class _mainPageState extends State<mainPage>{
   Future<bool> fetchModes() async {
     try {
       modesList = await FlutterDisplayMode.supported;
+      print(modesList);
     } on PlatformException catch (e) {
       print(e);
     }

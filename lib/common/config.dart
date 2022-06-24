@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:flutter_displaymode/flutter_displaymode.dart';
 
 const perPixel = 0.0025641025641026;
 bool isDrawerOpen = false;
@@ -9,6 +10,8 @@ bool isFavouriteOpen=false;
 bool openedAfterDbUpdate = false;
 bool isCameraOpen=false;
 List<CameraDescription> cameras = [];
+DisplayMode? selected;
+bool? isContrast = false;
 const Map<String, int> Menu = {
   'home':0,
   'favourite':1,
