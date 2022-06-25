@@ -72,10 +72,10 @@ final seekBarLight = Color(0xFFB8ECED);
 final seekBarDark = Color(0xFF37C8DF);
 final lightGradient = Color(0xFFc2e9fb);
 final darkGradient = Color(0xFFA1C4FD);
-const Color lightPrimary = Color.fromRGBO(255, 208, 0, 1);
-const Color darkPrimary = Color.fromRGBO(255, 184, 0, 1);
+const Color lightPrimary = Color.fromRGBO(250, 240, 230, 1);
+const Color darkPrimary = Color.fromRGBO(135, 206, 235, 1);
 const Color black = Colors.black;
-const Color darkShadow = Color.fromRGBO(222, 160, 0, 1);
-const Color lightShadow = Color.fromRGBO(255, 208, 0, 1);
+const Color darkShadow = Color.fromRGBO(128, 128, 105, 1);
+const Color lightShadow = Color.fromRGBO(210, 230, 201, 1);
 
 const double appPadding = 30;

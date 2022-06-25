@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:plack/function/mainPage/mainpage.dart';
 
 import '../../../../common/constants.dart';
 import '../../widgets/rectangular_button.dart';
@@ -40,7 +41,16 @@ class Credentials extends StatelessWidget {
               ),
             ),
           ),
-          RectangularButton(text: 'Connect the world', press: (){})
+          RectangularButton(text: 'Connect the world', press: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return mainPage();
+                },
+              ),
+            );
+          })
         ],
       ),
     );
