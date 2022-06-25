@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:clay_containers/widgets/clay_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:plack/style/NeuCard.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -63,37 +64,61 @@ class _NewsPageState extends State<NewsPage>{
           ),
         ),
         floatingActionButtonLocation: AlmostEndFloatFabLocation(),
-        body: Column(
-          children: [
-            SizedBox(
-              height: 100,
-            ),
-            Row(
-              children:
-              [
-                SizedBox(
-                  width: 20,
-                ),
-                Expanded(
-                  child: Text(
-                    '测试'*20,
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 30.0,
-                        height: 1.2,
-                        fontFamily: "TitleFont",
-                        decorationStyle: TextDecorationStyle.dashed
+        body: Container(
+          alignment: Alignment.topLeft,
+          padding: EdgeInsets.fromLTRB(12, 6, 12, 12),
+          color: backgroundNewsColor,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child:ListView(
+                  children: <Widget>[
+                    Markdown(
+                      data: '# '+'测试'*20,
+                      physics: new NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      styleSheet: MarkdownStyleSheet(
+                        h1: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'TitleFont',
+                        ),
+                      ),
                     ),
-
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-              ]
-            )
-          ],
+                    Markdown(
+                      data: '政治\n'+'###### '+'来源:'+'央视新闻',
+                      physics: new NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      styleSheet: MarkdownStyleSheet(
+                        p: TextStyle(
+                          fontSize: 12,
+                          color: Colors.lightBlueAccent,
+                        ),
+                        h6: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                    Markdown(
+                      data: '测试'*200,
+                      physics: new NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      styleSheet: MarkdownStyleSheet(
+                        p: TextStyle(
+                          fontFamily: 'TitleFont',
+                          fontSize: 15,
+                          letterSpacing: 4,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ),
+            ],
+          ),
         )
     );
   }

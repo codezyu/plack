@@ -53,6 +53,7 @@ dependencies:
   animated_radial_menu: ^0.0.1
   clay_containers:
     git: https://github.91chi.fun//https://github.com/mcaubrey/clay_containers.git
+  flutter_markdown: ^0.6.10+2
 dev_dependencies:
   flutter_test:
     sdk: flutter
