@@ -19,7 +19,7 @@ class AccountCheck extends StatelessWidget {
         GestureDetector(
           onTap: press,
           child: Text(
-            login ? "Sign Up" : "Sign In",
+            login ? "注册" : "登入",
             style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
           ),
         ),

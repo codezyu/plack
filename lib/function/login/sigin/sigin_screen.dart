@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../common/constants.dart';
-import '../sigup/components/credentials.dart';
-import '../sigup/components/head_text.dart';
-import '../sigup/components/social.dart';
+import 'components/credentials.dart';
+import 'components/head_text.dart';
+import 'components/social.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:plack/function/mainPage/mainpage.dart';
 
 import '../../../../common/constants.dart';
 import '../../widgets/rectangular_button.dart';
@@ -24,14 +25,6 @@ class Credentials extends StatelessWidget {
             height: appPadding / 2,
           ),
           RectangularInputField(
-            hintText: 'Email',
-            icon: Icons.email_rounded,
-            obscureText: false,
-          ),
-          SizedBox(
-            height: appPadding / 2,
-          ),
-          RectangularInputField(
             hintText: 'Password',
             icon: Icons.lock,
             obscureText: true,
@@ -39,16 +32,16 @@ class Credentials extends StatelessWidget {
           SizedBox(
             height: appPadding / 2,
           ),
-          Center(
-            child: Text(
-              'Forget Password?',
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 17,
+          RectangularButton(text: 'Let\'s Start', press: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return mainPage();
+                },
               ),
-            ),
-          ),
-          RectangularButton(text: 'Sign In', press: (){})
+            );
+          })
         ],
       ),
     );

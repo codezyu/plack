@@ -4,6 +4,7 @@ import '../../../../common/constants.dart';
 import '../../Sigin/sigin_screen.dart';
 import '../../widgets/account_check.dart';
 import '../../widgets/rounded_button.dart';
+import '../sigup_screen.dart';
 
 class Social extends StatelessWidget {
   const Social({Key? key}) : super(key: key);
@@ -15,19 +16,6 @@ class Social extends StatelessWidget {
         Text(
           'OR',
           style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: appPadding),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RoundedButton(imageSrc: 'assets/images/google.png', press: () {}),
-              RoundedButton(
-                  imageSrc: 'assets/images/facebook.png', press: () {}),
-              RoundedButton(
-                  imageSrc: 'assets/images/twitter.png', press: () {}),
-            ],
-          ),
         ),
         SizedBox(
           height: appPadding,

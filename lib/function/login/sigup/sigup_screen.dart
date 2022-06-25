@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../common/constants.dart';
-import '../Sigin/components/social.dart';
+import 'components/social.dart';
 import 'components/credentials.dart';
 import 'components/head_text.dart';
 

@@ -18,11 +18,11 @@ class HeadText extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: size.height * 0.05),
-          Text('Welcome',style: TextStyle(
+          Text('Welcome I\'m Plack',style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w600,
           ),),
-          Text('SIGN IN',style: TextStyle(
+          Text('登录',style: TextStyle(
             fontSize: 36,
             fontWeight: FontWeight.bold,
           ),),

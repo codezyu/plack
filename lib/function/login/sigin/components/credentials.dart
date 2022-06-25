@@ -16,8 +16,8 @@ class Credentials extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           RectangularInputField(
-            hintText: 'Email',
-            icon: Icons.email_rounded,
+            hintText: 'username',
+            icon: Icons.person,
             obscureText: false,
           ),
           SizedBox(
@@ -40,7 +40,7 @@ class Credentials extends StatelessWidget {
               ),
             ),
           ),
-          RectangularButton(text: 'Sign In', press: (){})
+          RectangularButton(text: 'Connect the world', press: (){})
         ],
       ),
     );

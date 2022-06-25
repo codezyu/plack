@@ -15,19 +15,6 @@ class Social extends StatelessWidget {
           'OR',
           style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: appPadding),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RoundedButton(imageSrc: 'assets/images/google.png', press: () {}),
-              RoundedButton(
-                  imageSrc: 'assets/images/facebook.png', press: () {}),
-              RoundedButton(
-                  imageSrc: 'assets/images/twitter.png', press: () {}),
-            ],
-          ),
-        ),
         SizedBox(
           height: appPadding,
         ),
