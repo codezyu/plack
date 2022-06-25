@@ -36,7 +36,7 @@ const List textC = [
   Color(0xFF707070),
   Color(0xFFF1F2F6),
 ];
-
+const Color backgroundNewsColor = Color(0xFFF2F2F2);
 
 const turqoiseGradient = [
   Color.fromRGBO(91, 253, 199, 1),
