@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:neumorphic_signin_signup/constants/constants.dart';
+
+import '../../../common/constants.dart';
+
 
 class RectangularButton extends StatelessWidget {
   final String text;

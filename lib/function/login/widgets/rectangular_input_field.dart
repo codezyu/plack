@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:neumorphic_signin_signup/constants/constants.dart';
-import 'package:neumorphic_signin_signup/screens/widgets/neumorphic_text_field_container.dart';
+
+import '../../../common/constants.dart';
+import 'neumorphic_text_field_container.dart';
+
 
 class RectangularInputField extends StatelessWidget {
 

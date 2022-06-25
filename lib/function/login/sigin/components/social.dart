@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:neumorphic_signin_signup/constants/constants.dart';
-import 'package:neumorphic_signin_signup/screens/sign_up/sigup_screen.dart';
-import 'package:neumorphic_signin_signup/screens/widgets/account_check.dart';
-import 'package:neumorphic_signin_signup/screens/widgets/rounded_button.dart';
+import '../../../../common/constants.dart';
+import '../../sigup/sigup_screen.dart';
+import '../../widgets/account_check.dart';
+import '../../widgets/rounded_button.dart';
 
 class Social extends StatelessWidget {
   const Social({Key? key}) : super(key: key);

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:neumorphic_signin_signup/constants/constants.dart';
-import 'package:neumorphic_signin_signup/screens/widgets/rectangular_button.dart';
-import 'package:neumorphic_signin_signup/screens/widgets/rectangular_input_field.dart';
+
+import '../../../../common/constants.dart';
+import '../../widgets/rectangular_button.dart';
+import '../../widgets/rectangular_input_field.dart';
 
 class Credentials extends StatelessWidget {
   const Credentials({Key? key}) : super(key: key);

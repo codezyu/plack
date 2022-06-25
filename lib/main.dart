@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:plack/function/aboutPage/aboutPage.dart';
 import 'package:plack/function/drawerPage/drawerPage.dart';
-import 'package:plack/function/login/signIn.dart';
 import 'package:plack/function/mainPage/mainpage.dart';
 import 'package:plack/function/newsPage/newsPage.dart';
 import 'package:plack/function/settingPage/settingPage.dart';
@@ -46,7 +45,7 @@ Future<void> main() async {
           ),
           initialRoute: '/home',
           routes: {
-            '/home': (context) =>LoginPage(),
+            '/home': (context) =>mainPage(),
             '/login':(context)=>mainPage(),
           },
         ),

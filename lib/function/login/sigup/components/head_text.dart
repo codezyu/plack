@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:neumorphic_signin_signup/constants/constants.dart';
+
+import '../../../../common/constants.dart';
 
 class HeadText extends StatelessWidget {
   const HeadText({Key? key}) : super(key: key);

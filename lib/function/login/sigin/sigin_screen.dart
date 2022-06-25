@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:neumorphic_signin_signup/constants/constants.dart';
-import 'package:neumorphic_signin_signup/screens/sign_in/components/social.dart';
-
-import '../components/credentials.dart';
-import '../components/head_text.dart';
+import '../../../common/constants.dart';
+import '../sigup/components/credentials.dart';
+import '../sigup/components/head_text.dart';
+import '../sigup/components/social.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);

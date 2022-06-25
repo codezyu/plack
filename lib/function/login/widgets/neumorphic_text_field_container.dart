@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:neumorphic_signin_signup/constants/constants.dart';
+
+import '../../../common/constants.dart';
+
 
 class NeumorphicTextFieldContainer extends StatelessWidget {
   final Widget child;

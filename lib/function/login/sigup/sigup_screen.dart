@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:neumorphic_signin_signup/constants/constants.dart';
-import 'package:neumorphic_signin_signup/screens/sign_up/components/social.dart';
-
+import '../../../common/constants.dart';
+import '../Sigin/components/social.dart';
 import 'components/credentials.dart';
 import 'components/head_text.dart';
 
