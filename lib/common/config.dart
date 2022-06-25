@@ -12,6 +12,7 @@ bool isCameraOpen=false;
 List<CameraDescription> cameras = [];
 DisplayMode? selected;
 bool? isContrast = false;
+
 const Map<String, int> Menu = {
   'home':0,
   'favourite':1,
@@ -22,3 +23,13 @@ const Map<String, int> Menu = {
   'news':5,
 };
 const version='0.0.1';
+
+String ip='47.99.200.3';
+String port='8081';
+String signupUrl='/user/create';
+String signinUrl='/user/login';
+String userUpdateUrl='user/update';
+
+
+
+

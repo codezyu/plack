@@ -1,8 +1,12 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:plack/component/Init.dart';
 import 'package:plack/function/aboutPage/aboutPage.dart';
+import 'package:plack/function/cameraPage/cameraPage.dart';
 import 'package:plack/function/drawerPage/drawerPage.dart';
 import 'package:plack/function/login/Sigin/sigin_screen.dart';
 import 'package:plack/function/login/sigup/sigup_screen.dart';
@@ -11,6 +15,7 @@ import 'package:plack/function/newsPage/newsPage.dart';
 import 'package:plack/function/settingPage/settingPage.dart';
 
 import 'common/config.dart';
+import 'function/cameraPage/cameraScreen.dart';
 import 'function/favouritePage/FavoritePage.dart';
 import 'function/homePage/homePage.dart';
 
@@ -19,6 +24,7 @@ Future<void> main() async {
     //初始化相机
     WidgetsFlutterBinding.ensureInitialized();
     cameras = await availableCameras();
+    init();
   }catch(e){
 
   }
@@ -37,7 +43,8 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]));
   runApp(
-      ProviderScope(
+      Phoenix(
+        child:ProviderScope(
         child: MaterialApp(
           //调试显示材质网格
           debugShowMaterialGrid: false,
@@ -47,10 +54,11 @@ Future<void> main() async {
           ),
           initialRoute: '/home',
           routes: {
-            '/home': (context) =>SignInScreen(),
-            '/login':(context)=>mainPage(),
+            '/home': (context) =>mainPage(),
+            '/login':(context)=>SignInScreen(),
           },
         ),
       ),
+      )
   );
 }

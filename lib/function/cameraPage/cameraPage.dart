@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:plack/function/cameraPage/cameraScreen.dart';
-
+import 'dart:io';
 import '../../common/config.dart';
 import '../../common/constants.dart';
 import '../../common/providers.dart';
@@ -16,6 +18,7 @@ class CameraPage extends StatefulWidget {
   _CameraPageState createState() => _CameraPageState();
 }
 class _CameraPageState extends State<CameraPage> {
+  File? _image;
   late double screenWidth;
   double xOffset = 0;
   double yOffset = 0;
@@ -214,50 +217,62 @@ class _CameraPageState extends State<CameraPage> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 40, bottom: 5),
-                              child: Text(
-                                '点击使用相机进行辅助阅读',
-                                style: kTextStyle.copyWith(
-                                  color: isDark ? Colors.white : Colors.black,
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 40, bottom: 5),
+                                  child: Text(
+                                    '点击使用相机',
+                                    style: kTextStyle.copyWith(
+                                      color: isDark ? Colors.white : Colors.black,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                SizedBox(
+                                  height: 40,
+                                ),
+                                NeuButton(
+                                  ico: Icon(
+                                    Icons.photo_camera_back,
+                                    size: 70,
+                                    color: Colors.amberAccent,
+                                  ),
+                                  length: 150,
+                                  breadth: 150,
+                                  radii: 50,
+                                  onPress: (() async{
+                                    pickCamera();
+                                  }),
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            NeuButton(
-                              ico: Icon(
-                                Icons.photo_camera_back,
-                                size: 100,
-                                color: Colors.amberAccent,
-                              ),
-                             length: 250,
-                              breadth: 250,
-                              radii: 50,
-                              onPress: (() async{
-                                await Navigator.push(context,
-                                    PageRouteBuilder(
-                                        transitionDuration:
-                                        Duration(milliseconds: 250),
-                                        reverseTransitionDuration:
-                                        Duration(milliseconds: 150),
-                                        transitionsBuilder: (BuildContext
-                                        context,
-                                            Animation<double> animation,
-                                            Animation<double> secAnimation,
-                                            Widget child) {
-                                          return FadeTransition(
-                                            opacity: animation,
-                                            child: child,
-                                          );
-                                        },
-                                        pageBuilder: (BuildContext context,
-                                            Animation<double> animation,
-                                            Animation<double> secAnimation) {
-                                          return CameraScreen();
-                                        }));
-                              }),
+                            Expanded(child: SizedBox()),
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 40, bottom: 5),
+                                  child: Text(
+                                    '图库',
+                                    style: kTextStyle.copyWith(
+                                      color: isDark ? Colors.white : Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 40,
+                                ),
+                                NeuButton(
+                                  ico: Icon(
+                                    Icons.photo,
+                                    size: 70,
+                                    color: Colors.greenAccent,
+                                  ),
+                                  length: 150,
+                                  breadth: 150,
+                                  radii: 50,
+                                  onPress: (){pickImage();},
+                                ),
+                              ],
                             ),
                             Expanded(
                               flex: 13,
@@ -273,6 +288,24 @@ class _CameraPageState extends State<CameraPage> {
           );
         }
     );
+  }
+  Future pickImage() async{
+    try{
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if(image == null) return;
+      setState(() => this._image = image as File?);
+    } on PlatformException catch(e) {
+      print('Failed to pick image: $e');
+    }
+  }
+  Future pickCamera() async{
+    try{
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      if(image == null) return;
+      setState(() => this._image = image as File?);
+    } on PlatformException catch(e) {
+      print('Failed to pick camera: $e');
+    }
   }
 
 }

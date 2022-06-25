@@ -109,7 +109,6 @@ class _NewsPageState extends State<NewsPage>{
                       styleSheet: MarkdownStyleSheet(
                         p: TextStyle(
                           fontFamily: 'TitleFont',
-                          fontSize: 15,
                           letterSpacing: 4,
                         ),
                       ),

@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../common/config.dart';
 
@@ -25,10 +26,23 @@ class _CameraScreenState extends State<CameraScreen> {
     SystemChrome.setEnabledSystemUIOverlays([]);
     onNewCameraSelected(cameras[0]);
     super.initState();
+    final ImagePicker _picker = ImagePicker();
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back),
+          color: Colors.black87,
+          onPressed: () => {
+            Navigator.of(context).pop('刷新')
+          },
+          iconSize: 30,
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
       body: _isCameraInitialized
           ? AspectRatio(
         aspectRatio: 1 / controller!.value.aspectRatio,

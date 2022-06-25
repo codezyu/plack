@@ -249,22 +249,15 @@ class _AboutPageState extends State<AboutPage> {
                             ],
                           ),
                           duration: Duration(milliseconds: 600),
-                          child: Scratcher(
-                            brushSize: 30,
-                            threshold: 50,
-                            color: Colors.grey,
-                            onChange: (value) => print("Scratch progress: $value%"),
-                            onThreshold: () => print("Threshold reached, you won!"),
-                            child: ClipOval(
-                              child: Image.asset(
-                                'assets/img/logo/logo.jpg',
-                                color: isDark
-                                    ? backgroundC[0].withAlpha(243)
-                                    : Colors.transparent,
-                                colorBlendMode: BlendMode.difference,
-                              ),
+                          child: ClipOval(
+                            child: Image.asset(
+                              'assets/img/logo/logo.jpg',
+                              color: isDark
+                                  ? backgroundC[0].withAlpha(243)
+                                  : Colors.transparent,
+                              colorBlendMode: BlendMode.difference,
                             ),
-                          )
+                          ),
                         ),
                       ),
                       Padding(

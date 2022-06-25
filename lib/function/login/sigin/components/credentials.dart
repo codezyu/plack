@@ -11,6 +11,8 @@ class Credentials extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final username= TextEditingController();
+    final password=TextEditingController();
     return Padding(
       padding: const EdgeInsets.all(appPadding),
       child: Column(
@@ -20,6 +22,7 @@ class Credentials extends StatelessWidget {
             hintText: 'username',
             icon: Icons.person,
             obscureText: false,
+            controller: username,
           ),
           SizedBox(
             height: appPadding / 2,
@@ -28,6 +31,7 @@ class Credentials extends StatelessWidget {
             hintText: 'Password',
             icon: Icons.lock,
             obscureText: true,
+            controller: password,
           ),
           SizedBox(
             height: appPadding / 2,
@@ -42,14 +46,17 @@ class Credentials extends StatelessWidget {
             ),
           ),
           RectangularButton(text: 'Connect the world', press: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return mainPage();
-                },
-              ),
-            );
+            if(true){
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return mainPage();
+                  },
+                ),
+              );
+            }
           })
         ],
       ),

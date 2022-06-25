@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:restart_app/restart_app.dart';
+
 
 import '../../common/config.dart';
 import '../../common/constants.dart';
@@ -377,7 +378,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                           tag: 'rightButton',
                                           child: NeuButton(
                                             onPress: (){
-                                              Restart.restartApp(webOrigin:'/login');
+                                              Phoenix.rebirth(context);
                                             },
                                             ico: Icon(
                                               Icons.logout,
