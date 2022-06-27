@@ -9,14 +9,12 @@ import '../../models/News.dart';
 import '../../models/NewsList.dart';
 import '../../models/myResponse.dart';
 
-Future<List<News>> getNews(String type) async {
+Future<List<News>> getNews(String type,int page) async {
   Map<String,dynamic> params=Map();
-  params['page']=1;
+  params['page']=page;
   params['pageSize']=3;
   String url=ip+':'+port+categoryNewsUrl+"/"+type;
-  print(url);
   Response response = await dio.get(url,queryParameters: params);
-  print(response);
   if(response.statusCode!=200){
     Get.snackbar(
       "无法获取新闻内容", // title
@@ -29,14 +27,17 @@ Future<List<News>> getNews(String type) async {
       isDismissible: true,
       duration: Duration(seconds: 3),
     );
-    return List.filled(2,getTemplate());
+    return List.filled(0,getTemplate());
   }
   else{
     MyResponse myResponse=MyResponse.fromJson(response.data,1);
     NewsList mylist=myResponse.data as NewsList;
-    if(mylist.size==0){
-      return List.filled(2,getTemplate());
+    print(response.data);
+    if(mylist.news==null||mylist.news!.length==0){
+      return List.filled(0,getTemplate());
     }
+    print(mylist.news);
+    print(mylist.news!.first.newsTitle);
     return mylist.news!;
   }
 

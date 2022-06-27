@@ -41,7 +41,6 @@ class _HomePageState extends State<HomePage>{
     super.initState();
     categories=getCategories();
     scrollController = ScrollController();
-    logic.getNewsbyCategory();
   }
   @override
   Widget build(BuildContext context) {

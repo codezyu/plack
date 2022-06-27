@@ -80,4 +80,4 @@ const Color darkShadow = Color.fromRGBO(128, 128, 105, 1);
 const Color lightShadow = Color.fromRGBO(210, 230, 201, 1);
 
 const double appPadding = 30;
-late Dio dio;
+Dio dio=Dio();

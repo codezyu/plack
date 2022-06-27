@@ -14,7 +14,6 @@ Future<void> init() async {
   userBox=Hive.box(userInfo);
   BaseOptions options = BaseOptions(
   );
-  dio=Dio();
   token=getUserToken();
   if(token.isNotEmpty){
     homeroute=true;
