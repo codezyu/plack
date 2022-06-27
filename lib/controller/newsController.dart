@@ -15,7 +15,7 @@ class newsController extends GetxController{
   Map<int,String> cate={
     0:'Business'
   };
-  late List<News> news=List.generate(1, (index)=>getTemplate());
+  late List<News> news=List.generate(1, (index)=>getTemplate()).obs;
   void getNewsbyCategory(){
    getNews(_type).then((value) {
      news=value;

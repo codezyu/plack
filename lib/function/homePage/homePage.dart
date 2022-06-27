@@ -232,131 +232,136 @@ class _HomePageState extends State<HomePage>{
                               Expanded(
                                   flex: 30,
                                   child: NotificationListener(
-                                      child: AnimatedList(
-                                          controller: scrollController,
-                                          initialItemCount: logic.news.length,
-                                          key: ValueKey('2'),
-                                          //允许滚动超出边界，但之后内容会反弹回来
-                                          physics: BouncingScrollPhysics(),
-                                          itemBuilder:
-                                              (BuildContext context, int index, animation) {
-                                            return AnimatedContainer(
-                                              duration:Duration(milliseconds: 300),
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 15, horizontal: 20),
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 15, horizontal: 15),
-                                              width: screenWidth,
-                                              height: 200,
-                                              decoration: BoxDecoration(
-                                                color: backgroundColor,
-                                                // gradient: LinearGradient(
-                                                //     colors: gradientList[index % 5],
-                                                //     begin: Alignment.centerLeft,
-                                                //     end: Alignment.centerRight),
-                                                borderRadius: BorderRadius.circular(32),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                      color: shadowColor,
-                                                      offset: Offset(8, 6),
-                                                      blurRadius: 12),
-                                                  BoxShadow(
-                                                      color: lightShadowColor,
-                                                      offset: Offset(-8, -6),
-                                                      blurRadius: 12),
-                                                ],
-                                              ),
-                                              child: GestureDetector(
-                                                child:Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Container(
-                                                      alignment: Alignment.centerLeft,
-                                                      child:  Text(
-                                                        logic.news[index].newsTitle!,
-                                                        style: TitleTextStyle.copyWith(
-                                                          color: textColor,
-                                                          fontWeight: FontWeight.bold,
-                                                          fontSize: 20,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: SizedBox(),
-                                                      flex: 1,
-                                                    ),
-                                                    Row(
+                                      child: GetBuilder<newsController>(
+                                        builder: (cotroller){
+                                          return AnimatedList(
+                                              controller: scrollController,
+                                              initialItemCount: logic.news.length,
+                                              key: ValueKey('2'),
+                                              //允许滚动超出边界，但之后内容会反弹回来
+                                              physics: BouncingScrollPhysics(),
+                                              itemBuilder:
+                                                  (BuildContext context, int index, animation) {
+                                                return AnimatedContainer(
+                                                  duration:Duration(milliseconds: 300),
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 15, horizontal: 20),
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 15, horizontal: 15),
+                                                  width: screenWidth,
+                                                  height: 200,
+                                                  decoration: BoxDecoration(
+                                                    color: backgroundColor,
+                                                    // gradient: LinearGradient(
+                                                    //     colors: gradientList[index % 5],
+                                                    //     begin: Alignment.centerLeft,
+                                                    //     end: Alignment.centerRight),
+                                                    borderRadius: BorderRadius.circular(32),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          color: shadowColor,
+                                                          offset: Offset(8, 6),
+                                                          blurRadius: 12),
+                                                      BoxShadow(
+                                                          color: lightShadowColor,
+                                                          offset: Offset(-8, -6),
+                                                          blurRadius: 12),
+                                                    ],
+                                                  ),
+                                                  child: GestureDetector(
+                                                    child:Column(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      mainAxisSize: MainAxisSize.min,
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
                                                       children: [
-                                                        Text(
-                                                          '分类:',
-                                                          style: TextStyle(
-                                                            color: Colors.lightGreen,
-                                                            fontWeight: FontWeight.w500,
-                                                          ),
-                                                        ),
                                                         SizedBox(
-                                                          width: 10,
+                                                          height: 10,
                                                         ),
-                                                        Text(
-                                                          logic.news[index].newsType!,
-                                                          style: TextStyle(
-                                                            fontWeight:FontWeight.bold,
+                                                        Container(
+                                                          alignment: Alignment.centerLeft,
+                                                          child:  Text(
+                                                            logic.news[index].newsTitle!,
+                                                            style: TitleTextStyle.copyWith(
+                                                              color: textColor,
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 20,
+                                                            ),
                                                           ),
                                                         ),
                                                         Expanded(
                                                           child: SizedBox(),
                                                           flex: 1,
                                                         ),
-                                                        Text(
-                                                          '推荐',
-                                                          style: TextStyle(
-                                                            color: Colors.cyan,
-                                                          ),
-                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                              '分类:',
+                                                              style: TextStyle(
+                                                                color: Colors.lightGreen,
+                                                                fontWeight: FontWeight.w500,
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            Text(
+                                                              logic.news[index].newsType!,
+                                                              style: TextStyle(
+                                                                fontWeight:FontWeight.bold,
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child: SizedBox(),
+                                                              flex: 1,
+                                                            ),
+                                                            Text(
+                                                              '推荐',
+                                                              style: TextStyle(
+                                                                color: Colors.cyan,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )
                                                       ],
-                                                    )
-                                                  ],
-                                                ),
-                                                onTap:() async {
-                                                  FocusScopeNode currentFocus =
-                                                  FocusScope.of(context);
-                                                  if (!currentFocus.hasPrimaryFocus) {
-                                                    currentFocus.unfocus();
-                                                  }
-                                                  await Navigator.push(
-                                                      context,
-                                                      PageRouteBuilder(
-                                                          transitionDuration:
-                                                          Duration(milliseconds: 250),
-                                                          reverseTransitionDuration:
-                                                          Duration(milliseconds: 150),
-                                                          transitionsBuilder: (BuildContext
+                                                    ),
+                                                    onTap:() async {
+                                                      FocusScopeNode currentFocus =
+                                                      FocusScope.of(context);
+                                                      if (!currentFocus.hasPrimaryFocus) {
+                                                        currentFocus.unfocus();
+                                                      }
+                                                      await Navigator.push(
                                                           context,
-                                                              Animation<double> animation,
-                                                              Animation<double> secAnimation,
-                                                              Widget child) {
-                                                            return FadeTransition(
-                                                              opacity: animation,
-                                                              child: child,
-                                                            );
-                                                          },
-                                                          pageBuilder: (BuildContext context,
-                                                              Animation<double> animation,
-                                                              Animation<double>
-                                                              secAnimation) {
-                                                            return NewsPage(id: '1');
-                                                          }));
-                                                },),
-                                            );
+                                                          PageRouteBuilder(
+                                                              transitionDuration:
+                                                              Duration(milliseconds: 250),
+                                                              reverseTransitionDuration:
+                                                              Duration(milliseconds: 150),
+                                                              transitionsBuilder: (BuildContext
+                                                              context,
+                                                                  Animation<double> animation,
+                                                                  Animation<double> secAnimation,
+                                                                  Widget child) {
+                                                                return FadeTransition(
+                                                                  opacity: animation,
+                                                                  child: child,
+                                                                );
+                                                              },
+                                                              pageBuilder: (BuildContext context,
+                                                                  Animation<double> animation,
+                                                                  Animation<double>
+                                                                  secAnimation) {
+                                                                return NewsPage(id: '1');
+                                                              }));
+                                                    },),
+                                                );
 
-                                          }
-                                      ))
-                              )
+                                              }
+                                          );
+                                        },
+                                      )
+                                  )
+                              ),
                             ],
                           )
                       )

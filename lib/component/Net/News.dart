@@ -34,6 +34,9 @@ Future<List<News>> getNews(String type) async {
   else{
     MyResponse myResponse=MyResponse.fromJson(response.data,1);
     NewsList mylist=myResponse.data as NewsList;
+    if(mylist.size==0){
+      return List.filled(2,getTemplate());
+    }
     return mylist.news!;
   }
 
