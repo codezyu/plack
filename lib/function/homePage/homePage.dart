@@ -276,7 +276,7 @@ class _HomePageState extends State<HomePage>{
                                                                 title: logic.news[index].newsTitle!,
                                                                 author: logic.news[index].author==null?"":logic.news[index].author!,
                                                                 content: logic.news[index].content!,
-                                                                type: logic.news[index].newsType!,
+                                                                type:  myConvert[logic.news[index].newsType!]!,
                                                               );
                                                             }));
                                                   },
@@ -342,7 +342,7 @@ class _HomePageState extends State<HomePage>{
                                                               width: 10,
                                                             ),
                                                             Text(
-                                                              logic.news[index].newsType!,
+                                                              myConvert[logic.news[index].newsType!]!,
                                                               style: TextStyle(
                                                                 fontWeight:FontWeight.bold,
                                                               ),

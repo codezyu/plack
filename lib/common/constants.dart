@@ -81,3 +81,12 @@ const Color lightShadow = Color.fromRGBO(210, 230, 201, 1);
 
 const double appPadding = 30;
 Dio dio=Dio();
+Map<String,String> myConvert={
+  'Business':'商业',
+  'Entertainment':'娱乐',
+  'General':'推荐',
+  'Health':'健康',
+  'Science':'科学',
+  'Sports':'运动',
+  "Technology":'技术',
+};

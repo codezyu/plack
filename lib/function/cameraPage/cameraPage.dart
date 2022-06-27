@@ -168,7 +168,7 @@ class _CameraPageState extends State<CameraPage> {
                                     Container(
                                       padding: EdgeInsets.only(left: 27),
                                       child: Text(
-                                        'Assit',
+                                        '辅助功能',
                                         style: TextStyle(
                                           color: textColor,
                                           letterSpacing: 2.0,

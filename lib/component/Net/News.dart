@@ -43,6 +43,8 @@ News getTemplate(){
   News news=News(
     newsTitle: "请检查你的网络连接",
     newsType: "无",
+    id: 0,
+    content: "请检查你的网络连接"
   );
   return news;
 }

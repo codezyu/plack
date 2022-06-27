@@ -6,17 +6,10 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:plack/controller/newsController.dart';
 
+import '../../common/constants.dart';
+
 class CategoryCard extends StatelessWidget {
   final String imageAssetUrl, categoryName;
-  Map<String,String> convert={
-    'Business':'商业',
-    'Entertainment':'娱乐',
-    'General':'推荐',
-    'Health':'健康',
-    'Science':'科学',
-    'Sports':'运动',
-    "Technology":'技术',
-};
   CategoryCard({required this.imageAssetUrl, required this.categoryName});
   final _logic=Get.put(newsController());
   @override
@@ -46,7 +39,7 @@ class CategoryCard extends StatelessWidget {
                   color: Colors.black26
               ),
               child: Text(
-                convert[categoryName]!,
+                myConvert[categoryName]!,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.white,
