@@ -16,4 +16,7 @@ Future<void> init() async {
   );
   dio=Dio();
   token=getUserToken();
+  if(token.isNotEmpty){
+    homeroute=true;
+  }
 }

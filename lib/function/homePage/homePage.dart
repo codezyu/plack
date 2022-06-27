@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage>{
     super.initState();
     categories=getCategories();
     scrollController = ScrollController();
-    logic.news=logic.getNewsbyCategory();
+    logic.getNewsbyCategory();
   }
   @override
   Widget build(BuildContext context) {
@@ -278,7 +278,7 @@ class _HomePageState extends State<HomePage>{
                                                     Container(
                                                       alignment: Alignment.centerLeft,
                                                       child:  Text(
-                                                        logic.news[index].name,
+                                                        logic.news[index].newsTitle!,
                                                         style: TitleTextStyle.copyWith(
                                                           color: textColor,
                                                           fontWeight: FontWeight.bold,
@@ -303,7 +303,7 @@ class _HomePageState extends State<HomePage>{
                                                           width: 10,
                                                         ),
                                                         Text(
-                                                          logic.news[index].topic,
+                                                          logic.news[index].newsType!,
                                                           style: TextStyle(
                                                             fontWeight:FontWeight.bold,
                                                           ),
