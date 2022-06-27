@@ -100,7 +100,7 @@ class _drawerPageState extends State<drawerPage> {
                                   ),
                                   SizedBox(width: screenWidth / 20),
                                   Text(
-                                    'News',
+                                    '新闻',
                                     style: TextStyle(
                                       fontFamily: 'MontserratBold',
                                       color: Colors.yellow[
@@ -142,7 +142,7 @@ class _drawerPageState extends State<drawerPage> {
                                   ),
                                   SizedBox(width: screenWidth / 20),
                                   Text(
-                                    'User',
+                                    '主页',
                                     style: TextStyle(
                                       fontFamily: 'MontserratBold',
                                       color: Colors.yellow[
@@ -184,7 +184,7 @@ class _drawerPageState extends State<drawerPage> {
                                   ),
                                   SizedBox(width: screenWidth / 20),
                                   Text(
-                                    'Assit',
+                                    '辅助功能',
                                     style: TextStyle(
                                       fontFamily: 'MontserratBold',
                                       color: Colors.yellow[
@@ -225,7 +225,7 @@ class _drawerPageState extends State<drawerPage> {
                                   ),
                                   SizedBox(width: screenWidth / 20),
                                   Text(
-                                    'About',
+                                    '关于',
                                     style: TextStyle(
                                       fontFamily: 'MontserratBold',
                                       color: Colors.yellow[
@@ -270,7 +270,7 @@ class _drawerPageState extends State<drawerPage> {
                                 width: screenWidth / 40,
                               ),
                               Text(
-                                'Settings',
+                                '设置',
                                 style: TextStyle(
                                   fontFamily: 'MontserratBold',
                                   color: Colors
@@ -297,7 +297,7 @@ class _drawerPageState extends State<drawerPage> {
                                       .invokeMethod('SystemNavigator.pop');
                                 }),
                                 child: Text(
-                                  'Exit',
+                                  '退出',
                                   style: TextStyle(
                                     fontFamily: 'MontserratBold',
                                     color: Colors.teal,

@@ -16,7 +16,7 @@ class FavoritePage extends StatefulWidget{
 
 }
 class _FavoritePageState extends State<FavoritePage>{
-  ValueNotifier<String> _titleName = ValueNotifier<String>('User info');
+  ValueNotifier<String> _titleName = ValueNotifier<String>('我的信息');
   late Animation<Color?> colAnim1, colAnim2;
   TextEditingController dialogController = TextEditingController();
   double _opacity = 1;

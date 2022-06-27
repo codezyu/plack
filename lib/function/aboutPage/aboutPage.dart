@@ -18,7 +18,7 @@ class AboutPage extends StatefulWidget {
   _AboutPageState createState() => _AboutPageState();
 }
 class _AboutPageState extends State<AboutPage> {
-  ValueNotifier<String> _titleName=ValueNotifier<String>("About");
+  ValueNotifier<String> _titleName=ValueNotifier<String>("关于");
   late double screenWidth;
   double xOffset = 0;
   double yOffset = 0;
@@ -281,7 +281,7 @@ class _AboutPageState extends State<AboutPage> {
                       Padding(
                         padding: const EdgeInsets.only(top: 20, bottom: 50),
                         child: Text(
-                          'Version'+ version,
+                          'Version: '+ version,
                           style: kTextStyle.copyWith(
                             color: isDark ? Colors.white : Colors.black,
                           ),
