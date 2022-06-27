@@ -10,8 +10,12 @@ import '../../common/constants.dart';
 import '../../common/myRadialMenu.dart';
 //新闻页面
 class NewsPage extends StatefulWidget{
-  final String id;
-  NewsPage({required this.id});
+  final int id;
+  final String title;
+  final String author;
+  final String type;
+  final String content;
+  NewsPage({required this.id, required this.title, required this.author, required this.type, required this.content});
   @override
   _NewsPageState createState()=> _NewsPageState();
 }
@@ -76,7 +80,7 @@ class _NewsPageState extends State<NewsPage>{
                 child:ListView(
                   children: <Widget>[
                     Markdown(
-                      data: '# '+'测试'*20,
+                      data: '# '+widget.title,
                       physics: new NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       styleSheet: MarkdownStyleSheet(
@@ -88,7 +92,7 @@ class _NewsPageState extends State<NewsPage>{
                       ),
                     ),
                     Markdown(
-                      data: '政治\n'+'###### '+'来源:'+'央视新闻',
+                      data: widget.type+'\n'+'###### '+'来源:'+widget.author,
                       physics: new NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       styleSheet: MarkdownStyleSheet(
@@ -103,7 +107,7 @@ class _NewsPageState extends State<NewsPage>{
                       ),
                     ),
                     Markdown(
-                      data: '测试'*200,
+                      data: widget.content,
                       physics: new NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       styleSheet: MarkdownStyleSheet(

@@ -19,20 +19,28 @@ class newsController extends GetxController{
     'Business':1,
     'Entertainment':1
   };
-  late List<News> news=(List.generate(1, (index)=>getTemplate()));
-  var change=true.obs;
-  void getNewsbyCategory(int page){
-    print(news.first.newsTitle);
-   getNews(_type,page).then((value) {
+  Map<String,List<News>> newslist={
+    'Business':List.generate(1, (index)=>getTemplate()),
+    'Entertainment':List.generate(1, (index)=>getTemplate()),
+  };
+  late List<News> news=(List.generate(1, (index)=>getTemplate())).obs;
+  void getNewsbyCategory(int pageindex){
+    getNews(_type,pageindex).then((value) {
      if(value.length!=0)
-       news=value;
+       {
+           news=value;
+           newslist[_type]=news;
+           page[_type]=page[_type]!+1;
+       }
+     else{
+       news=newslist[_type]!;
+     }
+     update();
    });
   }
   @override
   void onInit(){
     getNewsbyCategory(page[_type]!);
-    ever(change, (callback)=> update());
-    print("ok");
     super.onInit();
   }
   void getSpeciedNews(String id){
@@ -40,10 +48,6 @@ class newsController extends GetxController{
   }
   void setType(String type){
     _type=type;
-    change=(!change.value).obs;
-    print(page[type]);
     getNewsbyCategory(page[type]!);
-    page[type]=page[type]!+1;
-    update();
   }
 }

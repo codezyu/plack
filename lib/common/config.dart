@@ -24,7 +24,7 @@ const Map<String, int> Menu = {
   'news':5,
 };
 const version='0.0.4';
-bool homeroute=true;
+bool homeroute=false;
 late String token;
 SharedPref localStore=SharedPref();
 String ip='http://localhost';

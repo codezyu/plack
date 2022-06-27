@@ -236,39 +236,77 @@ class _HomePageState extends State<HomePage>{
                                           return AnimatedList(
                                               controller: scrollController,
                                               initialItemCount: logic.news.length,
-                                              key: ValueKey('2'),
+                                              key:GlobalKey<AnimatedListState>(),
                                               //允许滚动超出边界，但之后内容会反弹回来
                                               physics: BouncingScrollPhysics(),
                                               itemBuilder:
                                                   (BuildContext context, int index, animation) {
-                                                return AnimatedContainer(
-                                                  duration:Duration(milliseconds: 300),
-                                                  margin: EdgeInsets.symmetric(
-                                                      vertical: 15, horizontal: 20),
-                                                  padding: EdgeInsets.symmetric(
-                                                      vertical: 15, horizontal: 15),
-                                                  width: screenWidth,
-                                                  height: 200,
-                                                  decoration: BoxDecoration(
-                                                    color: backgroundColor,
-                                                    // gradient: LinearGradient(
-                                                    //     colors: gradientList[index % 5],
-                                                    //     begin: Alignment.centerLeft,
-                                                    //     end: Alignment.centerRight),
-                                                    borderRadius: BorderRadius.circular(32),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                          color: shadowColor,
-                                                          offset: Offset(8, 6),
-                                                          blurRadius: 12),
-                                                      BoxShadow(
-                                                          color: lightShadowColor,
-                                                          offset: Offset(-8, -6),
-                                                          blurRadius: 12),
-                                                    ],
-                                                  ),
-                                                  child: GestureDetector(
-                                                    child:Column(
+                                                print(logic.news.length);
+                                                print(index);
+                                                return GestureDetector(
+                                                  onTap:() async {
+                                                    FocusScopeNode currentFocus =
+                                                    FocusScope.of(context);
+                                                    if (!currentFocus.hasPrimaryFocus) {
+                                                      currentFocus.unfocus();
+                                                    }
+                                                    await Navigator.push(
+                                                        context,
+                                                        PageRouteBuilder(
+                                                            transitionDuration:
+                                                            Duration(milliseconds: 250),
+                                                            reverseTransitionDuration:
+                                                            Duration(milliseconds: 150),
+                                                            transitionsBuilder: (BuildContext
+                                                            context,
+                                                                Animation<double> animation,
+                                                                Animation<double> secAnimation,
+                                                                Widget child) {
+                                                              return FadeTransition(
+                                                                opacity: animation,
+                                                                child: child,
+                                                              );
+                                                            },
+                                                            pageBuilder: (BuildContext context,
+                                                                Animation<double> animation,
+                                                                Animation<double>
+                                                                secAnimation) {
+                                                              return NewsPage(
+                                                                id:logic.news[index].id!,
+                                                                title: logic.news[index].newsTitle!,
+                                                                author: logic.news[index].author==null?"":logic.news[index].author!,
+                                                                content: logic.news[index].content!,
+                                                                type: logic.news[index].newsType!,
+                                                              );
+                                                            }));
+                                                  },
+                                                  child: AnimatedContainer(
+                                                    duration:Duration(milliseconds: 300),
+                                                    margin: EdgeInsets.symmetric(
+                                                        vertical: 15, horizontal: 20),
+                                                    padding: EdgeInsets.symmetric(
+                                                        vertical: 15, horizontal: 15),
+                                                    width: screenWidth,
+                                                    height: 200,
+                                                    decoration: BoxDecoration(
+                                                      color: backgroundColor,
+                                                      // gradient: LinearGradient(
+                                                      //     colors: gradientList[index % 5],
+                                                      //     begin: Alignment.centerLeft,
+                                                      //     end: Alignment.centerRight),
+                                                      borderRadius: BorderRadius.circular(32),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                            color: shadowColor,
+                                                            offset: Offset(8, 6),
+                                                            blurRadius: 12),
+                                                        BoxShadow(
+                                                            color: lightShadowColor,
+                                                            offset: Offset(-8, -6),
+                                                            blurRadius: 12),
+                                                      ],
+                                                    ),
+                                                    child: Column(
                                                       mainAxisAlignment: MainAxisAlignment.center,
                                                       mainAxisSize: MainAxisSize.min,
                                                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -278,7 +316,7 @@ class _HomePageState extends State<HomePage>{
                                                         ),
                                                         Container(
                                                           alignment: Alignment.centerLeft,
-                                                          child:  Text(
+                                                          child:Text(
                                                             logic.news[index].newsTitle!,
                                                             style: TitleTextStyle.copyWith(
                                                               color: textColor,
@@ -323,36 +361,7 @@ class _HomePageState extends State<HomePage>{
                                                         )
                                                       ],
                                                     ),
-                                                    onTap:() async {
-                                                      FocusScopeNode currentFocus =
-                                                      FocusScope.of(context);
-                                                      if (!currentFocus.hasPrimaryFocus) {
-                                                        currentFocus.unfocus();
-                                                      }
-                                                      await Navigator.push(
-                                                          context,
-                                                          PageRouteBuilder(
-                                                              transitionDuration:
-                                                              Duration(milliseconds: 250),
-                                                              reverseTransitionDuration:
-                                                              Duration(milliseconds: 150),
-                                                              transitionsBuilder: (BuildContext
-                                                              context,
-                                                                  Animation<double> animation,
-                                                                  Animation<double> secAnimation,
-                                                                  Widget child) {
-                                                                return FadeTransition(
-                                                                  opacity: animation,
-                                                                  child: child,
-                                                                );
-                                                              },
-                                                              pageBuilder: (BuildContext context,
-                                                                  Animation<double> animation,
-                                                                  Animation<double>
-                                                                  secAnimation) {
-                                                                return NewsPage(id: '1');
-                                                              }));
-                                                    },),
+                                                  ),
                                                 );
 
                                               }
