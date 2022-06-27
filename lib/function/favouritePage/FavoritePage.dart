@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:plack/component/Config/UserConfig.dart';
 
 
 import '../../common/config.dart';
 import '../../common/constants.dart';
 import '../../common/providers.dart';
+import '../../controller/userInfoController.dart';
 import '../../style/NeuButton.dart';
 
 class FavoritePage extends StatefulWidget{
@@ -378,7 +379,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                           tag: 'rightButton',
                                           child: NeuButton(
                                             onPress: (){
-                                              Phoenix.rebirth(context);
+                                              logoutUser();
                                             },
                                             ico: Icon(
                                               Icons.logout,

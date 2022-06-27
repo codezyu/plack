@@ -42,15 +42,18 @@ class Credentials extends StatelessWidget {
           RectangularButton(text: 'Let\'s Start', press: ()async{
             signup(username.text, password.text).then((value){
               if(value==true){
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return mainPage();
-                    },
-                  ),
-                );
+                signin(username.text, password.text).then((value){
+                  if(value==true){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return mainPage();
+                        },
+                      ),
+                    );
+                  }
+                });
               }
             }
             );

@@ -45,13 +45,13 @@ class SharedPref {
   reset(String key, List value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList(key, []);
-    // prefs.setString(key, json.encode(value));
+    // prefs.setString(key, jsons.encode(value));
   }
 
   save(String str, List value) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setStringList(str, value as List<String>);
-    // prefs.setString(key, json.encode(value));
+    // prefs.setString(key, jsons.encode(value));
   }
 
   saveInt(String prefName, int val) async {

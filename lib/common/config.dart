@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
+import 'package:plack/common/SharedPref.dart';
 
 const perPixel = 0.0025641025641026;
 bool isDrawerOpen = false;
@@ -23,12 +24,17 @@ const Map<String, int> Menu = {
   'news':5,
 };
 const version='0.0.1';
-
-String ip='47.99.200.3';
+bool homeroute=false;
+late String token;
+SharedPref localStore=SharedPref();
+String ip='http://192.168.0.102';
 String port='8081';
-String signupUrl='/user/create';
-String signinUrl='/user/login';
+String signupUrl='/users';
+String signinUrl='/oauth/token';
 String userUpdateUrl='user/update';
+String newsid='1';
+String newsUrl='news/$newsid';
+var headers = {"Access-Control-Allow-Origin": "*"};
 
 
 

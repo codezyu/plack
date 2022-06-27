@@ -184,18 +184,18 @@ class SavedAdvanced {
 //   return {'name': name, 'groups': groups};
 // }
 
-// SavedAdvanced.fromJson(Map json) {
-//   if (json['groups'] != null) {
-//     var groupsJson = json['groups'] as List;
+// SavedAdvanced.fromJson(Map jsons) {
+//   if (jsons['groups'] != null) {
+//     var groupsJson = jsons['groups'] as List;
 //     List<SetClass> _groups = groupsJson
 //
 //     return SavedAdvanced(
-//       name: json['name'],
+//       name: jsons['name'],
 //       groups: _groups,
 //     );
 //   } else {
 //     return SavedAdvanced(
-//         json['name'] as String,
+//         jsons['name'] as String,
 //     );
 //   }
 // }
@@ -290,13 +290,13 @@ class SharedPref {
   reset(String key, List value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList(key, []);
-    // prefs.setString(key, json.encode(value));
+    // prefs.setString(key, jsons.encode(value));
   }
 
   save(String str, List value) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setStringList(str, value as List<String>);
-    // prefs.setString(key, json.encode(value));
+    // prefs.setString(key, jsons.encode(value));
   }
 
   saveInt(String prefName, int val) async {

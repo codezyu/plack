@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plack/component/Init.dart';
 import 'package:plack/function/aboutPage/aboutPage.dart';
@@ -42,23 +43,21 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]));
+
   runApp(
-      Phoenix(
-        child:ProviderScope(
-        child: MaterialApp(
-          //调试显示材质网格
-          debugShowMaterialGrid: false,
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            fontFamily: 'Montserrat',
-          ),
-          initialRoute: '/home',
-          routes: {
-            '/home': (context) =>mainPage(),
-            '/login':(context)=>SignInScreen(),
-          },
-        ),
-      ),
-      )
+     Phoenix(child: ProviderScope(
+         child:GetMaterialApp(
+           //调试显示材质网格
+           debugShowMaterialGrid: false,
+           debugShowCheckedModeBanner: false,
+           theme: ThemeData(
+             fontFamily: 'Montserrat',
+           ),
+           routes: {
+             '/': (context) =>(homeroute)?mainPage():SignInScreen(),
+             '/login':(context)=>SignInScreen(),
+           },
+         )
+     ))
   );
 }
