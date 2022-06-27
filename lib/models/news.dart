@@ -11,7 +11,7 @@ class News {
   late String full_name;
   late String author;
   late String description;
-  String? topic;
+  late String topic;
   late num thumb_count;
   late num reading_count;
   late num share_count;

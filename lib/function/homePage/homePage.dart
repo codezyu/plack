@@ -1,6 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:plack/controller/newsController.dart';
 import 'package:plack/function/homePage/CategoryCard.dart';
 import 'package:plack/function/newsPage/newsPage.dart';
 import 'package:plack/style/NeuCard.dart';
@@ -19,6 +24,7 @@ class HomePage extends StatefulWidget{
 
 }
 class _HomePageState extends State<HomePage>{
+  final logic=Get.put(newsController());
   ValueNotifier<String> _titleName = ValueNotifier<String>('News');
   late AnimationController playGradientControl;
   bool isBackPressed = false;
@@ -35,6 +41,7 @@ class _HomePageState extends State<HomePage>{
     super.initState();
     categories=getCategories();
     scrollController = ScrollController();
+    logic.news=logic.getNewsbyCategory();
   }
   @override
   Widget build(BuildContext context) {
@@ -227,7 +234,7 @@ class _HomePageState extends State<HomePage>{
                                   child: NotificationListener(
                                       child: AnimatedList(
                                           controller: scrollController,
-                                          initialItemCount: 1,
+                                          initialItemCount: logic.news.length,
                                           key: ValueKey('2'),
                                           //允许滚动超出边界，但之后内容会反弹回来
                                           physics: BouncingScrollPhysics(),
@@ -271,7 +278,7 @@ class _HomePageState extends State<HomePage>{
                                                     Container(
                                                       alignment: Alignment.centerLeft,
                                                       child:  Text(
-                                                        'XX : 到达世界最高层123212312343424314123412341421',
+                                                        logic.news[index].name,
                                                         style: TitleTextStyle.copyWith(
                                                           color: textColor,
                                                           fontWeight: FontWeight.bold,
@@ -296,7 +303,7 @@ class _HomePageState extends State<HomePage>{
                                                           width: 10,
                                                         ),
                                                         Text(
-                                                          '政治',
+                                                          logic.news[index].topic,
                                                           style: TextStyle(
                                                             fontWeight:FontWeight.bold,
                                                           ),

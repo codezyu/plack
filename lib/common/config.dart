@@ -23,17 +23,18 @@ const Map<String, int> Menu = {
   'setting':4,
   'news':5,
 };
-const version='0.0.1';
+const version='0.0.4';
 bool homeroute=false;
 late String token;
 SharedPref localStore=SharedPref();
-String ip='http://192.168.0.102';
+String ip='http://localhost';
 String port='8081';
 String signupUrl='/users';
 String signinUrl='/oauth/token';
 String userUpdateUrl='user/update';
 String newsid='1';
 String newsUrl='news/$newsid';
+String categoryNewsUrl="/categorypage";
 var headers = {"Access-Control-Allow-Origin": "*"};
 
 
