@@ -40,7 +40,7 @@ class _savedPageState extends ConsumerState<savedPage> {
         children: [
           Center(
             child: Container(
-              margin: EdgeInsets.fromLTRB(10, 65, 10, 5),
+              margin: EdgeInsets.fromLTRB(10, 25, 10, 5),
               child: FittedBox(
                 fit: BoxFit.fitWidth,
                 child: Text(
@@ -56,235 +56,170 @@ class _savedPageState extends ConsumerState<savedPage> {
               color: backgroundColor,
             ),
           ),
+          SizedBox(height: 10,),
           Expanded(
-              child:FutureBuilder(
-                builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot)
-                {
-                  if(false){
-                    return Center(child: Text('Loading'));
-                  }else{
-                    return snapshot.data!.length == 0
-                        ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Center(
-                              child: FaIcon(
-                                FontAwesomeIcons.puzzlePiece,
-                                size: 100,
-                                color: Colors.amberAccent,
-                              )),
-                          SizedBox(
-                            height: 40,
-                          ),
-                          Center(
-                              child: Text(
-                                '你还没有收藏',
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  color: textColor,
-                                ),
-                              )),
-                          Center(
-                              child: Text(
-                                '快快点击你喜欢的新闻吧',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: textColor,
-                                ),
-                              )),
-                        ],
-                      ),
-                    )
-                        :GetBuilder<userInfoController>(
-                      builder: (controller){
-                        return AnimatedList(
-                            initialItemCount:5,
-                            key:GlobalKey<AnimatedListState>(),
-                            physics: BouncingScrollPhysics(),
-                            itemBuilder: (BuildContext context,int index,animation){
-                              return GestureDetector(
-                                onTap: ()async{
-                                  FocusScopeNode currentFocus =
-                                  FocusScope.of(context);
-                                  if (!currentFocus.hasPrimaryFocus) {
-                                    currentFocus.unfocus();
-                                  }
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(
-                                      vertical: 15, horizontal: 20),
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 20, horizontal: 25),
-                                  height: 140,
-                                  child: Column(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        margin:
-                                        EdgeInsets.only(left: 10),
-                                        child: FittedBox(
-                                          fit: BoxFit.fitWidth,
-                                          child: Text(
-                                            'test',
-                                            style: kTextStyle.copyWith(
-                                              color: backgroundColor,
-                                              fontWeight:
-                                              FontWeight.bold,
-                                              fontSize: 26.5,
+            child:FutureBuilder(
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot)
+              {
+                if(false){
+                  return Center(child: Text('Loading'));
+                }else{
+                  return false
+                      ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(child: SizedBox(height: 10,)),
+                        Center(
+                            child: FaIcon(
+                              FontAwesomeIcons.android,
+                              size: 100,
+                              color: Colors.amberAccent,
+                            )),
+                        SizedBox(height: 5,),
+                        Center(
+                            child: Text(
+                              'Ops!你还没有收藏',
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.greenAccent,
+                              ),
+                            )),
+                        SizedBox(height: 10,),
+                        Center(
+                            child: Text(
+                              '快快点击你喜欢的新闻吧',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: textColor,
+                              ),
+                            )),
+                        Expanded(
+                          flex:2,
+                          child: SizedBox(
+                            height: 20,
+                          ),),
+                      ],
+                    ),
+                  )
+                      :GetBuilder<userInfoController>(
+                    builder: (controller){
+                      return AnimatedList(
+                          initialItemCount:5,
+                          key:GlobalKey<AnimatedListState>(),
+                          physics: BouncingScrollPhysics(),
+                          itemBuilder: (BuildContext context,int index,animation){
+                            return GestureDetector(
+                              onTap: ()async{
+                                FocusScopeNode currentFocus =
+                                FocusScope.of(context);
+                                if (!currentFocus.hasPrimaryFocus) {
+                                  currentFocus.unfocus();
+                                }
+                              },
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 20),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 20, horizontal: 25),
+                                height: 230,
+                                child: Column(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.center,
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        SizedBox(height: 10,),
+                                        Text(
+                                          textAlign: TextAlign.left,
+                                          '当我放牛的时候我在想什么奇奇怪怪给的点点滴滴得到适当的',
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                          style: kTextStyle
+                                              .copyWith(
+                                            color:
+                                            backgroundColor,
+                                            fontSize: 25,
+                                            wordSpacing: 5,
+                                          ),
+                                        ),
+                                        SizedBox(height: 5,),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Expanded(child: Text(
+                                      textAlign: TextAlign.right,
+                                      '作者:马超',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: kTextStyle
+                                          .copyWith(
+                                        color:
+                                        backgroundColor,
+                                        fontWeight:
+                                        FontWeight.bold,
+                                        fontSize: 15,
+                                      ),
+                                    ),),
+                                    Row(
+                                      children: [
+                                        Expanded(child: SizedBox(width: 1,)),
+                                        Container(
+                                          margin:
+                                          EdgeInsets.only(left: 10),
+                                          child: FittedBox(
+                                            fit: BoxFit.fitWidth,
+                                            child: Text(
+                                              '商业',
+                                              style: kTextStyle.copyWith(
+                                                color: backgroundColor,
+                                                fontWeight:
+                                                FontWeight.bold,
+                                                fontSize: 18,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceEvenly,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                        children: [
-                                          Column(
-                                            children: [
-                                              FittedBox(
-                                                fit: BoxFit.fitWidth,
-                                                child: Text(
-                                                  'Time',
-                                                  style: kTextStyle
-                                                      .copyWith(
-                                                    color:
-                                                    backgroundColor,
-                                                    fontSize: 20,
-                                                  ),
-                                                ),
-                                              ),
-                                              FittedBox(
-                                                fit: BoxFit.fitWidth,
-                                                child: Text(
-                                                  'test',
-                                                  style: kTextStyle
-                                                      .copyWith(
-                                                    color:
-                                                    backgroundColor,
-                                                    fontWeight:
-                                                    FontWeight.bold,
-                                                    fontSize: 20,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Container(
-                                            height: 45,
-                                            width: 1.3,
-                                            color: backgroundColor,
-                                          ),
-                                          Column(
-                                            children: [
-                                              FittedBox(
-                                                fit: BoxFit.fitWidth,
-                                                child: Text(
-                                                  'Break',
-                                                  style: kTextStyle
-                                                      .copyWith(
-                                                    color:
-                                                    backgroundColor,
-                                                    fontSize: 20,
-                                                  ),
-                                                ),
-                                              ),
-                                              FittedBox(
-                                                fit: BoxFit.fitWidth,
-                                                child: Text(
-                                                  '11',
-                                                  style: kTextStyle
-                                                      .copyWith(
-                                                    color:
-                                                    backgroundColor,
-                                                    fontWeight:
-                                                    FontWeight.bold,
-                                                    fontSize: 20,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Container(
-                                            height: 45,
-                                            width: 1.3,
-                                            color: backgroundColor,
-                                          ),
-                                          Column(
-                                            children: [
-                                              FittedBox(
-                                                fit: BoxFit.fitWidth,
-                                                child: Text(
-                                                  'Sets',
-                                                  style: kTextStyle
-                                                      .copyWith(
-                                                    color:
-                                                    backgroundColor,
-                                                    fontSize: 20,
-                                                  ),
-                                                ),
-                                              ),
-                                              FittedBox(
-                                                fit: BoxFit.fitWidth,
-                                                child: Text(
-                                                  '345',
-                                                  style: kTextStyle
-                                                      .copyWith(
-                                                    color:
-                                                    backgroundColor,
-                                                    fontWeight:
-                                                    FontWeight.bold,
-                                                    fontSize: 20,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        colors: gradientList[index % 5],
-                                        begin: Alignment.centerLeft,
-                                        end: Alignment.centerRight),
-                                    borderRadius:
-                                    BorderRadius.circular(25),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: gradientList[index % 5]
-                                          [1]
-                                              .withOpacity(0.22),
-                                          offset: Offset(8, 6),
-                                          blurRadius: 15),
-                                      BoxShadow(
-                                          color: gradientList[index % 5]
-                                          [0]
-                                              .withOpacity(0.22),
-                                          offset: Offset(-8, -6),
-                                          blurRadius: 15),
-                                    ],
-                                  ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                              );
-                            }
-                        );
-                      },
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: gradientList[index % 5],
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight),
+                                  borderRadius:
+                                  BorderRadius.circular(25),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: gradientList[index % 5]
+                                        [1]
+                                            .withOpacity(0.22),
+                                        offset: Offset(8, 6),
+                                        blurRadius: 15),
+                                    BoxShadow(
+                                        color: gradientList[index % 5]
+                                        [0]
+                                            .withOpacity(0.22),
+                                        offset: Offset(-8, -6),
+                                        blurRadius: 15),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }
+                      );
+                    },
 
-                    );
-                  }
-                },
-              ),
+                  );
+                }
+              },
+            ),
           ),
         ],
       ),
