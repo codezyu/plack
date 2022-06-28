@@ -13,6 +13,7 @@ import 'package:plack/function/login/Sigin/sigin_screen.dart';
 import 'package:plack/function/login/sigup/sigup_screen.dart';
 import 'package:plack/function/mainPage/mainpage.dart';
 import 'package:plack/function/newsPage/newsPage.dart';
+import 'package:plack/function/savedPage/savedPage.dart';
 import 'package:plack/function/settingPage/settingPage.dart';
 
 import 'common/config.dart';
@@ -54,7 +55,7 @@ Future<void> main() async {
              fontFamily: 'Montserrat',
            ),
            routes: {
-             '/': (context) =>(homeroute)?mainPage():SignInScreen(),
+             '/': (context) =>(homeroute)?savedPage():SignInScreen(),
              '/login':(context)=>SignInScreen(),
            },
          )

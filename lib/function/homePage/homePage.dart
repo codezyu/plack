@@ -232,7 +232,7 @@ class _HomePageState extends State<HomePage>{
                                   flex: 30,
                                   child: NotificationListener(
                                       child: GetBuilder<newsController>(
-                                        builder: (cotroller){
+                                        builder: (controller){
                                           return AnimatedList(
                                               controller: scrollController,
                                               initialItemCount: logic.news.length,
@@ -241,8 +241,6 @@ class _HomePageState extends State<HomePage>{
                                               physics: BouncingScrollPhysics(),
                                               itemBuilder:
                                                   (BuildContext context, int index, animation) {
-                                                print(logic.news.length);
-                                                print(index);
                                                 return GestureDetector(
                                                   onTap:() async {
                                                     FocusScopeNode currentFocus =
