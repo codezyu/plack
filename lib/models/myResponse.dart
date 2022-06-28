@@ -1,4 +1,5 @@
 import 'package:plack/models/Data.dart';
+import 'package:plack/models/UserInfo.dart';
 
 import 'NewsList.dart';
 
@@ -16,6 +17,8 @@ class MyResponse {
     errno = json['errno'];
     if(type==1)
     data = json['data'] != null ? NewsList.fromJson(json['data']) : null;
+    else if(type==2)
+      data = json['data'] != null ? UserInfo.fromJson(json['data']) : null;
     else{
       data = json['data'] != null ? Data.fromJson(json['data']) : null;
     }

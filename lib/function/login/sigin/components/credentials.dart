@@ -51,13 +51,18 @@ class Credentials extends StatelessWidget {
           RectangularButton(text: 'Connect the world', press: (){
               signin(username.text, password.text).then((value){
                 if(value==true) {
-                  showTopSnackBar(
-                    context,
-                    CustomSnackBar.success(
-                      message:
-                      "I'm Plack Have a nice day",
-                    ),
-                  );
+                      ()async{
+
+                      };
+                      ()async{
+                    showTopSnackBar(
+                      context,
+                      CustomSnackBar.success(
+                        message:
+                        "I'm Plack Have a nice day",
+                      ),
+                    );
+                  };
                   Navigator.push(
                     context,
                     MaterialPageRoute(
