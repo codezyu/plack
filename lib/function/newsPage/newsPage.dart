@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:clay_containers/widgets/clay_text.dart';
+import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,6 +18,8 @@ class NewsPage extends StatefulWidget{
   final String author;
   final String type;
   final String content;
+  bool isStar=false;
+  bool isLike=false;
   NewsPage({required this.id, required this.title, required this.author, required this.type, required this.content});
   @override
   _NewsPageState createState()=> _NewsPageState();
@@ -49,32 +52,21 @@ class _NewsPageState extends State<NewsPage>{
           elevation: 0,
           backgroundColor: Colors.transparent,
         ),
-        floatingActionButton: ClayContainer(
-          emboss: true,
-          height: 50,
-          width: 50,
-          borderRadius: 50,
-          child: myRadialMenu(
-              centerButtonAlignment: Alignment.center,
-              children: [
-                RadialButton(
-                  icon: Icon(FontAwesomeIcons.heart),
-                  buttonColor: Colors.redAccent,
-                  onPress: (){
-                    logic.setLove(widget.id,userLogic.userInfo.id!);
-                    Get.snackbar('点赞成功', '感谢您的点赞');
-                  },
-                ),
-                RadialButton(
-                  icon: Icon(Icons.star_border),
-                  buttonColor: Colors.greenAccent,
-                  onPress: (){
-                    logic.setCollection(widget.id,userLogic.userInfo.id!);
-                    Get.snackbar('收藏成功', '感谢您的收藏');
-                  },
-                ),
-              ]
-          ),
+        floatingActionButton: FabCircularMenu(
+          fabSize: 32,
+          children: [
+            IconButton(
+                icon: Icon(widget.isLike?Icons.favorite:Icons.favorite_border,color: Colors.redAccent,), onPressed: () {
+              widget.isLike=true;
+              logic.setLove(widget.id,userLogic.userInfo.id!);
+              Get.snackbar('点赞成功', '感谢您的点赞');
+            }),
+            IconButton(icon: Icon(widget.isStar?Icons.star:Icons.star_outline,color: Colors.amberAccent,), onPressed: () {
+              widget.isStar=true;
+              logic.setCollection(widget.id,userLogic.userInfo.id!);
+              Get.snackbar('收藏成功', '感谢您的收藏');
+            })
+          ],
         ),
         floatingActionButtonLocation: AlmostEndFloatFabLocation(),
         body: Container(
@@ -86,48 +78,48 @@ class _NewsPageState extends State<NewsPage>{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child:ListView(
-                  children: <Widget>[
-                    Markdown(
-                      data: '# '+widget.title,
-                      physics: new NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      styleSheet: MarkdownStyleSheet(
-                        h1: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'TitleFont',
+                  child:ListView(
+                    children: <Widget>[
+                      Markdown(
+                        data: '# '+widget.title,
+                        physics: new NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        styleSheet: MarkdownStyleSheet(
+                          h1: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'TitleFont',
+                          ),
                         ),
                       ),
-                    ),
-                    Markdown(
-                      data: widget.type+'\n'+'###### '+'来源:'+widget.author,
-                      physics: new NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      styleSheet: MarkdownStyleSheet(
-                        p: TextStyle(
-                          fontSize: 12,
-                          color: Colors.lightBlueAccent,
-                        ),
-                        h6: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                    Markdown(
-                      data: widget.content,
-                      physics: new NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      styleSheet: MarkdownStyleSheet(
-                        p: TextStyle(
-                          fontFamily: 'TitleFont',
-                          letterSpacing: 4,
+                      Markdown(
+                        data: widget.type+'\n'+'###### '+'来源:'+widget.author,
+                        physics: new NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        styleSheet: MarkdownStyleSheet(
+                          p: TextStyle(
+                            fontSize: 12,
+                            color: Colors.lightBlueAccent,
+                          ),
+                          h6: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                )
+                      Markdown(
+                        data: widget.content,
+                        physics: new NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        styleSheet: MarkdownStyleSheet(
+                          p: TextStyle(
+                            fontFamily: 'TitleFont',
+                            letterSpacing: 4,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
               ),
             ],
           ),
