@@ -50,4 +50,13 @@ class newsController extends GetxController{
     _type=type;
     getNewsbyCategory(page[type]!);
   }
+  void setLove(int newsid,int userid){
+    setLoveInfo(newsid, userid);
+  }
+  void setCollection(int newsid,int userid){
+    setCollectionInfo(newsid, userid);
+  }
+  void setVisit(int newsid,int userid){
+    setVisitInfo(newsid, userid);
+  }
 }

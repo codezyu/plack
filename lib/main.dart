@@ -55,7 +55,7 @@ Future<void> main() async {
              fontFamily: 'Montserrat',
            ),
            routes: {
-             '/': (context) =>(homeroute)?savedPage():SignInScreen(),
+             '/': (context) =>(homeroute)?mainPage():SignInScreen(),
              '/login':(context)=>SignInScreen(),
            },
          )

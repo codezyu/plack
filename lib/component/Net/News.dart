@@ -37,7 +37,27 @@ Future<List<News>> getNews(String type,int page) async {
     }
     return mylist.news!;
   }
-
+}
+Future<void> setLoveInfo(int newsid,int userid) async {
+  Map<String,int> params=Map();
+  params['newsId']=newsid;
+  params['userId']=userid;
+  String url=ip+':'+port+loveNewsUrl;
+  Response response = await dio.get(url,queryParameters: params);
+}
+Future<void> setCollectionInfo(int newsid,int userid) async {
+  Map<String,int> params=Map();
+  params['newsId']=newsid;
+  params['userId']=userid;
+  String url=ip+':'+port+collectNewsUrl;
+  Response response = await dio.get(url,queryParameters: params);
+}
+Future<void> setVisitInfo(int newsid,int userid) async {
+  Map<String,int> params=Map();
+  params['newsId']=newsid;
+  params['userId']=userid;
+  String url=ip+':'+port+visitNewsUrl;
+  Response response = await dio.get(url,queryParameters: params);
 }
 News getTemplate(){
   News news=News(

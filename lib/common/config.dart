@@ -24,7 +24,7 @@ const Map<String, int> Menu = {
   'news':5,
 };
 const version='0.0.4';
-bool homeroute=true;
+bool homeroute=false;
 late String token;
 SharedPref localStore=SharedPref();
 String ip='http://localhost';
@@ -36,6 +36,9 @@ String newsid='1';
 String newsUrl='news/$newsid';
 String categoryNewsUrl="/categorypage";
 String userInfoUrl="/self";
+String loveNewsUrl="/xihuan";
+String collectNewsUrl="/xihuan";
+String visitNewsUrl="/liulan";
 var headers = {"Access-Control-Allow-Origin": "*"};
 
 

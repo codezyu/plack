@@ -4,10 +4,14 @@ import 'package:clay_containers/widgets/clay_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:plack/component/Data/proxy.dart';
 import 'package:plack/style/NeuCard.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../common/constants.dart';
 import '../../common/myRadialMenu.dart';
+import '../../controller/newsController.dart';
+import '../../controller/userInfoController.dart';
 //新闻页面
 class NewsPage extends StatefulWidget{
   final int id;
@@ -22,10 +26,11 @@ class NewsPage extends StatefulWidget{
 class _NewsPageState extends State<NewsPage>{
   //网页加载
   final Completer<WebViewController> _controller = Completer<WebViewController>();
-
-
+  final logic=Get.put(newsController());
+  final userLogic=Get.put(userInfoController());
   @override
   void initState(){
+    logic.setVisit(widget.id, userLogic.userInfo.id!);
     super.initState();
   }
   @override
@@ -55,13 +60,17 @@ class _NewsPageState extends State<NewsPage>{
                 RadialButton(
                   icon: Icon(FontAwesomeIcons.heart),
                   buttonColor: Colors.redAccent,
-                  onPress: (){},
+                  onPress: (){
+                    logic.setLove(widget.id,userLogic.userInfo.id!);
+                    Get.snackbar('点赞成功', '感谢您的点赞');
+                  },
                 ),
                 RadialButton(
                   icon: Icon(Icons.star_border),
                   buttonColor: Colors.greenAccent,
                   onPress: (){
-
+                    logic.setCollection(widget.id,userLogic.userInfo.id!);
+                    Get.snackbar('收藏成功', '感谢您的收藏');
                   },
                 ),
               ]

@@ -18,7 +18,13 @@ Future<void> logoutUser() async {
 }
 class userInfoController extends GetxController{
   late UserInfo userInfo;
-  late String _token;
+  late String _token="";
+  @override
+  void onInit(){
+    _token=getToken();
+    print(_token);
+    getUserInfo();
+  }
   void getUserInfo(){
     getInfo(_token).then((value){
       var temp=value;
@@ -36,7 +42,7 @@ class userInfoController extends GetxController{
       setToken(value);
       _token=token;
     });
-    if(_token!=null){
+    if(_token.isNotEmpty){
       return true;
     }
     else
