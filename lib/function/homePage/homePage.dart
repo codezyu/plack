@@ -24,7 +24,7 @@ class HomePage extends StatefulWidget{
 
 }
 class _HomePageState extends State<HomePage>{
-  final logic=Get.put(newsController());
+  newsController logic=Get.find();
   ValueNotifier<String> _titleName = ValueNotifier<String>('新闻');
   late AnimationController playGradientControl;
   bool isBackPressed = false;

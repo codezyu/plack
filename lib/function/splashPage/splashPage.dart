@@ -7,6 +7,7 @@ import 'package:plack/controller/dataController.dart';
 import 'package:plack/controller/userInfoController.dart';
 import '../../common/scaleFactor.dart';
 import '../../controller/initController.dart';
+import '../../controller/newsController.dart';
 class splashPage  extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -36,5 +37,6 @@ class SplashBinding extends Bindings {
     Get.put<initController>(initController());
     Get.put<dataController>(dataController());
     Get.put<userInfoController>(userInfoController());
+    Get.put<newsController>(newsController());
   }
 }

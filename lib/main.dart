@@ -39,11 +39,12 @@ Future<void> main() async {
   runApp(
      Phoenix(child: ProviderScope(
          child:GetMaterialApp(
+           smartManagement: SmartManagement.onlyBuilder,
            debugShowCheckedModeBanner: false,
            theme: ThemeData(
              fontFamily: 'Montserrat',
            ),
-           initialRoute: '/main',
+           initialRoute: '/init',
            getPages: [
              GetPage(name: '/login', page: () => SignInScreen()),
              GetPage(name: '/main', page: () => mainPage()),

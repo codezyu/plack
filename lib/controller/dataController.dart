@@ -14,7 +14,11 @@ class dataController extends GetxController{
   void onReady(){
   }
   String getToken(){
-    return userBox.get(userToken);
+    String? s=userBox.get(userToken);
+    if(s==null)
+      return "";
+    else
+      return s;
   }
   void setToken(String token) async {
     await userBox.put(userToken,token);

@@ -44,6 +44,7 @@ Future<UserInfo?> getInfo(String token) async {
     if (response.statusCode == 200) {
       MyResponse myResponse=MyResponse.fromJson(response.data,2);
       UserInfo userInfo=myResponse.data as UserInfo;
+      print(userInfo);
       return userInfo;
     }
     else{

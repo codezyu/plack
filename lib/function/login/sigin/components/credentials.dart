@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:plack/component/Loading.dart';
 import 'package:plack/function/mainPage/mainpage.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -51,33 +52,35 @@ class Credentials extends StatelessWidget {
             ),
           ),
           RectangularButton(text: 'Connect the world',
-              press: (){
-                if(logic.signIn(username.text, password.text)){
-                      ()async{
+              press: () async {
+                Loading.show(context);
+                logic.signIn(username.text, password.text).then((value){
+                  if(value==true){
                     showTopSnackBar(
                       context,
                       CustomSnackBar.success(
                         message:
                         "I'm Plack Have a nice day",
                       ),
-                    );};
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return mainPage();
-                      },
-                    ),
-                  );
-                }else{
-                  showTopSnackBar(
-                    context,
-                    CustomSnackBar.error(
-                      message:
-                      "请检查你的用户名和密码",
-                    ),
-                  );
-                }
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return mainPage();
+                        },
+                      ),
+                    );
+                  }else{
+                    showTopSnackBar(
+                      context,
+                      CustomSnackBar.error(
+                        message:
+                        "请检查你的用户名和密码",
+                      ),
+                    );
+                  }
+                });
               })
         ],
       ),

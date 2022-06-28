@@ -14,15 +14,14 @@ class userInfoController extends GetxController{
   @override
   void onInit(){
     var token=store.getToken();
-    print(_token);
     if(token==null||token.isEmpty){
       store.homeroute=false;
     }
     else{
       _token=token;
       store.homeroute=true;
+      getUserInfo();
     }
-    getUserInfo();
   }
   void getUserInfo(){
     getInfo(_token).then((value){
@@ -34,14 +33,16 @@ class userInfoController extends GetxController{
       }
     });
   }
-  bool signIn(String name,String password){
+  Future<bool> signIn(String name,String password) async {
     userInfo=UserInfo();
     userInfo.userName=name;
-    signin(name, password).then((value){
+    await signin(name, password).then((value){
       store.setToken(value);
-      _token=token;
+      _token=value;
     });
     if(_token.isNotEmpty){
+      print(_token);
+      getUserInfo();
       return true;
     }
     else
@@ -50,7 +51,7 @@ class userInfoController extends GetxController{
   bool signUp(String name,String password){
     bool temp=false;
     signup(name, password).then((value){
-      temp=signIn(name, password);
+      signIn(name, password).then((value) => temp=value);
     });
     return temp;
   }

@@ -64,6 +64,8 @@ dependencies:
   hive_flutter: ^1.1.0
   top_snackbar_flutter: ^2.0.0
   get: ^4.6.5
+  flutter_spinkit:
+    git: https://github.91chi.fun//https://github.com/jogboms/flutter_spinkit.git
 dev_dependencies:
   flutter_test:
     sdk: flutter

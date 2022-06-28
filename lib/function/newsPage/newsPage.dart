@@ -28,6 +28,8 @@ class _NewsPageState extends State<NewsPage>{
   final userLogic=Get.put(userInfoController());
   @override
   void initState(){
+    print(widget.id);
+    print(userLogic.userInfo.id!);
     logic.setVisit(widget.id, userLogic.userInfo.id!);
     super.initState();
   }
