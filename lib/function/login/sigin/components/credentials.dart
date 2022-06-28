@@ -15,7 +15,7 @@ class Credentials extends StatelessWidget {
   const Credentials({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final logic=Get.put(userInfoController());
+    userInfoController logic=Get.find();
     final username= TextEditingController();
     final password=TextEditingController();
     return Padding(

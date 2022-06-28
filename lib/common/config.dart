@@ -40,6 +40,8 @@ String collectNewsUrl="/xihuan";
 String visitNewsUrl="/liulan";
 var headers = {"Access-Control-Allow-Origin": "*"};
 
-
+const String userInfo='plack_userinfo';
+const String userToken='plack_userToken';
+const String userName='plack_userName';
 
 

@@ -6,6 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plack/controller/dataController.dart';
 import 'package:plack/function/aboutPage/aboutPage.dart';
@@ -26,23 +28,25 @@ import 'function/homePage/homePage.dart';
 
 Future<void> main() async {
   try{
+    await Hive.initFlutter();
+    // Hive.registerAdapter(ContactAdapter());
+    await Hive.openBox(userInfo);
     //初始化相机
     WidgetsFlutterBinding.ensureInitialized();
+    cameras = await availableCameras();
   }catch(e){
   }
   runApp(
      Phoenix(child: ProviderScope(
          child:GetMaterialApp(
-           //调试显示材质网格
-           debugShowMaterialGrid: false,
            debugShowCheckedModeBanner: false,
            theme: ThemeData(
              fontFamily: 'Montserrat',
            ),
-           initialRoute: '/init',
+           initialRoute: '/main',
            getPages: [
-             GetPage(name: '/main', page: () => mainPage()),
              GetPage(name: '/login', page: () => SignInScreen()),
+             GetPage(name: '/main', page: () => mainPage()),
              GetPage(name: '/drawer', page: ()=>drawerPage()),
              GetPage(name: '/news', page: ()=>HomePage()),
              GetPage(name:'/init',page:()=>splashPage(),binding: SplashBinding())

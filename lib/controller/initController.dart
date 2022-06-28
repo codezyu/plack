@@ -9,33 +9,29 @@ import 'package:plack/controller/userInfoController.dart';
 
 import '../common/config.dart';
 class initController extends GetxController{
-  final data=Get.put(dataController());
-  final user=Get.put(userInfoController());
   @override
-  void onReady() async {
+  void onReady() {
     super.onReady();
-    //方向
-    Future.delayed(Duration(milliseconds: 1)).then(
-            (value) => SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.dark,
-          systemNavigationBarColor: Color(0xFFF1F2F6),
-          systemNavigationBarIconBrightness: Brightness.dark,
-          systemNavigationBarDividerColor: Color(0xFFF1F2F6),
-        )));
-    Future.delayed(Duration(milliseconds: 1))
-        .then((value) => SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]));
-    try {
-      cameras = await availableCameras();
-      if(data.homeroute){
-        Get.offNamed('/main');
-      }else{
-        Get.offNamed('/login');
-      }
-    } catch (e) {
+    dataController data=Get.find();
+    userInfoController user=Get.find();
+    // //方向
+    // Future.delayed(Duration(milliseconds: 1)).then(
+    //         (value) => SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //       statusBarColor: Colors.transparent,
+    //       statusBarIconBrightness: Brightness.dark,
+    //       systemNavigationBarColor: Color(0xFFF1F2F6),
+    //       systemNavigationBarIconBrightness: Brightness.dark,
+    //       systemNavigationBarDividerColor: Color(0xFFF1F2F6),
+    //     )));
+    // Future.delayed(Duration(milliseconds: 1))
+    //     .then((value) => SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    // ]));
+    if(data.getToken()==null||data.getToken().isEmpty){
+      Get.offNamed('/login');
+    }else{
+      Get.offNamed('/main');
     }
   }
 }

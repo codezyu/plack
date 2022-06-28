@@ -1,19 +1,17 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+
+import '../common/config.dart';
 class dataController extends GetxController{
-  late final userBox;
-  static const String userInfo='plack_userinfo';
-  static const String userToken='plack_userToken';
-  static const String userName='plack_userName';
+  final userBox=Hive.box(userInfo);
   late final newBox;
   var homeroute=false;
   @override
   void onInit() async{
-    await Hive.initFlutter();
-    // Hive.registerAdapter(ContactAdapter());
-    await Hive.openBox(userInfo);
-    userBox=Hive.box(userInfo);
+  }
+  @override
+  void onReady(){
   }
   String getToken(){
     return userBox.get(userToken);

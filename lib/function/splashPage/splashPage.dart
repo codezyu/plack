@@ -32,8 +32,9 @@ class splashPage  extends StatelessWidget {
 class SplashBinding extends Bindings {
   @override
   void dependencies() {
+    print("ok");
     Get.put<initController>(initController());
-    Get.lazyPut<dataController>(()=>dataController());
-    Get.lazyPut<userInfoController>(()=>userInfoController());
+    Get.put<dataController>(dataController());
+    Get.put<userInfoController>(userInfoController());
   }
 }
