@@ -49,8 +49,9 @@ Future<void> main() async {
              GetPage(name: '/login', page: () => SignInScreen()),
              GetPage(name: '/main', page: () => mainPage()),
              GetPage(name: '/drawer', page: ()=>drawerPage()),
-             GetPage(name: '/news', page: ()=>HomePage()),
-             GetPage(name:'/init',page:()=>splashPage(),binding: SplashBinding())
+             GetPage(name: '/home', page: ()=>HomePage()),
+             GetPage(name:'/init',page:()=>splashPage(),binding: SplashBinding()),
+             GetPage(name: '/news', page: ()=>NewsPage(id: 1, title: '1', author: '1', type: '1', content: '1')),
            ],
          )
      ))

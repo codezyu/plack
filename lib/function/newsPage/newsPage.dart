@@ -32,7 +32,7 @@ class _NewsPageState extends State<NewsPage>{
   @override
   void initState(){
     print(widget.id);
-    print(userLogic.userInfo.id!);
+    // print(userLogic.userInfo.id!);
     logic.setVisit(widget.id, userLogic.userInfo.id!);
     super.initState();
   }
@@ -53,22 +53,21 @@ class _NewsPageState extends State<NewsPage>{
           backgroundColor: Colors.transparent,
         ),
         floatingActionButton: FabCircularMenu(
-          fabSize: 32,
+          ringDiameter: 150,
           children: [
             IconButton(
                 icon: Icon(widget.isLike?Icons.favorite:Icons.favorite_border,color: Colors.redAccent,), onPressed: () {
-              widget.isLike=true;
+              setState((){widget.isLike=true;});
               logic.setLove(widget.id,userLogic.userInfo.id!);
               Get.snackbar('点赞成功', '感谢您的点赞');
             }),
             IconButton(icon: Icon(widget.isStar?Icons.star:Icons.star_outline,color: Colors.amberAccent,), onPressed: () {
-              widget.isStar=true;
+              setState((){widget.isStar=true;});
               logic.setCollection(widget.id,userLogic.userInfo.id!);
               Get.snackbar('收藏成功', '感谢您的收藏');
             })
           ],
         ),
-        floatingActionButtonLocation: AlmostEndFloatFabLocation(),
         body: Container(
           alignment: Alignment.topLeft,
           padding: EdgeInsets.fromLTRB(12, 6, 12, 12),
