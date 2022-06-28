@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:plack/common/config.dart';
 import 'package:plack/component/Config/UserConfig.dart';
+import 'package:plack/component/Data/GetData.dart';
+import 'package:plack/models/UserInfo.dart';
+
+import '../component/Net/User.dart';
 
 Future<void> logoutUser() async {
 
@@ -13,6 +17,36 @@ Future<void> logoutUser() async {
   Get.reset(); // resetting getx
 }
 class userInfoController extends GetxController{
-
-
+  late UserInfo userInfo;
+  late String _token;
+  void getUserInfo(){
+    getInfo(_token).then((value){
+      var temp=value;
+      if(temp==null){
+        return;
+      }else{
+        userInfo=temp;
+      }
+    });
+  }
+  bool signIn(String name,String password){
+    userInfo=UserInfo();
+    userInfo.userName=name;
+    signin(name, password).then((value){
+      setToken(value);
+      _token=token;
+    });
+    if(_token!=null){
+      return true;
+    }
+    else
+      return false;
+  }
+  bool signUp(String name,String password){
+    bool temp=false;
+    signup(name, password).then((value){
+      temp=signIn(name, password);
+    });
+    return temp;
+  }
 }

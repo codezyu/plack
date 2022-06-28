@@ -35,6 +35,7 @@ String userUpdateUrl='user/update';
 String newsid='1';
 String newsUrl='news/$newsid';
 String categoryNewsUrl="/categorypage";
+String userInfoUrl="/self";
 var headers = {"Access-Control-Allow-Origin": "*"};
 
 

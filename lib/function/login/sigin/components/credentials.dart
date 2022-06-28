@@ -1,19 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:plack/component/Net/User.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:plack/function/mainPage/mainpage.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../../../common/constants.dart';
+import '../../../../controller/userInfoController.dart';
 import '../../widgets/rectangular_button.dart';
 import '../../widgets/rectangular_input_field.dart';
 
 class Credentials extends StatelessWidget {
   const Credentials({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    final logic=Get.put(userInfoController());
     final username= TextEditingController();
     final password=TextEditingController();
     return Padding(
@@ -48,12 +50,9 @@ class Credentials extends StatelessWidget {
               ),
             ),
           ),
-          RectangularButton(text: 'Connect the world', press: (){
-              signin(username.text, password.text).then((value){
-                if(value==true) {
-                      ()async{
-
-                      };
+          RectangularButton(text: 'Connect the world',
+              press: (){
+                if(logic.signIn(username.text, password.text)){
                       ()async{
                     showTopSnackBar(
                       context,
@@ -61,8 +60,7 @@ class Credentials extends StatelessWidget {
                         message:
                         "I'm Plack Have a nice day",
                       ),
-                    );
-                  };
+                    );};
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -71,8 +69,7 @@ class Credentials extends StatelessWidget {
                       },
                     ),
                   );
-                }
-                else{
+                }else{
                   showTopSnackBar(
                     context,
                     CustomSnackBar.error(
@@ -81,8 +78,7 @@ class Credentials extends StatelessWidget {
                     ),
                   );
                 }
-              });
-          })
+              })
         ],
       ),
     );
