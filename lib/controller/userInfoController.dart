@@ -3,25 +3,18 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:plack/common/config.dart';
 import 'package:plack/component/Config/UserConfig.dart';
-import 'package:plack/component/Data/GetData.dart';
+import 'package:plack/controller/dataController.dart';
 import 'package:plack/models/UserInfo.dart';
 
 import '../component/Net/User.dart';
 
-Future<void> logoutUser() async {
-
-  resetToken("");
-  homeroute=false;
-  await Get.deleteAll(force: true); //deleting all controllers
-  Phoenix.rebirth(Get.context!); // Restarting app
-  Get.reset(); // resetting getx
-}
 class userInfoController extends GetxController{
+  final store=Get.put(dataController());
   late UserInfo userInfo;
   late String _token="";
   @override
   void onInit(){
-    _token=getToken();
+    _token=store.getToken();
     print(_token);
     getUserInfo();
   }
@@ -39,7 +32,7 @@ class userInfoController extends GetxController{
     userInfo=UserInfo();
     userInfo.userName=name;
     signin(name, password).then((value){
-      setToken(value);
+      store.setToken(value);
       _token=token;
     });
     if(_token.isNotEmpty){
@@ -54,5 +47,12 @@ class userInfoController extends GetxController{
       temp=signIn(name, password);
     });
     return temp;
+  }
+  Future<void> logoutUser() async {
+    store.setToken("");
+    _token="";
+    await Get.deleteAll(force: true); //deleting all controllers
+    Phoenix.rebirth(Get.context!); // Restarting app
+    Get.reset(); // resetting getx
   }
 }

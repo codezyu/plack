@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:plack/component/Config/UserConfig.dart';
 
 
@@ -16,6 +18,7 @@ class FavoritePage extends StatefulWidget{
 
 }
 class _FavoritePageState extends State<FavoritePage>{
+  final logic=Get.put(userInfoController());
   ValueNotifier<String> _titleName = ValueNotifier<String>('我的信息');
   late Animation<Color?> colAnim1, colAnim2;
   TextEditingController dialogController = TextEditingController();
@@ -379,7 +382,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                           tag: 'rightButton',
                                           child: NeuButton(
                                             onPress: (){
-                                              logoutUser();
+                                              logic.logoutUser();
                                             },
                                             ico: Icon(
                                               Icons.logout,

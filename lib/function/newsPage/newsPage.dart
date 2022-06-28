@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:plack/component/Data/proxy.dart';
-import 'package:plack/style/NeuCard.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../common/constants.dart';
 import '../../common/myRadialMenu.dart';

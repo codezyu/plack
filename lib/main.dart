@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:plack/component/Init.dart';
+import 'package:plack/controller/dataController.dart';
 import 'package:plack/function/aboutPage/aboutPage.dart';
 import 'package:plack/function/cameraPage/cameraPage.dart';
 import 'package:plack/function/drawerPage/drawerPage.dart';
@@ -26,10 +28,10 @@ Future<void> main() async {
     //初始化相机
     WidgetsFlutterBinding.ensureInitialized();
     cameras = await availableCameras();
-    init();
   }catch(e){
-
   }
+  final logic=Get.put(dataController());
+  logic.init();
   //方向
   Future.delayed(Duration(milliseconds: 1)).then(
           (value) => SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -44,7 +46,6 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]));
-
   runApp(
      Phoenix(child: ProviderScope(
          child:GetMaterialApp(
@@ -55,7 +56,7 @@ Future<void> main() async {
              fontFamily: 'Montserrat',
            ),
            routes: {
-             '/': (context) =>(homeroute)?mainPage():SignInScreen(),
+             '/': (context) =>logic.homeroute.value?mainPage():SignInScreen(),
              '/login':(context)=>SignInScreen(),
            },
          )
