@@ -17,6 +17,7 @@ import 'package:plack/function/mainPage/mainpage.dart';
 import 'package:plack/function/newsPage/newsPage.dart';
 import 'package:plack/function/savedPage/savedPage.dart';
 import 'package:plack/function/settingPage/settingPage.dart';
+import 'package:plack/function/splashPage/splashPage.dart';
 
 import 'common/config.dart';
 import 'function/cameraPage/cameraScreen.dart';
@@ -27,25 +28,8 @@ Future<void> main() async {
   try{
     //初始化相机
     WidgetsFlutterBinding.ensureInitialized();
-    cameras = await availableCameras();
   }catch(e){
   }
-  final logic=Get.put(dataController());
-  logic.init();
-  //方向
-  Future.delayed(Duration(milliseconds: 1)).then(
-          (value) => SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color(0xFFF1F2F6),
-        systemNavigationBarIconBrightness: Brightness.dark,
-        systemNavigationBarDividerColor: Color(0xFFF1F2F6),
-      )));
-  Future.delayed(Duration(milliseconds: 1))
-      .then((value) => SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]));
   runApp(
      Phoenix(child: ProviderScope(
          child:GetMaterialApp(
@@ -55,10 +39,14 @@ Future<void> main() async {
            theme: ThemeData(
              fontFamily: 'Montserrat',
            ),
-           routes: {
-             '/': (context) =>logic.homeroute.value?mainPage():SignInScreen(),
-             '/login':(context)=>SignInScreen(),
-           },
+           initialRoute: '/init',
+           getPages: [
+             GetPage(name: '/main', page: () => mainPage()),
+             GetPage(name: '/login', page: () => SignInScreen()),
+             GetPage(name: '/drawer', page: ()=>drawerPage()),
+             GetPage(name: '/news', page: ()=>HomePage()),
+             GetPage(name:'/init',page:()=>splashPage(),binding: SplashBinding())
+           ],
          )
      ))
   );

@@ -8,13 +8,20 @@ import 'package:plack/models/UserInfo.dart';
 import '../component/Net/User.dart';
 
 class userInfoController extends GetxController{
-  final store=Get.put(dataController());
+  dataController store=Get.find();
   late UserInfo userInfo;
   late String _token="";
   @override
   void onInit(){
-    _token=store.getToken();
+    var token=store.getToken();
     print(_token);
+    if(token==null||token.isEmpty){
+      store.homeroute=false;
+    }
+    else{
+      _token=token;
+      store.homeroute=true;
+    }
     getUserInfo();
   }
   void getUserInfo(){
