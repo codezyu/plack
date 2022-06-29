@@ -36,7 +36,7 @@ String newsUrl='news/$newsid';
 String categoryNewsUrl="/categorypage";
 String userInfoUrl="/self";
 String loveNewsUrl="/xihuan";
-String collectNewsUrl="/xihuan";
+String collectNewsUrl="/shoucang";
 String visitNewsUrl="/liulan";
 var headers = {"Access-Control-Allow-Origin": "*"};
 

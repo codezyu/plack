@@ -9,9 +9,13 @@ import '../../models/myResponse.dart';
 
 Future<bool> signup(String username,String password) async {
   if(username.isNotEmpty&&password.isNotEmpty) {
+    var vo=UserVo();
+    vo.userName=username;
+    vo.password=password;
     Response response = await dio.post(
-        ip + ':' + port+signupUrl, data: {"username": username, "password": password});
+        ip + ':' + port+signupUrl, data: vo.toJson());
     if (response.statusCode == 200) {
+      print(response);
       return Future.value(true);
     }
   }

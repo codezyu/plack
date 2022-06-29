@@ -48,12 +48,15 @@ class userInfoController extends GetxController{
     else
       return false;
   }
-  bool signUp(String name,String password){
-    bool temp=false;
-    signup(name, password).then((value){
-      signIn(name, password).then((value) => temp=value);
+  Future<bool> signUp(String name,String password) async {
+    await signup(name, password).then((value) async {
+      await signIn(name, password);
     });
-    return temp;
+    if(_token.isNotEmpty){
+      return true;
+    }
+    else
+      return false;
   }
   Future<void> logoutUser() async {
     store.setToken("");

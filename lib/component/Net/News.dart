@@ -43,21 +43,22 @@ Future<void> setLoveInfo(int newsid,int userid) async {
   params['newsId']=newsid;
   params['userId']=userid;
   String url=ip+':'+port+loveNewsUrl;
-  Response response = await dio.get(url,queryParameters: params);
+  Response response = await dio.post(url,queryParameters: params);
 }
 Future<void> setCollectionInfo(int newsid,int userid) async {
   Map<String,int> params=Map();
   params['newsId']=newsid;
   params['userId']=userid;
   String url=ip+':'+port+collectNewsUrl;
-  Response response = await dio.get(url,queryParameters: params);
+  Response response = await dio.post(url,queryParameters: params);
 }
 Future<void> setVisitInfo(int newsid,int userid) async {
   Map<String,int> params=Map();
   params['newsId']=newsid;
   params['userId']=userid;
   String url=ip+':'+port+visitNewsUrl;
-  Response response = await dio.get(url,queryParameters: params);
+  Response response = await dio.post(url,queryParameters: params);
+  print(response);
 }
 News getTemplate(){
   News news=News(

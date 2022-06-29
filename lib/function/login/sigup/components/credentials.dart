@@ -46,32 +46,35 @@ class Credentials extends StatelessWidget {
             height: appPadding / 2,
           ),
           RectangularButton(text: 'Let\'s Start', press: ()async{
-            if(logic.signUp(username.text, password.text)){
-                  ()async{
-                showTopSnackBar(
-                  context,
-                  CustomSnackBar.success(
-                    message:
-                    "I'm Plack Have a nice day",
-                  ),
-                );};
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return mainPage();
-                  },
-                ),
-              );
-            }else{
-              showTopSnackBar(
-                context,
-                CustomSnackBar.error(
-                  message:
-                  "网络连接错误",
-                ),
-              );
-            }
+           logic.signUp(username.text, password.text).then((value) {
+             if (value) {
+                   () async {
+                 showTopSnackBar(
+                   context,
+                   CustomSnackBar.success(
+                     message:
+                     "I'm Plack Have a nice day",
+                   ),
+                 );
+               };
+               Navigator.push(
+                 context,
+                 MaterialPageRoute(
+                   builder: (context) {
+                     return mainPage();
+                   },
+                 ),
+               );
+             } else {
+               showTopSnackBar(
+                 context,
+                 CustomSnackBar.error(
+                   message:
+                   "网络连接错误",
+                 ),
+               );
+             }
+           });
           })
         ],
       ),
