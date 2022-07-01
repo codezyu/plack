@@ -22,8 +22,6 @@ import 'package:plack/function/settingPage/settingPage.dart';
 import 'package:plack/function/splashPage/splashPage.dart';
 
 import 'common/config.dart';
-import 'function/cameraPage/cameraScreen.dart';
-import 'function/favouritePage/FavoritePage.dart';
 import 'function/homePage/homePage.dart';
 
 Future<void> main() async {
@@ -51,6 +49,7 @@ Future<void> main() async {
              GetPage(name: '/drawer', page: ()=>drawerPage()),
              GetPage(name: '/home', page: ()=>HomePage()),
              GetPage(name:'/init',page:()=>splashPage(),binding: SplashBinding()),
+             GetPage(name:'/camera',page:()=>CameraPage(),binding: cameraBlinding()),
              GetPage(name: '/news', page: ()=>NewsPage(id: 1, title: '1', author: '1', type: '1', content: '1')),
            ],
          )

@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:plack/function/cameraPage/cameraScreen.dart';
+import 'package:plack/controller/ocrController.dart';
+import 'package:plack/function/newsPage/newsPage.dart';
 import 'dart:io';
 import '../../common/config.dart';
 import '../../common/constants.dart';
@@ -18,7 +21,7 @@ class CameraPage extends StatefulWidget {
   _CameraPageState createState() => _CameraPageState();
 }
 class _CameraPageState extends State<CameraPage> {
-  File? _image;
+  ocrController logic=Get.find();
   late double screenWidth;
   double xOffset = 0;
   double yOffset = 0;
@@ -292,8 +295,10 @@ class _CameraPageState extends State<CameraPage> {
   Future pickImage() async{
     try{
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      print(image==null);
       if(image == null) return;
-      setState(() => this._image = image as File?);
+      logic.image=File(image.path);
+      createPage();
     } on PlatformException catch(e) {
       print('Failed to pick image: $e');
     }
@@ -302,10 +307,31 @@ class _CameraPageState extends State<CameraPage> {
     try{
       final image = await ImagePicker().pickImage(source: ImageSource.camera);
       if(image == null) return;
-      setState(() => this._image = image as File?);
+      logic.image=File(image.path);
+      createPage();
     } on PlatformException catch(e) {
       print('Failed to pick camera: $e');
     }
   }
+  void createPage() {
+    logic.getOCR().then((value) {
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) {
+          return NewsPage(id: -1,
+              title: 'OCR识别结果',
+              author: 'plack',
+              type: 'ocr',
+              content: value);
+        },
+      ));
+    });
+  }
 
+}
+class cameraBlinding extends Bindings {
+  @override
+  void dependencies() {
+    print("ok");
+    Get.put<ocrController>(ocrController());
+  }
 }

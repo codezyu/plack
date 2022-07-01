@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 final drawerAnimDur = 350;
 ValueNotifier<int> indexOfMenu =
-    ValueNotifier<int>(0); //Timer,Stats,Donate,About,Rate
+    ValueNotifier<int>(2);
 const kTextStyle = TextStyle(
   letterSpacing: 2.0,
   fontSize: 20,

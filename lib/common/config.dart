@@ -26,7 +26,7 @@ const Map<String, int> Menu = {
 const version='0.0.4';
 late String token;
 SharedPref localStore=SharedPref();
-String ip='http://localhost';
+String ip='http://47.99.200.3';
 String port='8081';
 String signupUrl='/users';
 String signinUrl='/oauth/token';
@@ -38,6 +38,7 @@ String userInfoUrl="/self";
 String loveNewsUrl="/xihuan";
 String collectNewsUrl="/shoucang";
 String visitNewsUrl="/liulan";
+String ocrUrl="/ocr";
 var headers = {"Access-Control-Allow-Origin": "*"};
 
 const String userInfo='plack_userinfo';
