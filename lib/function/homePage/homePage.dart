@@ -241,6 +241,9 @@ class _HomePageState extends State<HomePage>{
                                               physics: BouncingScrollPhysics(),
                                               itemBuilder:
                                                   (BuildContext context, int index, animation) {
+
+                                                print(logic.news.length);
+                                                print(index);
                                                 return GestureDetector(
                                                   onTap:() async {
                                                     FocusScopeNode currentFocus =

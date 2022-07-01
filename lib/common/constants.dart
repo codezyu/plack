@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 final drawerAnimDur = 350;
 ValueNotifier<int> indexOfMenu =
-    ValueNotifier<int>(2);
+    ValueNotifier<int>(0);
 const kTextStyle = TextStyle(
   letterSpacing: 2.0,
   fontSize: 20,
@@ -89,4 +89,5 @@ Map<String,String> myConvert={
   'Science':'科学',
   'Sports':'运动',
   "Technology":'技术',
+  "无":'警告',
 };

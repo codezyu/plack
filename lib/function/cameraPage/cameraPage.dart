@@ -14,6 +14,7 @@ import 'dart:io';
 import '../../common/config.dart';
 import '../../common/constants.dart';
 import '../../common/providers.dart';
+import '../../component/Loading.dart';
 import '../../style/NeuButton.dart';
 
 class CameraPage extends StatefulWidget {
@@ -295,7 +296,6 @@ class _CameraPageState extends State<CameraPage> {
   Future pickImage() async{
     try{
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      print(image==null);
       if(image == null) return;
       logic.image=File(image.path);
       createPage();
@@ -314,7 +314,9 @@ class _CameraPageState extends State<CameraPage> {
     }
   }
   void createPage() {
+    Loading.show(context);
     logic.getOCR().then((value) {
+      Loading.dismiss(context);
       Navigator.push(context, MaterialPageRoute(
         builder: (context) {
           return NewsPage(id: -1,

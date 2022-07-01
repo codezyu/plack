@@ -10,6 +10,7 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../../../common/config.dart';
 import '../../../../common/constants.dart';
+import '../../../../component/Loading.dart';
 import '../../../../controller/userInfoController.dart';
 import '../../widgets/rectangular_button.dart';
 import '../../widgets/rectangular_input_field.dart';
@@ -46,6 +47,7 @@ class Credentials extends StatelessWidget {
             height: appPadding / 2,
           ),
           RectangularButton(text: 'Let\'s Start', press: ()async{
+            Loading.show(context);
            logic.signUp(username.text, password.text).then((value) {
              if (value) {
                    () async {

@@ -17,15 +17,26 @@ class newsController extends GetxController{
   };
   Map<String,int> page={
     'Business':1,
-    'Entertainment':1
+    'Entertainment':1,
+    'General':1,
+    'Health':1,
+    'Science':1,
+    'Sports':1,
+    'Technology':1,
   };
   Map<String,List<News>> newslist={
-    'Business':List.generate(1, (index)=>getTemplate()),
-    'Entertainment':List.generate(1, (index)=>getTemplate()),
+    'Business':List.filled(1, getTemplate()),
+    'Entertainment':List.filled(1, getTemplate()),
+    'General':List.filled(1, getTemplate()),
+    'Health':List.filled(1, getTemplate()),
+    'Science':List.filled(1, getTemplate()),
+    'Sports':List.filled(1, getTemplate()),
+    'Technology':List.filled(1, getTemplate()),
   };
   late List<News> news=(List.generate(1, (index)=>getTemplate())).obs;
   void getNewsbyCategory(int pageindex){
     getNews(_type,pageindex).then((value) {
+      print(value.length);
      if(value.length!=0)
        {
            news=value;
@@ -35,6 +46,7 @@ class newsController extends GetxController{
      else{
        news=newslist[_type]!;
      }
+     print(news.first.newsType);
      update();
    });
   }
