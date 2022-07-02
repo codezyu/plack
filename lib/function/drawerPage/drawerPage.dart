@@ -103,8 +103,7 @@ class _drawerPageState extends State<drawerPage> {
                                     '新闻',
                                     style: TextStyle(
                                       fontFamily: 'MontserratBold',
-                                      color: Colors.yellow[
-                                      indexOfMenu.value == 0 ? 200 : 500],
+                                      color: indexOfMenu.value == Menu['home']! ? Colors.blue[500] : Colors.white70,
                                       letterSpacing: 1.5,
                                       fontSize: 22,
                                       fontWeight: FontWeight.w900,
@@ -145,8 +144,7 @@ class _drawerPageState extends State<drawerPage> {
                                     '主页',
                                     style: TextStyle(
                                       fontFamily: 'MontserratBold',
-                                      color: Colors.yellow[
-                                      indexOfMenu.value == 0 ? 200 : 500],
+                                      color: indexOfMenu.value == Menu['favourite']! ? Colors.yellow[200] : Colors.white70,
                                       letterSpacing: 1.5,
                                       fontSize: 22,
                                       fontWeight: FontWeight.w900,
@@ -187,8 +185,7 @@ class _drawerPageState extends State<drawerPage> {
                                     '辅助功能',
                                     style: TextStyle(
                                       fontFamily: 'MontserratBold',
-                                      color: Colors.yellow[
-                                      indexOfMenu.value == 0 ? 200 : 500],
+                                      color:indexOfMenu.value == Menu['camera']! ? Colors.greenAccent[200] : Colors.white70,
                                       letterSpacing: 1.5,
                                       fontSize: 22,
                                       fontWeight: FontWeight.w900,
@@ -207,7 +204,7 @@ class _drawerPageState extends State<drawerPage> {
                           GestureDetector(
                             onTap: (() {
                               setState(() {
-                                indexOfMenu.value = 3;
+                                indexOfMenu.value = Menu['about']!;
                               });
                             }),
                             child: FittedBox(
@@ -228,8 +225,7 @@ class _drawerPageState extends State<drawerPage> {
                                     '关于',
                                     style: TextStyle(
                                       fontFamily: 'MontserratBold',
-                                      color: Colors.yellow[
-                                      indexOfMenu.value == 0 ? 200 : 500],
+                                      color: indexOfMenu.value == Menu['about']! ? Colors.deepPurpleAccent[200] : Colors.white70,
                                       letterSpacing: 1.5,
                                       fontSize: 22,
                                       fontWeight: FontWeight.w900,

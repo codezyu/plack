@@ -47,7 +47,6 @@ class userInfoController extends GetxController{
       _token=value;
     });
     if(_token.isNotEmpty){
-      print(_token);
       getUserInfo();
       return true;
     }
@@ -65,7 +64,6 @@ class userInfoController extends GetxController{
       return false;
   }
   Future<int> editPassword(String oldpassword,String newpassword)async{
-    print(userInfo.password);
     if(oldpassword!=userInfo.password){
       return 1;
     }

@@ -58,7 +58,6 @@ Future<void> setVisitInfo(int newsid,int userid) async {
   params['userId']=userid;
   String url=ip+':'+port+visitNewsUrl;
   Response response = await dio.post(url,queryParameters: params);
-  print(response);
 }
 News getTemplate(){
   News news=News(

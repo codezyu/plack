@@ -31,7 +31,7 @@ class _FavoritePageState extends State<FavoritePage>{
   TextEditingController dialogController = TextEditingController();
   double _opacity = 1;
   late double screenWidth;
-  late double cardHeight;
+  late double cardHeight=MediaQuery.of(context).size.height/3*2;
   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
@@ -44,8 +44,8 @@ class _FavoritePageState extends State<FavoritePage>{
   }
   @override
   Widget build(BuildContext context) {
+    logic.getNums();
     screenWidth = MediaQuery.of(context).size.width;
-    cardHeight=MediaQuery.of(context).size.height/4*3;
     return Consumer(
         builder: (context, ref, child) {
           bool isDark = ref.read(isDarkProvider);
@@ -214,598 +214,603 @@ class _FavoritePageState extends State<FavoritePage>{
                               ),
                               //间隔
                               Expanded(
-                                flex: 0,
+                                flex: 1,
                                 child: SizedBox(),
                               ),
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 15, horizontal: 20),
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 15, horizontal: 15),
-                                height:  cardHeight,
-                                decoration: BoxDecoration(
-                                  color: backgroundColor,
-                                  // gradient: LinearGradient(
-                                  //     colors: gradientList[index % 5],
-                                  //     begin: Alignment.centerLeft,
-                                  //     end: Alignment.centerRight),
-                                  borderRadius: BorderRadius.circular(32),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: shadowColor,
-                                        offset: Offset(8, 6),
-                                        blurRadius: 12),
-                                    BoxShadow(
-                                        color: lightShadowColor,
-                                        offset: Offset(-8, -6),
-                                        blurRadius: 12),
-                                  ],
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          flex:15,
-                                          child: Text(
-                                            logic.userInfo.userName!,
-                                            style: kTextStyle.copyWith(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 25,
-                                              color: Colors.amber,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex:4,
-                                          child: NeuButton(
-                                          ico: Icon(
-                                            Icons.edit_note,
-                                            size: 30,
-                                            color: textColor,
-                                          ),
-                                          onPress: (){
-                                            Navigator.push(context, MaterialPageRoute(
-                                              builder: (context) {
-                                                return EditScreen();
-                                              },
-                                            ));
-                                          },
-                                        ),),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    //阅读数
-                                    Container(
-                                      decoration: ConcaveDecoration(
-                                        shape:
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(
-                                            lerpDouble(
-                                                0, 100, 0.25)!,
-                                          ),
-                                        ),
-                                        colors: [
-                                          shadowColor,
-                                          lightShadowColor
-                                        ],
-                                        depression: 10,
-                                      ),
-                                      width: screenWidth - 40,
+                              Expanded(
+                                flex:30,
+                                child:NotificationListener(
+                                  child: AnimatedContainer(
+                                      duration: Duration(milliseconds: 300),
                                       margin: EdgeInsets.symmetric(
-                                          vertical: 5,
-                                          horizontal: 0),
+                                          vertical: 15, horizontal: 20),
                                       padding: EdgeInsets.symmetric(
-                                          vertical: 0,
-                                          horizontal: 5),
-                                      child: Container(
-                                        child: Theme(
-                                          data: Theme.of(context).copyWith(
-                                            dividerColor:  Colors.transparent
-                                          ),
-                                          child: ExpansionTile(
-                                              childrenPadding:
-                                              EdgeInsets.only(bottom: 10),
-                                              maintainState: true,
-                                              onExpansionChanged:
-                                              (val){
-                                                setState((){
-                                                  val?cardHeight+=68:cardHeight-=68;
-                                                });
-                                              },
-                                              title:Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                      alignment: Alignment.center,
-                                                      child: Text(
-                                                        textAlign:
-                                                        TextAlign
-                                                            .center,
-                                                        '阅读数:',
-                                                        style: kTextStyle.copyWith(
-                                                          color: isDark ? Colors.white : Colors.black,
-                                                        ),
-                                                      )),
-                                                  Text(
-                                                    logic.userNumber.browseCount.toString(),
-                                                    style: kTextStyle.copyWith(
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 20,
-                                                      color: isDark
-                                                        ? Colors
-                                                        .white
-                                                        : Colors
-                                                        .black,
-                                                    ),
+                                          vertical: 15, horizontal: 15),
+                                      height:  cardHeight,
+                                      width: screenWidth,
+                                      decoration: BoxDecoration(
+                                        color: backgroundColor,
+                                        // gradient: LinearGradient(
+                                        //     colors: gradientList[index % 5],
+                                        //     begin: Alignment.centerLeft,
+                                        //     end: Alignment.centerRight),
+                                        borderRadius: BorderRadius.circular(32),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: shadowColor,
+                                              offset: Offset(8, 6),
+                                              blurRadius: 12),
+                                          BoxShadow(
+                                              color: lightShadowColor,
+                                              offset: Offset(-8, -6),
+                                              blurRadius: 12),
+                                        ],
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                flex:15,
+                                                child: Text(
+                                                  logic.userInfo.userName!,
+                                                  style: kTextStyle.copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 25,
+                                                    color: Colors.amber,
                                                   ),
-                                                ],
+                                                  textAlign: TextAlign.center,
+                                                ),
                                               ),
-                                            //备选框
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child:
-                                                      SizedBox(),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 4,
-                                                      child:
-                                                      FittedBox(
-                                                        fit: BoxFit
-                                                            .fill,
-                                                        child: Text(
-                                                          'More:',
+                                              Expanded(
+                                                flex:4,
+                                                child: NeuButton(
+                                                  ico: Icon(
+                                                    Icons.edit_note,
+                                                    size: 30,
+                                                    color: textColor,
+                                                  ),
+                                                  onPress: (){
+                                                    Navigator.push(context, MaterialPageRoute(
+                                                      builder: (context) {
+                                                        return EditScreen();
+                                                      },
+                                                    ));
+                                                  },
+                                                ),),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          //阅读数
+                                          Container(
+                                            decoration: ConcaveDecoration(
+                                              shape:
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                  lerpDouble(
+                                                      0, 100, 0.25)!,
+                                                ),
+                                              ),
+                                              colors: [
+                                                shadowColor,
+                                                lightShadowColor
+                                              ],
+                                              depression: 10,
+                                            ),
+                                            width: screenWidth - 40,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 5,
+                                                horizontal: 0),
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 0,
+                                                horizontal: 5),
+                                            child: Container(
+                                              child: Theme(
+                                                data: Theme.of(context).copyWith(
+                                                    dividerColor:  Colors.transparent
+                                                ),
+                                                child: ExpansionTile(
+                                                  childrenPadding:
+                                                  EdgeInsets.only(bottom: 10),
+                                                  maintainState: true,
+                                                  onExpansionChanged:
+                                                      (val){
+                                                    setState((){
+                                                      val?cardHeight+=68:cardHeight-=68;
+                                                    });
+                                                  },
+                                                  title:Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                          alignment: Alignment.center,
+                                                          child: Text(
+                                                            textAlign:
+                                                            TextAlign
+                                                                .center,
+                                                            '阅读数:',
+                                                            style: kTextStyle.copyWith(
+                                                              color: isDark ? Colors.white : Colors.black,
+                                                            ),
+                                                          )),
+                                                      Text(
+                                                        logic.userNumber.browseCount.toString(),
+                                                        style: kTextStyle.copyWith(
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 20,
+                                                          color: isDark
+                                                              ? Colors
+                                                              .white
+                                                              : Colors
+                                                              .black,
                                                         ),
                                                       ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child:
-                                                      SizedBox(),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 10,
-                                                      child:
-                                                      GestureDetector(
-                                                        onTap:
-                                                        (() async {
-                                                          Navigator.push(context, MaterialPageRoute(
-                                                            builder: (context) {
-                                                              return mainPage();
-                                                            },
-                                                          ));
-                                                        }),
-                                                        child:
-                                                        AnimatedContainer(
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                              200),
-                                                          curve: Curves
-                                                              .easeOutQuint,
-                                                          height: 45,
-                                                          decoration:
-                                                          BoxDecoration(
-                                                            color: Colors
-                                                                .transparent,
-                                                            border: Border.all(
-                                                                width:
-                                                                1,
-                                                                color: Colors
-                                                                    .white
-                                                                    .withOpacity(0.8)),
-                                                            borderRadius:
-                                                            BorderRadius.circular(
-                                                                20),
-                                                          ),
+                                                    ],
+                                                  ),
+                                                  //备选框
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 1,
                                                           child:
-                                                          Center(
+                                                          SizedBox(),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 4,
+                                                          child:
+                                                          FittedBox(
+                                                            fit: BoxFit
+                                                                .fill,
+                                                            child: Text(
+                                                              'More:',
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child:
+                                                          SizedBox(),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 10,
+                                                          child:
+                                                          GestureDetector(
+                                                            onTap:
+                                                            (() async {
+                                                              isHomeOpen=false;
+                                                              indexOfMenu.value =Menu['home']!;
+                                                            }),
                                                             child:
-                                                            Text(
-                                                              '开始探索',
-                                                              style:
-                                                              TextStyle(
-                                                                color:  textColor,
-                                                                letterSpacing:
-                                                                2.0,
-                                                                fontSize:
-                                                                20,
-                                                                fontWeight:
-                                                                FontWeight.bold,
+                                                            AnimatedContainer(
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                  200),
+                                                              curve: Curves
+                                                                  .easeOutQuint,
+                                                              height: 45,
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                border: Border.all(
+                                                                    width:
+                                                                    1,
+                                                                    color: Colors
+                                                                        .white
+                                                                        .withOpacity(0.8)),
+                                                                borderRadius:
+                                                                BorderRadius.circular(
+                                                                    20),
+                                                              ),
+                                                              child:
+                                                              Center(
+                                                                child:
+                                                                Text(
+                                                                  '开始探索',
+                                                                  style:
+                                                                  TextStyle(
+                                                                    color:  textColor,
+                                                                    letterSpacing:
+                                                                    2.0,
+                                                                    fontSize:
+                                                                    20,
+                                                                    fontWeight:
+                                                                    FontWeight.bold,
+                                                                  ),
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child:
-                                                      SizedBox(),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child:
+                                                          SizedBox(),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ],
-                                                ),
-                                              ],
 
-                                          ),
-
-                                        ),
-                                      ),
-                                    ),
-                                    //收藏数
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Container(
-                                      decoration: ConcaveDecoration(
-                                        shape:
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(
-                                            lerpDouble(
-                                                0, 100, 0.25)!,
-                                          ),
-                                        ),
-                                        colors: [
-                                          shadowColor,
-                                          lightShadowColor
-                                        ],
-                                        depression: 10,
-                                      ),
-                                      width: screenWidth - 40,
-                                      margin: EdgeInsets.symmetric(
-                                          vertical: 5,
-                                          horizontal: 0),
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 0,
-                                          horizontal: 5),
-                                      child: Container(
-                                        child: Theme(
-                                          data: Theme.of(context).copyWith(
-                                              dividerColor:  Colors.transparent
-                                          ),
-                                          child: ExpansionTile(
-                                            childrenPadding:
-                                            EdgeInsets.only(bottom: 10),
-                                            maintainState: true,
-                                            onExpansionChanged:
-                                                (val){
-                                              setState((){
-                                                val?cardHeight+=68:cardHeight-=68;
-                                              });
-                                            },
-                                            title:Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                    alignment: Alignment.center,
-                                                    child: Text(
-                                                      textAlign:
-                                                      TextAlign
-                                                          .center,
-                                                      '收藏数:',
-                                                      style: kTextStyle.copyWith(
-                                                        color: isDark ? Colors.white : Colors.black,
-                                                      ),
-                                                    )),
-                                                Text(
-                                                  logic.userNumber.collectCount.toString(),
-                                                  style: kTextStyle.copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    color: isDark
-                                                        ? Colors
-                                                        .white
-                                                        : Colors
-                                                        .black,
-                                                  ),
                                                 ),
-                                              ],
+
+                                              ),
                                             ),
-                                            //备选框
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child:
-                                                    SizedBox(),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 4,
-                                                    child:
-                                                    FittedBox(
-                                                      fit: BoxFit
-                                                          .fill,
-                                                      child: Text(
-                                                        'More:',
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child:
-                                                    SizedBox(),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 10,
-                                                    child:
-                                                    GestureDetector(
-                                                      onTap:
-                                                      (() async {
-                                                        Navigator.push(context, MaterialPageRoute(
-                                                          builder: (context) {
-                                                            return savedPage();
-                                                          },
-                                                        ));
-                                                      }),
-                                                      child:
-                                                      AnimatedContainer(
-                                                        duration: Duration(
-                                                            milliseconds:
-                                                            200),
-                                                        curve: Curves
-                                                            .easeOutQuint,
-                                                        height: 45,
-                                                        decoration:
-                                                        BoxDecoration(
-                                                          color: Colors
-                                                              .transparent,
-                                                          border: Border.all(
-                                                              width:
-                                                              1,
-                                                              color: Colors
-                                                                  .white
-                                                                  .withOpacity(0.8)),
-                                                          borderRadius:
-                                                          BorderRadius.circular(
-                                                              20),
+                                          ),
+                                          //收藏数
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            decoration: ConcaveDecoration(
+                                              shape:
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                  lerpDouble(
+                                                      0, 100, 0.25)!,
+                                                ),
+                                              ),
+                                              colors: [
+                                                shadowColor,
+                                                lightShadowColor
+                                              ],
+                                              depression: 10,
+                                            ),
+                                            width: screenWidth - 40,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 5,
+                                                horizontal: 0),
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 0,
+                                                horizontal: 5),
+                                            child: Container(
+                                              child: Theme(
+                                                data: Theme.of(context).copyWith(
+                                                    dividerColor:  Colors.transparent
+                                                ),
+                                                child: ExpansionTile(
+                                                  childrenPadding:
+                                                  EdgeInsets.only(bottom: 10),
+                                                  maintainState: true,
+                                                  onExpansionChanged:
+                                                      (val){
+                                                    setState((){
+                                                      val?cardHeight+=68:cardHeight-=68;
+                                                    });
+                                                  },
+                                                  title:Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                          alignment: Alignment.center,
+                                                          child: Text(
+                                                            textAlign:
+                                                            TextAlign
+                                                                .center,
+                                                            '收藏数:',
+                                                            style: kTextStyle.copyWith(
+                                                              color: isDark ? Colors.white : Colors.black,
+                                                            ),
+                                                          )),
+                                                      Text(
+                                                        logic.userNumber.collectCount.toString(),
+                                                        style: kTextStyle.copyWith(
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 20,
+                                                          color: isDark
+                                                              ? Colors
+                                                              .white
+                                                              : Colors
+                                                              .black,
                                                         ),
-                                                        child:
-                                                        Center(
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  //备选框
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 1,
                                                           child:
-                                                          Text(
-                                                            '我的收藏夹',
-                                                            style:
-                                                            TextStyle(
-                                                              color:  textColor,
-                                                              letterSpacing:
-                                                              2.0,
-                                                              fontSize:
-                                                              20,
-                                                              fontWeight:
-                                                              FontWeight.bold,
+                                                          SizedBox(),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 4,
+                                                          child:
+                                                          FittedBox(
+                                                            fit: BoxFit
+                                                                .fill,
+                                                            child: Text(
+                                                              'More:',
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child:
-                                                    SizedBox(),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-
-                                          ),
-
-                                        ),
-                                      ),
-                                    ),
-                                    //关注的主题
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Container(
-                                      decoration: ConcaveDecoration(
-                                        shape:
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(
-                                            lerpDouble(
-                                                0, 100, 0.25)!,
-                                          ),
-                                        ),
-                                        colors: [
-                                          shadowColor,
-                                          lightShadowColor
-                                        ],
-                                        depression: 10,
-                                      ),
-                                      width: screenWidth - 40,
-                                      margin: EdgeInsets.symmetric(
-                                          vertical: 5,
-                                          horizontal: 0),
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 0,
-                                          horizontal: 5),
-                                      child: Container(
-                                        child: Theme(
-                                          data: Theme.of(context).copyWith(
-                                              dividerColor:  Colors.transparent
-                                          ),
-                                          child: ExpansionTile(
-                                            childrenPadding:
-                                            EdgeInsets.only(bottom: 10),
-                                            maintainState: true,
-                                            onExpansionChanged:
-                                                (val){
-                                              setState((){
-                                                val?cardHeight+=68:cardHeight-=68;
-                                              });
-                                            },
-                                            title:Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                    alignment: Alignment.center,
-                                                    child: Text(
-                                                      textAlign:
-                                                      TextAlign
-                                                          .center,
-                                                      '爱好:',
-                                                      style: kTextStyle.copyWith(
-                                                        color: isDark ? Colors.white : Colors.black,
-                                                      ),
-                                                    )),
-                                                Text(
-                                                  logic.userNumber.favorCount.toString(),
-                                                  style: kTextStyle.copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    color: isDark
-                                                        ? Colors
-                                                        .white
-                                                        : Colors
-                                                        .black,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            //备选框
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child:
-                                                    SizedBox(),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 4,
-                                                    child:
-                                                    FittedBox(
-                                                      fit: BoxFit
-                                                          .fill,
-                                                      child: Text(
-                                                        'More:',
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child:
-                                                    SizedBox(),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 10,
-                                                    child:
-                                                    GestureDetector(
-                                                      onTap:
-                                                      (() async {
-                                                        newsController logic=Get.find();
-                                                        logic.setType("Business");
-                                                        Navigator.push(context, MaterialPageRoute(
-                                                          builder: (context) {
-                                                            return HomePage();
-                                                          },
-                                                        ));
-                                                      }),
-                                                      child:
-                                                      AnimatedContainer(
-                                                        duration: Duration(
-                                                            milliseconds:
-                                                            200),
-                                                        curve: Curves
-                                                            .easeOutQuint,
-                                                        height: 45,
-                                                        decoration:
-                                                        BoxDecoration(
-                                                          color: Colors
-                                                              .transparent,
-                                                          border: Border.all(
-                                                              width:
-                                                              1,
-                                                              color: Colors
-                                                                  .white
-                                                                  .withOpacity(0.8)),
-                                                          borderRadius:
-                                                          BorderRadius.circular(
-                                                              20),
-                                                        ),
-                                                        child:
-                                                        Center(
+                                                        Expanded(
+                                                          flex: 1,
                                                           child:
-                                                          Text(
-                                                            'Business',
-                                                            style:
-                                                            TextStyle(
-                                                              color:  textColor,
-                                                              letterSpacing:
-                                                              2.0,
-                                                              fontSize:
-                                                              20,
-                                                              fontWeight:
-                                                              FontWeight.bold,
+                                                          SizedBox(),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 10,
+                                                          child:
+                                                          GestureDetector(
+                                                            onTap:
+                                                            (() async {
+                                                              Navigator.push(context, MaterialPageRoute(
+                                                                builder: (context) {
+                                                                  return savedPage();
+                                                                },
+                                                              ));
+                                                            }),
+                                                            child:
+                                                            AnimatedContainer(
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                  200),
+                                                              curve: Curves
+                                                                  .easeOutQuint,
+                                                              height: 45,
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                border: Border.all(
+                                                                    width:
+                                                                    1,
+                                                                    color: Colors
+                                                                        .white
+                                                                        .withOpacity(0.8)),
+                                                                borderRadius:
+                                                                BorderRadius.circular(
+                                                                    20),
+                                                              ),
+                                                              child:
+                                                              Center(
+                                                                child:
+                                                                Text(
+                                                                  '我的收藏夹',
+                                                                  style:
+                                                                  TextStyle(
+                                                                    color:  textColor,
+                                                                    letterSpacing:
+                                                                    2.0,
+                                                                    fontSize:
+                                                                    20,
+                                                                    fontWeight:
+                                                                    FontWeight.bold,
+                                                                  ),
+                                                                ),
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child:
+                                                          SizedBox(),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 1,
-                                                    child:
-                                                    SizedBox(),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                                  ],
 
-                                          ),
-
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          flex:13,
-                                          child: SizedBox(),
-                                        ),
-                                        Expanded(
-                                            flex:5,
-                                            child: Hero(
-                                              tag: 'rightButton',
-                                              child: NeuButton(
-                                                onPress: (){
-                                                  logic.logoutUser();
-                                                },
-                                                ico: Icon(
-                                                  Icons.logout,
-                                                  size: 30,
-                                                  color: textColor,
                                                 ),
+
                                               ),
                                             ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
+                                          ),
+                                          //关注的主题
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            decoration: ConcaveDecoration(
+                                              shape:
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                  lerpDouble(
+                                                      0, 100, 0.25)!,
+                                                ),
+                                              ),
+                                              colors: [
+                                                shadowColor,
+                                                lightShadowColor
+                                              ],
+                                              depression: 10,
+                                            ),
+                                            width: screenWidth - 40,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 5,
+                                                horizontal: 0),
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 0,
+                                                horizontal: 5),
+                                            child: Container(
+                                              child: Theme(
+                                                data: Theme.of(context).copyWith(
+                                                    dividerColor:  Colors.transparent
+                                                ),
+                                                child: ExpansionTile(
+                                                  childrenPadding:
+                                                  EdgeInsets.only(bottom: 10),
+                                                  maintainState: true,
+                                                  onExpansionChanged:
+                                                      (val){
+                                                    setState((){
+                                                      val?cardHeight+=68:cardHeight-=68;
+                                                    });
+                                                  },
+                                                  title:Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                          alignment: Alignment.center,
+                                                          child: Text(
+                                                            textAlign:
+                                                            TextAlign
+                                                                .center,
+                                                            '爱好:',
+                                                            style: kTextStyle.copyWith(
+                                                              color: isDark ? Colors.white : Colors.black,
+                                                            ),
+                                                          )),
+                                                      Text(
+                                                        logic.userNumber.favorCount.toString(),
+                                                        style: kTextStyle.copyWith(
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 20,
+                                                          color: isDark
+                                                              ? Colors
+                                                              .white
+                                                              : Colors
+                                                              .black,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  //备选框
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child:
+                                                          SizedBox(),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 4,
+                                                          child:
+                                                          FittedBox(
+                                                            fit: BoxFit
+                                                                .fill,
+                                                            child: Text(
+                                                              'More:',
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child:
+                                                          SizedBox(),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 10,
+                                                          child:
+                                                          GestureDetector(
+                                                            onTap:
+                                                            (() async {
+                                                              newsController logic=Get.find();
+                                                              logic.setType("Business");
+                                                              isHomeOpen=false;
+                                                              indexOfMenu.value=Menu['home']!;
+                                                            }),
+                                                            child:
+                                                            AnimatedContainer(
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                  200),
+                                                              curve: Curves
+                                                                  .easeOutQuint,
+                                                              height: 45,
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                border: Border.all(
+                                                                    width:
+                                                                    1,
+                                                                    color: Colors
+                                                                        .white
+                                                                        .withOpacity(0.8)),
+                                                                borderRadius:
+                                                                BorderRadius.circular(
+                                                                    20),
+                                                              ),
+                                                              child:
+                                                              Center(
+                                                                child:
+                                                                Text(
+                                                                  'Business',
+                                                                  style:
+                                                                  TextStyle(
+                                                                    color:  textColor,
+                                                                    letterSpacing:
+                                                                    2.0,
+                                                                    fontSize:
+                                                                    20,
+                                                                    fontWeight:
+                                                                    FontWeight.bold,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child:
+                                                          SizedBox(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+
+                                                ),
+
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                flex:13,
+                                                child: SizedBox(),
+                                              ),
+                                              Expanded(
+                                                flex:5,
+                                                child: Hero(
+                                                  tag: 'rightButton',
+                                                  child: NeuButton(
+                                                    onPress: (){
+                                                      logic.logoutUser();
+                                                    },
+                                                    ico: Icon(
+                                                      Icons.logout,
+                                                      size: 30,
+                                                      color: textColor,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                  ),
                                 )
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: SizedBox(),
                               ),
                             ],
                           )

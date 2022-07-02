@@ -16,7 +16,6 @@ Future<bool> signup(String username,String password) async {
     Response response = await dio.post(
         ip + ':' + port+signupUrl, data: vo.toJson());
     if (response.statusCode == 200) {
-      print(response);
       return Future.value(true);
     }
   }
@@ -46,12 +45,9 @@ Future<bool> updatepassword(String username,String oldpassword,String newpasswor
       "oldpassword":oldpassword,
       "newpassword":newpassword,
     };
-    print(url);
-    print(data);
     Response response = await dio.post(url
     , data: data);
     if (response.statusCode == 200) {
-      print(response);
       return Future.value(true);
     }
   }
@@ -59,10 +55,11 @@ Future<bool> updatepassword(String username,String oldpassword,String newpasswor
 }
 Future<Number> getUserNum(int userid) async {
   var params={
-    "userid": userid
+    "userId": userid
   };
   Response response = await dio.get(
       ip + ':' + port+getNum,queryParameters:params);
+  print(response.data);
   if (response.statusCode == 200) {
     MyResponse myResponse=MyResponse.fromJson(response.data,Number.fromJson);
     Number number=myResponse.data as Number;
@@ -80,13 +77,12 @@ Future<UserInfo?> getInfo(String token) async {
     return null;
   }
   else{
-    dio.options.headers["Authorization"]="mawang";
+    dio.options.headers["Authorization"]=token;
     Response response = await dio.get(
         ip + ':' + port+userInfoUrl);
     if (response.statusCode == 200) {
       MyResponse myResponse=MyResponse.fromJson(response.data,UserInfo.fromJson);
       UserInfo userInfo=myResponse.data as UserInfo;
-      print(userInfo);
       return userInfo;
     }
     else{
