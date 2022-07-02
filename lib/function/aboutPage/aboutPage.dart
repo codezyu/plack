@@ -326,11 +326,11 @@ class _AboutPageState extends State<AboutPage> {
                             GestureDetector(
                               onTap: (() async {
                                 if (await canLaunchUrl(
-                                    Uri.parse('https://www.google.com/search?q=%E5%8E%A6%E9%97%A8%E5%A4%A7%E5%AD%A6'))) {
+                                    Uri.parse('https://www.baidu.com/search?q=%E5%8E%A6%E9%97%A8%E5%A4%A7%E5%AD%A6'))) {
                                   await launchUrl(Uri.parse(
-                                      'https://www.google.com/search?q=%E5%8E%A6%E9%97%A8%E5%A4%A7%E5%AD%A6'));
+                                      'https://www.baidu.com/search?q=%E5%8E%A6%E9%97%A8%E5%A4%A7%E5%AD%A6'));
                                 } else {
-                                  throw 'https://www.google.com/search?q=%E5%8E%A6%E9%97%A8%E5%A4%A7%E5%AD%A6';
+                                  throw 'https://www.baidu.com/search?q=%E5%8E%A6%E9%97%A8%E5%A4%A7%E5%AD%A6';
                                 }
                               }),
                               child: Container(
@@ -368,7 +368,7 @@ class _AboutPageState extends State<AboutPage> {
                                   await launch(
                                       'https://github.com/codezyu');
                                 } else {
-                                  throw 'Could not launch https://github.com/codezyu}';
+                                  throw 'Could not launch https://github.com/codezyu';
                                 }
                               }),
                               child: Container(
