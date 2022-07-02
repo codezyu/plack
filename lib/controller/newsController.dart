@@ -33,10 +33,14 @@ class newsController extends GetxController{
     'Sports':List.filled(1, getTemplate()),
     'Technology':List.filled(1, getTemplate()),
   };
+  Map<String,List<int>> userNewsList={
+    '/xihuan':[],
+    '/shoucang':[],
+    '/liulan':[],
+  };
   late List<News> news=(List.generate(1, (index)=>getTemplate())).obs;
   void getNewsbyCategory(int pageindex){
     getNews(_type,pageindex).then((value) {
-      print(value.length);
      if(value.length!=0)
        {
            news=value;
@@ -55,8 +59,14 @@ class newsController extends GetxController{
     getNewsbyCategory(page[_type]!);
     super.onInit();
   }
-  void getSpeciedNews(String id){
-
+  Future<News> getSpeciedNews(int id) async {
+      return await getSpeciedNews(id);
+  }
+  void getNewsIdByUserId(int userId,String type){
+    getNewsConnects(type, userId).then((value){
+      if(value.length>0)
+        userNewsList[type]=value;
+    });
   }
   void setType(String type){
     _type=type;

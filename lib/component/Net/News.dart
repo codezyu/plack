@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get/get_core/src/get_main.dart';
+import 'package:plack/models/NewsConnectList.dart';
 import '../../common/config.dart';
 import '../../common/constants.dart';
 import '../../models/News.dart';
@@ -59,11 +60,51 @@ Future<void> setVisitInfo(int newsid,int userid) async {
   String url=ip+':'+port+visitNewsUrl;
   Response response = await dio.post(url,queryParameters: params);
 }
+Future<List<int>> getNewsConnects(String type,int userId) async {
+  var param={
+    "userId":userId
+  };
+  String url=ip+':'+port+type;
+  print(url);
+  Response response=await dio.get(url,queryParameters: param);
+  MyResponse myResponse=MyResponse.fromJson(response.data,NewsConnectList.fromJson);
+  NewsConnectList mylist=myResponse.data as NewsConnectList;
+  if(mylist.newsConnect!=null)
+    return List.generate(mylist.newsConnect!.length, (index) => mylist.newsConnect![index].newsId!);
+  else
+    return List.generate(0, (index) => 0);
+}
+Future<News> getNewByid(int id) async {
+  String url=ip+':'+port+getSingleNews+id.toString();
+  Response response = await dio.get(url);
+  if(response.statusCode!=200){
+    Get.snackbar(
+      "无法获取新闻内容", // title
+      "请检查你的网络连接",
+      // message
+      icon: Icon(Icons.wifi_off),
+      colorText: Colors.black,
+      shouldIconPulse: true,
+      barBlur: 20,
+      isDismissible: true,
+      duration: Duration(seconds: 3),
+    );
+    return getTemplate();
+  }
+  else{
+    MyResponse myResponse=MyResponse.fromJson(response.data,News.fromJson);
+    News news=myResponse.data as News;
+    if(news!=null){
+      return news;
+    }
+    return getTemplate();
+  }
+}
 News getTemplate(){
   News news=News(
     newsTitle: "请检查你的网络连接",
     newsType: "无",
-    id: 0,
+    id: -1,
     content: "请检查你的网络连接"
   );
   return news;

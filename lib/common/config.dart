@@ -41,6 +41,7 @@ String visitNewsUrl="/liulan";
 String ocrUrl="/ocr";
 String newpasswordUrl="/user/update";
 String getNum="/news/user/summary";
+String getSingleNews="/news/";
 var headers = {"Access-Control-Allow-Origin": "*"};
 
 const String userInfo='plack_userinfo';

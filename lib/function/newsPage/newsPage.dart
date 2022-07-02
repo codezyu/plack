@@ -33,7 +33,8 @@ class _NewsPageState extends State<NewsPage>{
   void initState(){
     print(widget.id);
     // print(userLogic.userInfo.id!);
-    logic.setVisit(widget.id, userLogic.userInfo.id!);
+    if(widget.id!=-1)
+      logic.setVisit(widget.id, userLogic.userInfo.id!);
     super.initState();
   }
   @override
@@ -52,7 +53,7 @@ class _NewsPageState extends State<NewsPage>{
           elevation: 0,
           backgroundColor: Colors.transparent,
         ),
-        floatingActionButton: FabCircularMenu(
+        floatingActionButton: widget.id!=-1?FabCircularMenu(
           ringDiameter: 150,
           children: [
             IconButton(
@@ -67,7 +68,7 @@ class _NewsPageState extends State<NewsPage>{
               Get.snackbar('收藏成功', '感谢您的收藏');
             })
           ],
-        ),
+        ):null,
         body: Container(
           alignment: Alignment.topLeft,
           padding: EdgeInsets.fromLTRB(12, 6, 12, 12),

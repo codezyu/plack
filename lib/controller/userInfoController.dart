@@ -18,7 +18,7 @@ class userInfoController extends GetxController{
     collectCount: 0,
   );
   @override
-  void onInit(){
+  void onInit()async{
     var token=store.getToken();
     if(token==null||token.isEmpty){
       store.homeroute=false;
@@ -36,6 +36,7 @@ class userInfoController extends GetxController{
         return;
       }else{
         userInfo=temp;
+        getUserNum(userInfo.id!);
       }
     });
   }

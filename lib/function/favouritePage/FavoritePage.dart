@@ -25,7 +25,8 @@ class FavoritePage extends StatefulWidget{
 
 }
 class _FavoritePageState extends State<FavoritePage>{
-  final logic=Get.put(userInfoController());
+  userInfoController logic=Get.find();
+  newsController data=Get.find();
   ValueNotifier<String> _titleName = ValueNotifier<String>('我的信息');
   late Animation<Color?> colAnim1, colAnim2;
   TextEditingController dialogController = TextEditingController();
@@ -549,9 +550,10 @@ class _FavoritePageState extends State<FavoritePage>{
                                                           GestureDetector(
                                                             onTap:
                                                             (() async {
+                                                              data.getNewsIdByUserId(logic.userInfo.id!, "/shoucang");
                                                               Navigator.push(context, MaterialPageRoute(
                                                                 builder: (context) {
-                                                                  return savedPage();
+                                                                  return savedPage(type: "/shoucang");
                                                                 },
                                                               ));
                                                             }),
