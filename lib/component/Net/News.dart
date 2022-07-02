@@ -30,7 +30,7 @@ Future<List<News>> getNews(String type,int page) async {
     return List.filled(0,getTemplate());
   }
   else{
-    MyResponse myResponse=MyResponse.fromJson(response.data,1);
+    MyResponse myResponse=MyResponse.fromJson(response.data,NewsList.fromJson);
     NewsList mylist=myResponse.data as NewsList;
     if(mylist.news==null||mylist.news!.length==0){
       return List.filled(0,getTemplate());

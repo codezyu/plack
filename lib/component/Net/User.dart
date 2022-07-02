@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:plack/component/Net/util.dart';
-import 'package:plack/models/index.dart';
 import '../../common/config.dart';
 import '../../common/constants.dart';
 import '../../models/UserInfo.dart';
+import '../../models/UserVo.dart';
 import '../../models/myResponse.dart';
 
 Future<bool> signup(String username,String password) async {
@@ -46,7 +46,7 @@ Future<UserInfo?> getInfo(String token) async {
     Response response = await dio.get(
         ip + ':' + port+userInfoUrl);
     if (response.statusCode == 200) {
-      MyResponse myResponse=MyResponse.fromJson(response.data,2);
+      MyResponse myResponse=MyResponse.fromJson(response.data,UserInfo.fromJson);
       UserInfo userInfo=myResponse.data as UserInfo;
       print(userInfo);
       return userInfo;

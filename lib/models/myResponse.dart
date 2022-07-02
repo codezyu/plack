@@ -13,15 +13,9 @@ class MyResponse {
       this.data, 
       this.errmsg,});
 
-  MyResponse.fromJson(dynamic json,int type) {
+  MyResponse.fromJson(dynamic json,fromJson) {
     errno = json['errno'];
-    if(type==1)
-    data = json['data'] != null ? NewsList.fromJson(json['data']) : null;
-    else if(type==2)
-      data = json['data'] != null ? UserInfo.fromJson(json['data']) : null;
-    else{
-      data = json['data'] != null ? Data.fromJson(json['data']) : null;
-    }
+    data = json['data'] != null ?fromJson(json['data']) : null;
     errmsg = json['errmsg'];
   }
   int? errno;
