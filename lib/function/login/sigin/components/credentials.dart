@@ -42,27 +42,21 @@ class Credentials extends StatelessWidget {
           SizedBox(
             height: appPadding / 2,
           ),
-          Center(
-            child: Text(
-              'Forget Password?',
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 17,
-              ),
-            ),
-          ),
+          // Center(
+          //   child: Text(
+          //     'Forget Password?',
+          //     style: TextStyle(
+          //       fontWeight: FontWeight.w400,
+          //       fontSize: 17,
+          //     ),
+          //   ),
+          // ),
           RectangularButton(text: 'Connect the world',
               press: () async {
                 Loading.show(context);
                 logic.signIn(username.text, password.text).then((value){
                   if(value==true){
-                    showTopSnackBar(
-                      context,
-                      CustomSnackBar.success(
-                        message:
-                        "I'm Plack Have a nice day",
-                      ),
-                    );
+                    Get.snackbar('欢迎', 'I\'m Plack Have a nice day');
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -72,13 +66,7 @@ class Credentials extends StatelessWidget {
                       ),
                     );
                   }else{
-                    showTopSnackBar(
-                      context,
-                      CustomSnackBar.error(
-                        message:
-                        "请检查你的用户名和密码",
-                      ),
-                    );
+                    Get.snackbar('错误', '请检查你的用户名和密码');
                   }
                 });
               })

@@ -1,26 +1,22 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:plack/component/Net/User.dart';
+import 'package:plack/component/Loading.dart';
 import 'package:plack/function/mainPage/mainpage.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-import '../../../../common/config.dart';
 import '../../../../common/constants.dart';
-import '../../../../component/Loading.dart';
 import '../../../../controller/userInfoController.dart';
 import '../../widgets/rectangular_button.dart';
 import '../../widgets/rectangular_input_field.dart';
 
 class Credentials extends StatelessWidget {
   const Credentials({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    final logic=Get.put(userInfoController());
+    userInfoController logic=Get.find();
     final username= TextEditingController();
     final password=TextEditingController();
     return Padding(
@@ -29,8 +25,8 @@ class Credentials extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           RectangularInputField(
-            hintText: 'Username',
-            icon: Icons.person,
+            hintText: '旧密码',
+            icon: Icons.lock_outline,
             obscureText: false,
             controller: username,
           ),
@@ -38,7 +34,7 @@ class Credentials extends StatelessWidget {
             height: appPadding / 2,
           ),
           RectangularInputField(
-            hintText: 'Password',
+            hintText: '新密码',
             icon: Icons.lock,
             obscureText: true,
             controller: password,
@@ -46,24 +42,33 @@ class Credentials extends StatelessWidget {
           SizedBox(
             height: appPadding / 2,
           ),
-          RectangularButton(text: 'Let\'s Start', press: ()async{
-            Loading.show(context);
-           logic.signUp(username.text, password.text).then((value) {
-             if (value) {
-               Get.snackbar('欢迎', 'I\'m Plack Have a nice day');
-               Navigator.push(
-                       context,
-                       MaterialPageRoute(
-                         builder: (context) {
-                           return mainPage();
-                         },
-                       ),
-                     );
-             } else {
-               Get.snackbar('错误', '网络连接错误');
-             }
-           });
-          })
+          RectangularButton(text: 'ReConnect the World',
+              press: () async {
+                if(username.text==password.text){
+                  Get.snackbar('提示', '新旧密码不能相同');
+                  return;
+                }
+                Loading.show(context);
+                logic.editPassword(username.text, password.text).then((value){
+                  Loading.dismiss(context);
+                  if(value==0){
+                    Get.snackbar('欢迎', 'Have a nice Day!');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return mainPage();
+                        },
+                      ),
+                    );
+                  }else if(value==1){
+                    Get.snackbar('错误', '请检查密码是否输入正确');
+                  }
+                  else{
+                    Get.snackbar('错误', '请检查您的网络连接');
+                  }
+                });
+              })
         ],
       ),
     );

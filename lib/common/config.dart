@@ -39,6 +39,7 @@ String loveNewsUrl="/xihuan";
 String collectNewsUrl="/shoucang";
 String visitNewsUrl="/liulan";
 String ocrUrl="/ocr";
+String newpasswordUrl="/user/update";
 var headers = {"Access-Control-Allow-Origin": "*"};
 
 const String userInfo='plack_userinfo';

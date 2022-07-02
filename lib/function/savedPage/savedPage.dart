@@ -40,7 +40,7 @@ class _savedPageState extends ConsumerState<savedPage> {
         children: [
           Center(
             child: Container(
-              margin: EdgeInsets.fromLTRB(10, 25, 10, 5),
+              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: FittedBox(
                 fit: BoxFit.fitWidth,
                 child: Text(

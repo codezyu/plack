@@ -37,6 +37,21 @@ Future<String> signin(String username,String password) async{
   }
   return Future.value(null);
 }
+Future<bool> updatepassword(String username,String oldpassword,String newpassword) async {
+  if(oldpassword.isNotEmpty&&newpassword.isNotEmpty) {
+    String url=ip + ':' + port+newpasswordUrl;
+    String data="{"+"\"username\":"+"\""+username+"\""+","+"\"oldpassword\":"+"\""+oldpassword+"\""+","+"\"newpassword\":"+"\""+newpassword+"\""+"}";
+    print(url);
+    print(data);
+    Response response = await dio.post(url
+    , data: data);
+    if (response.statusCode == 200) {
+      print(response);
+      return Future.value(true);
+    }
+  }
+  return Future.value(false);
+}
 Future<UserInfo?> getInfo(String token) async {
   if(token==null){
     return null;

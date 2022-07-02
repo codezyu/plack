@@ -11,6 +11,9 @@ class userInfoController extends GetxController{
   dataController store=Get.find();
   late UserInfo userInfo;
   late String _token="";
+  int ReadingNums=0;
+  int CollectionNums=0;
+  int LoveNums=0;
   @override
   void onInit(){
     var token=store.getToken();
@@ -58,11 +61,37 @@ class userInfoController extends GetxController{
     else
       return false;
   }
+  Future<int> editPassword(String oldpassword,String newpassword)async{
+    print(userInfo.password);
+    if(oldpassword!=userInfo.password){
+      return 1;
+    }
+    await updatepassword(userInfo.userName!, oldpassword, newpassword).then((value){
+      if(value==true){
+        userInfo.password=newpassword;
+      }
+    });
+    if(oldpassword!=userInfo.password){
+      return 0;
+    }
+    else
+      return 2;
+
+  }
   Future<void> logoutUser() async {
     store.setToken("");
     _token="";
     await Get.deleteAll(force: true); //deleting all controllers
     Phoenix.rebirth(Get.context!); // Restarting app
     Get.reset(); // resetting getx
+  }
+  Future<void> getReadingnNums()async {
+
+  }
+  Future<void> getCollectionNums()async {
+
+  }
+  Future<void> getLoveNums()async{
+
   }
 }

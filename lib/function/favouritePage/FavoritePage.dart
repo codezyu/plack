@@ -1,14 +1,22 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:plack/function/homePage/homePage.dart';
+import 'package:plack/function/login/edit/edit_screen.dart';
+import 'package:plack/function/savedPage/savedPage.dart';
 
 import '../../common/config.dart';
 import '../../common/constants.dart';
 import '../../common/providers.dart';
+import '../../component/Loading.dart';
+import '../../controller/newsController.dart';
 import '../../controller/userInfoController.dart';
 import '../../style/NeuButton.dart';
+import '../../style/innerShadow.dart';
 
 class FavoritePage extends StatefulWidget{
   @override
@@ -22,17 +30,21 @@ class _FavoritePageState extends State<FavoritePage>{
   TextEditingController dialogController = TextEditingController();
   double _opacity = 1;
   late double screenWidth;
+  late double cardHeight;
   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
   bool isBackPressed = false;
   List<String>? savedList = [];
+
   @override
   void initState() {
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
+    screenWidth = MediaQuery.of(context).size.width;
+    cardHeight=MediaQuery.of(context).size.height/4*3;
     return Consumer(
         builder: (context, ref, child) {
           bool isDark = ref.read(isDarkProvider);
@@ -204,195 +216,595 @@ class _FavoritePageState extends State<FavoritePage>{
                                 flex: 0,
                                 child: SizedBox(),
                               ),
-                              //阅读数
-                              Expanded(
-                                flex: 6,
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 20),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 15),
+                                height:  cardHeight,
+                                decoration: BoxDecoration(
+                                  color: backgroundColor,
+                                  // gradient: LinearGradient(
+                                  //     colors: gradientList[index % 5],
+                                  //     begin: Alignment.centerLeft,
+                                  //     end: Alignment.centerRight),
+                                  borderRadius: BorderRadius.circular(32),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: shadowColor,
+                                        offset: Offset(8, 6),
+                                        blurRadius: 12),
+                                    BoxShadow(
+                                        color: lightShadowColor,
+                                        offset: Offset(-8, -6),
+                                        blurRadius: 12),
+                                  ],
+                                ),
                                 child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
                                   children: [
-                                    Container(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          '我的阅读数',
-                                          style: kTextStyle.copyWith(
-                                            color: isDark ? Colors.white : Colors.black,
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex:15,
+                                          child: Text(
+                                            logic.userInfo.userName!,
+                                            style: kTextStyle.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 25,
+                                              color: Colors.amber,
+                                            ),
+                                            textAlign: TextAlign.center,
                                           ),
-                                        )),
+                                        ),
+                                        Expanded(
+                                          flex:4,
+                                          child: NeuButton(
+                                          ico: Icon(
+                                            Icons.edit_note,
+                                            size: 30,
+                                            color: textColor,
+                                          ),
+                                          onPress: (){
+                                            Navigator.push(context, MaterialPageRoute(
+                                              builder: (context) {
+                                                return EditScreen();
+                                              },
+                                            ));
+                                          },
+                                        ),),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    //阅读数
                                     Container(
-                                      margin: EdgeInsets.only(top: 10),
-                                      alignment: Alignment.center,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                              child: Text(
-                                                '130',
-                                                style: kTextStyle.copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 25,
+                                      decoration: ConcaveDecoration(
+                                        shape:
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                            lerpDouble(
+                                                0, 100, 0.25)!,
+                                          ),
+                                        ),
+                                        colors: [
+                                          shadowColor,
+                                          lightShadowColor
+                                        ],
+                                        depression: 10,
+                                      ),
+                                      width: screenWidth - 40,
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 5,
+                                          horizontal: 0),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 0,
+                                          horizontal: 5),
+                                      child: Container(
+                                        child: Theme(
+                                          data: Theme.of(context).copyWith(
+                                            dividerColor:  Colors.transparent
+                                          ),
+                                          child: ExpansionTile(
+                                              childrenPadding:
+                                              EdgeInsets.only(bottom: 10),
+                                              maintainState: true,
+                                              onExpansionChanged:
+                                              (val){
+                                                setState((){
+                                                  val?cardHeight+=68:cardHeight-=68;
+                                                });
+                                              },
+                                              title:Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                      alignment: Alignment.center,
+                                                      child: Text(
+                                                        textAlign:
+                                                        TextAlign
+                                                            .center,
+                                                        '阅读数:',
+                                                        style: kTextStyle.copyWith(
+                                                          color: isDark ? Colors.white : Colors.black,
+                                                        ),
+                                                      )),
+                                                  Text(
+                                                    logic.ReadingNums.toString(),
+                                                    style: kTextStyle.copyWith(
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 20,
+                                                      color: isDark
+                                                        ? Colors
+                                                        .white
+                                                        : Colors
+                                                        .black,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            //备选框
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child:
+                                                      SizedBox(),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 4,
+                                                      child:
+                                                      FittedBox(
+                                                        fit: BoxFit
+                                                            .fill,
+                                                        child: Text(
+                                                          'More:',
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child:
+                                                      SizedBox(),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 10,
+                                                      child:
+                                                      GestureDetector(
+                                                        onTap:
+                                                        (() async {
+                                                          Navigator.push(context, MaterialPageRoute(
+                                                            builder: (context) {
+                                                              return HomePage();
+                                                            },
+                                                          ));
+                                                        }),
+                                                        child:
+                                                        AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                              200),
+                                                          curve: Curves
+                                                              .easeOutQuint,
+                                                          height: 45,
+                                                          decoration:
+                                                          BoxDecoration(
+                                                            color: Colors
+                                                                .transparent,
+                                                            border: Border.all(
+                                                                width:
+                                                                1,
+                                                                color: Colors
+                                                                    .white
+                                                                    .withOpacity(0.8)),
+                                                            borderRadius:
+                                                            BorderRadius.circular(
+                                                                20),
+                                                          ),
+                                                          child:
+                                                          Center(
+                                                            child:
+                                                            Text(
+                                                              '开始探索',
+                                                              style:
+                                                              TextStyle(
+                                                                color:  textColor,
+                                                                letterSpacing:
+                                                                2.0,
+                                                                fontSize:
+                                                                20,
+                                                                fontWeight:
+                                                                FontWeight.bold,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child:
+                                                      SizedBox(),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+
+                                          ),
+
+                                        ),
+                                      ),
+                                    ),
+                                    //收藏数
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      decoration: ConcaveDecoration(
+                                        shape:
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                            lerpDouble(
+                                                0, 100, 0.25)!,
+                                          ),
+                                        ),
+                                        colors: [
+                                          shadowColor,
+                                          lightShadowColor
+                                        ],
+                                        depression: 10,
+                                      ),
+                                      width: screenWidth - 40,
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 5,
+                                          horizontal: 0),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 0,
+                                          horizontal: 5),
+                                      child: Container(
+                                        child: Theme(
+                                          data: Theme.of(context).copyWith(
+                                              dividerColor:  Colors.transparent
+                                          ),
+                                          child: ExpansionTile(
+                                            childrenPadding:
+                                            EdgeInsets.only(bottom: 10),
+                                            maintainState: true,
+                                            onExpansionChanged:
+                                                (val){
+                                              setState((){
+                                                val?cardHeight+=68:cardHeight-=68;
+                                              });
+                                            },
+                                            title:Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      textAlign:
+                                                      TextAlign
+                                                          .center,
+                                                      '收藏数:',
+                                                      style: kTextStyle.copyWith(
+                                                        color: isDark ? Colors.white : Colors.black,
+                                                      ),
+                                                    )),
+                                                Text(
+                                                  logic.CollectionNums.toString(),
+                                                  style: kTextStyle.copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20,
+                                                    color: isDark
+                                                        ? Colors
+                                                        .white
+                                                        : Colors
+                                                        .black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            //备选框
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child:
+                                                    SizedBox(),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 4,
+                                                    child:
+                                                    FittedBox(
+                                                      fit: BoxFit
+                                                          .fill,
+                                                      child: Text(
+                                                        'More:',
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child:
+                                                    SizedBox(),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 10,
+                                                    child:
+                                                    GestureDetector(
+                                                      onTap:
+                                                      (() async {
+                                                        Navigator.push(context, MaterialPageRoute(
+                                                          builder: (context) {
+                                                            return savedPage();
+                                                          },
+                                                        ));
+                                                      }),
+                                                      child:
+                                                      AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds:
+                                                            200),
+                                                        curve: Curves
+                                                            .easeOutQuint,
+                                                        height: 45,
+                                                        decoration:
+                                                        BoxDecoration(
+                                                          color: Colors
+                                                              .transparent,
+                                                          border: Border.all(
+                                                              width:
+                                                              1,
+                                                              color: Colors
+                                                                  .white
+                                                                  .withOpacity(0.8)),
+                                                          borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                        ),
+                                                        child:
+                                                        Center(
+                                                          child:
+                                                          Text(
+                                                            '我的收藏夹',
+                                                            style:
+                                                            TextStyle(
+                                                              color:  textColor,
+                                                              letterSpacing:
+                                                              2.0,
+                                                              fontSize:
+                                                              20,
+                                                              fontWeight:
+                                                              FontWeight.bold,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child:
+                                                    SizedBox(),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+
+                                          ),
+
+                                        ),
+                                      ),
+                                    ),
+                                    //关注的主题
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      decoration: ConcaveDecoration(
+                                        shape:
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                            lerpDouble(
+                                                0, 100, 0.25)!,
+                                          ),
+                                        ),
+                                        colors: [
+                                          shadowColor,
+                                          lightShadowColor
+                                        ],
+                                        depression: 10,
+                                      ),
+                                      width: screenWidth - 40,
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 5,
+                                          horizontal: 0),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 0,
+                                          horizontal: 5),
+                                      child: Container(
+                                        child: Theme(
+                                          data: Theme.of(context).copyWith(
+                                              dividerColor:  Colors.transparent
+                                          ),
+                                          child: ExpansionTile(
+                                            childrenPadding:
+                                            EdgeInsets.only(bottom: 10),
+                                            maintainState: true,
+                                            onExpansionChanged:
+                                                (val){
+                                              setState((){
+                                                val?cardHeight+=68:cardHeight-=68;
+                                              });
+                                            },
+                                            title:Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      textAlign:
+                                                      TextAlign
+                                                          .center,
+                                                      '爱好:',
+                                                      style: kTextStyle.copyWith(
+                                                        color: isDark ? Colors.white : Colors.black,
+                                                      ),
+                                                    )),
+                                                Text(
+                                                  logic.LoveNums.toString(),
+                                                  style: kTextStyle.copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20,
+                                                    color: isDark
+                                                        ? Colors
+                                                        .white
+                                                        : Colors
+                                                        .black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            //备选框
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child:
+                                                    SizedBox(),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 4,
+                                                    child:
+                                                    FittedBox(
+                                                      fit: BoxFit
+                                                          .fill,
+                                                      child: Text(
+                                                        'More:',
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child:
+                                                    SizedBox(),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 10,
+                                                    child:
+                                                    GestureDetector(
+                                                      onTap:
+                                                      (() async {
+                                                        newsController logic=Get.find();
+                                                        logic.setType("Business");
+                                                        Navigator.push(context, MaterialPageRoute(
+                                                          builder: (context) {
+                                                            return HomePage();
+                                                          },
+                                                        ));
+                                                      }),
+                                                      child:
+                                                      AnimatedContainer(
+                                                        duration: Duration(
+                                                            milliseconds:
+                                                            200),
+                                                        curve: Curves
+                                                            .easeOutQuint,
+                                                        height: 45,
+                                                        decoration:
+                                                        BoxDecoration(
+                                                          color: Colors
+                                                              .transparent,
+                                                          border: Border.all(
+                                                              width:
+                                                              1,
+                                                              color: Colors
+                                                                  .white
+                                                                  .withOpacity(0.8)),
+                                                          borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                        ),
+                                                        child:
+                                                        Center(
+                                                          child:
+                                                          Text(
+                                                            'Business',
+                                                            style:
+                                                            TextStyle(
+                                                              color:  textColor,
+                                                              letterSpacing:
+                                                              2.0,
+                                                              fontSize:
+                                                              20,
+                                                              fontWeight:
+                                                              FontWeight.bold,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child:
+                                                    SizedBox(),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+
+                                          ),
+
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex:13,
+                                          child: SizedBox(),
+                                        ),
+                                        Expanded(
+                                            flex:5,
+                                            child: Hero(
+                                              tag: 'rightButton',
+                                              child: NeuButton(
+                                                onPress: (){
+                                                  logic.logoutUser();
+                                                },
+                                                ico: Icon(
+                                                  Icons.logout,
+                                                  size: 30,
                                                   color: textColor,
                                                 ),
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              //收藏数
-                              Expanded(
-                                flex: 6,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        '我的收藏',
-                                        style: kTextStyle.copyWith(
-                                          color: isDark ? Colors.white : Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 10),
-                                      alignment: Alignment.center,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            child: Text(
-                                              '250',
-                                              style: kTextStyle.copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 25,
-                                                color: textColor,
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              //喜欢的主题
-                              Expanded(
-                                flex: 6,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        '我的喜爱',
-                                        style: kTextStyle.copyWith(
-                                          color: isDark ? Colors.white : Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 10),
-                                      alignment: Alignment.center,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            child: Text(
-                                              '250',
-                                              style: kTextStyle.copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 25,
-                                                color: textColor,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              //左右按钮
-                              Expanded(
-                                flex: 5,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Text(
-                                          '我的收藏',
-                                          style: TextStyle(
-                                            color: Colors.deepOrange[200],
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Hero(
-                                          tag: 'leftButton',
-                                          child: NeuButton(
-                                            ico: Icon(
-                                              Icons.bookmark_border_rounded,
-                                              size: 30,
-                                              color: textColor,
-                                            ),
-                                          ),
                                         ),
                                       ],
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          '修改密码',
-                                          style: TextStyle(
-                                            color: Colors.pinkAccent[200],
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Hero(
-                                          tag: 'leftButton',
-                                          child: NeuButton(
-                                            ico: Icon(
-                                              Icons.edit_note,
-                                              size: 30,
-                                              color: textColor,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          '退出登录',
-                                          style: TextStyle(
-                                            color: Colors.redAccent[200],
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Hero(
-                                          tag: 'rightButton',
-                                          child: NeuButton(
-                                            onPress: (){
-                                              logic.logoutUser();
-                                            },
-                                            ico: Icon(
-                                              Icons.logout,
-                                              size: 30,
-                                              color: textColor,
-                                            ),
-                                          ),
-                                        ),
-                                        ]
                                     )
                                   ],
-                                ),
+                                )
                               ),
                             ],
                           )
