@@ -65,7 +65,6 @@ Future<List<int>> getNewsConnects(String type,int userId) async {
     "userId":userId
   };
   String url=ip+':'+port+type;
-  print(url);
   Response response=await dio.get(url,queryParameters: param);
   MyResponse myResponse=MyResponse.fromJson(response.data,NewsConnectList.fromJson);
   NewsConnectList mylist=myResponse.data as NewsConnectList;

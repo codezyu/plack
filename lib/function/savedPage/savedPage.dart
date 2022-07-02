@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:plack/common/constants.dart';
+import 'package:plack/component/Loading.dart';
 import 'package:plack/controller/newsController.dart';
 import 'package:plack/controller/userInfoController.dart';
 import 'package:plack/function/newsPage/newsPage.dart';
@@ -35,7 +36,6 @@ class _savedPageState extends ConsumerState<savedPage> {
   }
   @override
   Widget build(BuildContext context) {
-    print(data.userInfo.id);
     Color backgroundColor = ref.watch(backgroundProvider);
     Color shadowColor = ref.watch(shadowProvider);
     Color lightShadowColor = ref.watch(lightShadowProvider);
@@ -84,6 +84,8 @@ class _savedPageState extends ConsumerState<savedPage> {
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (BuildContext context,int index,animation)
                   {
+                    print(index);
+                    print(logic.userNewsList[widget.type]![index]);
                     return FutureBuilder(
                         future: logic.getSpeciedNews(logic.userNewsList[widget.type]![index]),
                         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -205,7 +207,7 @@ class _savedPageState extends ConsumerState<savedPage> {
                             }
                           }else {
                             // 请求未结束，显示loading
-                            return CircularProgressIndicator();
+                            return Loading();
                           }
                         }
                     );

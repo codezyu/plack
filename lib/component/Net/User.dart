@@ -59,7 +59,6 @@ Future<Number> getUserNum(int userid) async {
   };
   Response response = await dio.get(
       ip + ':' + port+getNum,queryParameters:params);
-  print(response.data);
   if (response.statusCode == 200) {
     MyResponse myResponse=MyResponse.fromJson(response.data,Number.fromJson);
     Number number=myResponse.data as Number;

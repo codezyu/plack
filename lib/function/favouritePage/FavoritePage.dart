@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -418,14 +419,75 @@ class _FavoritePageState extends State<FavoritePage>{
                                                               Center(
                                                                 child:
                                                                 Text(
-                                                                  '开始探索',
+                                                                  '探索',
                                                                   style:
                                                                   TextStyle(
                                                                     color:  textColor,
                                                                     letterSpacing:
                                                                     2.0,
                                                                     fontSize:
-                                                                    20,
+                                                                    17,
+                                                                    fontWeight:
+                                                                    FontWeight.bold,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child:
+                                                          SizedBox(),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 10,
+                                                          child:
+                                                          GestureDetector(
+                                                            onTap:
+                                                            (() async {
+                                                              data.getNewsIdByUserId(logic.userInfo.id!, "/liulan");
+                                                              Navigator.push(context, MaterialPageRoute(
+                                                                builder: (context) {
+                                                                  return savedPage(type: "/liulan");
+                                                                },
+                                                              ));
+                                                            }),
+                                                            child:
+                                                            AnimatedContainer(
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                  200),
+                                                              curve: Curves
+                                                                  .easeOutQuint,
+                                                              height: 45,
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                border: Border.all(
+                                                                    width:
+                                                                    1,
+                                                                    color: Colors
+                                                                        .white
+                                                                        .withOpacity(0.8)),
+                                                                borderRadius:
+                                                                BorderRadius.circular(
+                                                                    20),
+                                                              ),
+                                                              child:
+                                                              Center(
+                                                                child:
+                                                                AutoSizeText(
+                                                                  '历史浏览',
+                                                                  maxLines: 1,
+                                                                  style:
+                                                                  TextStyle(
+                                                                    color:  textColor,
+                                                                    letterSpacing:
+                                                                    2.0,
+                                                                    fontSize:
+                                                                    17,
                                                                     fontWeight:
                                                                     FontWeight.bold,
                                                                   ),
@@ -500,7 +562,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                             textAlign:
                                                             TextAlign
                                                                 .center,
-                                                            '收藏数:',
+                                                            '收藏:',
                                                             style: kTextStyle.copyWith(
                                                               color: isDark ? Colors.white : Colors.black,
                                                             ),
@@ -590,7 +652,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                                     letterSpacing:
                                                                     2.0,
                                                                     fontSize:
-                                                                    20,
+                                                                    17,
                                                                     fontWeight:
                                                                     FontWeight.bold,
                                                                   ),
@@ -665,7 +727,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                             textAlign:
                                                             TextAlign
                                                                 .center,
-                                                            '爱好:',
+                                                            '喜爱:',
                                                             style: kTextStyle.copyWith(
                                                               color: isDark ? Colors.white : Colors.black,
                                                             ),
@@ -746,14 +808,74 @@ class _FavoritePageState extends State<FavoritePage>{
                                                               Center(
                                                                 child:
                                                                 Text(
-                                                                  'Business',
+                                                                  '尝试',
                                                                   style:
                                                                   TextStyle(
                                                                     color:  textColor,
                                                                     letterSpacing:
                                                                     2.0,
                                                                     fontSize:
-                                                                    20,
+                                                                    17,
+                                                                    fontWeight:
+                                                                    FontWeight.bold,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child:
+                                                          SizedBox(),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 10,
+                                                          child:
+                                                          GestureDetector(
+                                                            onTap:
+                                                            (() async {
+                                                              data.getNewsIdByUserId(logic.userInfo.id!, "/xihuan");
+                                                              Navigator.push(context, MaterialPageRoute(
+                                                                builder: (context) {
+                                                                  return savedPage(type: "/xihuan");
+                                                                },
+                                                              ));
+                                                            }),
+                                                            child:
+                                                            AnimatedContainer(
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                  200),
+                                                              curve: Curves
+                                                                  .easeOutQuint,
+                                                              height: 45,
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                border: Border.all(
+                                                                    width:
+                                                                    1,
+                                                                    color: Colors
+                                                                        .white
+                                                                        .withOpacity(0.8)),
+                                                                borderRadius:
+                                                                BorderRadius.circular(
+                                                                    20),
+                                                              ),
+                                                              child:
+                                                              Center(
+                                                                child:
+                                                                Text(
+                                                                  '历史点赞',
+                                                                  style:
+                                                                  TextStyle(
+                                                                    color:  textColor,
+                                                                    letterSpacing:
+                                                                    2.0,
+                                                                    fontSize:
+                                                                    17,
                                                                     fontWeight:
                                                                     FontWeight.bold,
                                                                   ),

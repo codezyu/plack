@@ -60,7 +60,7 @@ class newsController extends GetxController{
     super.onInit();
   }
   Future<News> getSpeciedNews(int id) async {
-      return await getSpeciedNews(id);
+      return await getNewByid(id);
   }
   void getNewsIdByUserId(int userId,String type){
     getNewsConnects(type, userId).then((value){
