@@ -446,12 +446,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                           GestureDetector(
                                                             onTap:
                                                             (() async {
-                                                              data.getNewsIdByUserId(logic.userInfo.id!, "/liulan");
-                                                              Navigator.push(context, MaterialPageRoute(
-                                                                builder: (context) {
-                                                                  return savedPage(type: "/liulan");
-                                                                },
-                                                              ));
+                                                              createPage("/liulan");
                                                             }),
                                                             child:
                                                             AnimatedContainer(
@@ -612,12 +607,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                           GestureDetector(
                                                             onTap:
                                                             (() async {
-                                                              data.getNewsIdByUserId(logic.userInfo.id!, "/shoucang");
-                                                              Navigator.push(context, MaterialPageRoute(
-                                                                builder: (context) {
-                                                                  return savedPage(type: "/shoucang");
-                                                                },
-                                                              ));
+                                                              createPage("/shoucang");
                                                             }),
                                                             child:
                                                             AnimatedContainer(
@@ -835,12 +825,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                           GestureDetector(
                                                             onTap:
                                                             (() async {
-                                                              data.getNewsIdByUserId(logic.userInfo.id!, "/xihuan");
-                                                              Navigator.push(context, MaterialPageRoute(
-                                                                builder: (context) {
-                                                                  return savedPage(type: "/xihuan");
-                                                                },
-                                                              ));
+                                                              createPage("/xihuan");
                                                             }),
                                                             child:
                                                             AnimatedContainer(
@@ -946,6 +931,17 @@ class _FavoritePageState extends State<FavoritePage>{
           );
         }
     );
+  }
+  void createPage(String type) async{
+    Loading.show(context);
+    data.getNewsIdByUserId(logic.userInfo.id!, type);
+    Loading.dismiss(context);
+    Navigator.push(context, MaterialPageRoute(
+      builder: (context) {
+        return savedPage(type: type);
+      },
+    ));
+
   }
 
 }

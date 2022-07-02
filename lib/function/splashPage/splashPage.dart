@@ -6,6 +6,7 @@ import 'package:get/get_instance/src/bindings_interface.dart';
 import 'package:plack/controller/dataController.dart';
 import 'package:plack/controller/userInfoController.dart';
 import '../../common/scaleFactor.dart';
+import '../../component/Loading.dart';
 import '../../controller/initController.dart';
 import '../../controller/newsController.dart';
 import '../../controller/ocrController.dart';
@@ -14,17 +15,24 @@ class splashPage  extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Container(
-      color: Colors.white,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image:new ExactAssetImage('assets/img/splashscreen/splashscreen.png'),
+              fit: BoxFit.cover
+          )
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.hourglass_bottom,
-            size: 30.0,
-          ),
+          Loading(),
+          SizedBox(height: 20,),
           Text(
             'loading...',
-            style: TextStyle(fontSize: 30.0),
+            style: TextStyle(
+              color: Colors.black45,
+              decoration: TextDecoration.none,
+              fontSize: 30,
+            ),
           ),
         ],
       ),
