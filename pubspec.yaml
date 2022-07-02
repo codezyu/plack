@@ -90,7 +90,7 @@ flutter:
   assets:
     - assets/img/splashscreen/
     - assets/img/logo/logo.jpg
-    - assets/img/splashscreen/splashscreen.png
+    - assets/img/splashscreen/splashscreen.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

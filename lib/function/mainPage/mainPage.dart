@@ -86,7 +86,7 @@ class _mainPageState extends State<mainPage>{
                   return Center(
                     //添加图片
                     child: Image.asset(
-                      'assets/img/splashscreen/splashscreen.png',
+                      'assets/img/splashscreen/splashscreen.jpg',
                     ),
                   );
                 } else {

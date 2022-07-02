@@ -17,7 +17,7 @@ class splashPage  extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image:new ExactAssetImage('assets/img/splashscreen/splashscreen.png'),
+              image:new ExactAssetImage('assets/img/splashscreen/splashscreen.jpg'),
               fit: BoxFit.cover
           )
       ),
