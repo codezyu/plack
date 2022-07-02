@@ -23,7 +23,7 @@ const Map<String, int> Menu = {
   'setting':4,
   'news':5,
 };
-const version='0.0.4';
+const version='1.0.0';
 late String token;
 SharedPref localStore=SharedPref();
 String ip='http://47.99.200.3';

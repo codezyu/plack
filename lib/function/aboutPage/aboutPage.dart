@@ -169,7 +169,7 @@ class _AboutPageState extends State<AboutPage> {
                               Container(
                                 padding: EdgeInsets.only(left: 27),
                                 child: Text(
-                                  'About',
+                                  '关于',
                                   style: TextStyle(
                                     color: textColor,
                                     letterSpacing: 2.0,
