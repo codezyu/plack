@@ -164,7 +164,7 @@ class _CameraPageState extends State<CameraPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Expanded(
-                              flex: 13,
+                              flex: 10,
                               child: Container(
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -221,65 +221,73 @@ class _CameraPageState extends State<CameraPage> {
                                 ),
                               ),
                             ),
-                            Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 40, bottom: 5),
-                                  child: Text(
-                                    '点击使用相机',
-                                    style: kTextStyle.copyWith(
-                                      color: isDark ? Colors.white : Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 40,
-                                ),
-                                NeuButton(
-                                  ico: Icon(
-                                    Icons.photo_camera_back,
-                                    size: 70,
-                                    color: Colors.amberAccent,
-                                  ),
-                                  length: 150,
-                                  breadth: 150,
-                                  radii: 50,
-                                  onPress: (() async{
-                                    pickCamera();
-                                  }),
-                                ),
-                              ],
-                            ),
-                            Expanded(child: SizedBox()),
-                            Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 40, bottom: 5),
-                                  child: Text(
-                                    '图库',
-                                    style: kTextStyle.copyWith(
-                                      color: isDark ? Colors.white : Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 40,
-                                ),
-                                NeuButton(
-                                  ico: Icon(
-                                    Icons.photo,
-                                    size: 70,
-                                    color: Colors.greenAccent,
-                                  ),
-                                  length: 150,
-                                  breadth: 150,
-                                  radii: 50,
-                                  onPress: (){pickImage();},
-                                ),
-                              ],
-                            ),
                             Expanded(
                               flex: 13,
+                                child:Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 40, bottom: 5),
+                                      child: Text(
+                                        '点击使用相机',
+                                        style: kTextStyle.copyWith(
+                                          color: isDark ? Colors.white : Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    NeuButton(
+                                      ico: Icon(
+                                        Icons.photo_camera_back,
+                                        size: 70,
+                                        color: Colors.amberAccent,
+                                      ),
+                                      length: 150,
+                                      breadth: 150,
+                                      radii: 50,
+                                      onPress: (() async{
+                                        pickCamera();
+                                      }),
+                                    ),
+                                  ],
+                                ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                                child: SizedBox()),
+                            Expanded(
+                              flex:13,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 40, bottom: 5),
+                                      child: Text(
+                                        '图库',
+                                        style: kTextStyle.copyWith(
+                                          color: isDark ? Colors.white : Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    NeuButton(
+                                      ico: Icon(
+                                        Icons.photo,
+                                        size: 70,
+                                        color: Colors.greenAccent,
+                                      ),
+                                      length: 150,
+                                      breadth: 150,
+                                      radii: 50,
+                                      onPress: (){pickImage();},
+                                    ),
+                                  ],
+                                ),
+                            ),
+                            Expanded(
+                              flex:1,
                               child: SizedBox(),
                             ),
                           ],

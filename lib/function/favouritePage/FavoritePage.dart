@@ -141,7 +141,7 @@ class _FavoritePageState extends State<FavoritePage>{
                             children: [
                               //界面标题和菜单按钮
                               Expanded(
-                                flex: 6,
+                                flex: 10,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
