@@ -6,14 +6,17 @@ import 'package:plack/controller/dataController.dart';
 import 'package:plack/models/UserInfo.dart';
 
 import '../component/Net/User.dart';
+import '../models/Number.dart';
 
 class userInfoController extends GetxController{
   dataController store=Get.find();
   late UserInfo userInfo;
   late String _token="";
-  int ReadingNums=0;
-  int CollectionNums=0;
-  int LoveNums=0;
+  Number userNumber=Number(
+    favorCount: 0,
+    browseCount: 0,
+    collectCount: 0,
+  );
   @override
   void onInit(){
     var token=store.getToken();
@@ -85,13 +88,7 @@ class userInfoController extends GetxController{
     Phoenix.rebirth(Get.context!); // Restarting app
     Get.reset(); // resetting getx
   }
-  Future<void> getReadingnNums()async {
-
-  }
-  Future<void> getCollectionNums()async {
-
-  }
-  Future<void> getLoveNums()async{
-
+  Future<void> getNums()async {
+    getUserNum(userInfo.id!).then((value) =>userNumber=value);
   }
 }

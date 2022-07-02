@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:plack/function/homePage/homePage.dart';
 import 'package:plack/function/login/edit/edit_screen.dart';
+import 'package:plack/function/mainPage/mainpage.dart';
 import 'package:plack/function/savedPage/savedPage.dart';
 
 import '../../common/config.dart';
@@ -338,7 +339,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                         ),
                                                       )),
                                                   Text(
-                                                    logic.ReadingNums.toString(),
+                                                    logic.userNumber.browseCount.toString(),
                                                     style: kTextStyle.copyWith(
                                                       fontWeight: FontWeight.bold,
                                                       fontSize: 20,
@@ -384,7 +385,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                         (() async {
                                                           Navigator.push(context, MaterialPageRoute(
                                                             builder: (context) {
-                                                              return HomePage();
+                                                              return mainPage();
                                                             },
                                                           ));
                                                         }),
@@ -502,7 +503,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                       ),
                                                     )),
                                                 Text(
-                                                  logic.CollectionNums.toString(),
+                                                  logic.userNumber.collectCount.toString(),
                                                   style: kTextStyle.copyWith(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -666,7 +667,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                       ),
                                                     )),
                                                 Text(
-                                                  logic.LoveNums.toString(),
+                                                  logic.userNumber.favorCount.toString(),
                                                   style: kTextStyle.copyWith(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
