@@ -5,7 +5,7 @@ import 'package:plack/common/SharedPref.dart';
 const perPixel = 0.0025641025641026;
 bool isDrawerOpen = false;
 bool isAboutOpen = false;
-bool isHomeOpen = true;
+bool isHomeOpen = false;
 bool isSettingsOpen = false;
 bool isFavouriteOpen=false;
 bool openedAfterDbUpdate = false;

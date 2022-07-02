@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,7 +42,48 @@ class _HomePageState extends State<HomePage>{
     super.initState();
     categories=getCategories();
     scrollController = ScrollController();
+    BackButtonInterceptor.add(myInterceptor);
+    setState(() {
+      xOffset = 250;
+      yOffset = 140;
+      isBackPressed = false;
+      scaleFactor = 0.7;
+      isDrawerOpen = true;
+      isHomeOpen = false;
+    });
   }
+  @override
+  void dispose() {
+    // player.dispose();
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    if (isHomeOpen) {
+      setState(() {
+        isBackPressed = true;
+        xOffset = adjusted(250);
+        yOffset = adjusted(140);
+        scaleFactor = 0.7;
+        isDrawerOpen = true;
+        isHomeOpen = false;
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness:
+          isHomeOpen ? Brightness.dark : Brightness.light,
+          systemNavigationBarColor: isAboutOpen ? backgroundC[0] : drawerColor,
+          systemNavigationBarIconBrightness:
+          isHomeOpen ? Brightness.dark : Brightness.light,
+          systemNavigationBarDividerColor:
+          isHomeOpen ? backgroundC[0] : drawerColor,
+        ));
+      });
+      return true;
+    }
+    else
+      return false;
+  }
+  double adjusted(double val) => val * screenWidth * perPixel;
   @override
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
@@ -59,7 +101,6 @@ class _HomePageState extends State<HomePage>{
                   Future.delayed(Duration(microseconds: 1)).then((value) {
                     setState(() {
                       xOffset = 0;
-                      playGradientControl.reverse();
                       yOffset = 0;
                       scaleFactor = 1;
                       isDrawerOpen = false;

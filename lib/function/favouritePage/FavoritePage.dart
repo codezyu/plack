@@ -33,7 +33,7 @@ class _FavoritePageState extends State<FavoritePage>{
   TextEditingController dialogController = TextEditingController();
   double _opacity = 1;
   late double screenWidth;
-  late double cardHeight=MediaQuery.of(context).size.height/3*2;
+  late double cardHeight=MediaQuery.of(context).size.height/5*4;
   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
@@ -220,7 +220,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                 child: SizedBox(),
                               ),
                               Expanded(
-                                flex:30,
+                                flex:40,
                                 child:NotificationListener(
                                   child: AnimatedContainer(
                                       duration: Duration(milliseconds: 300),
@@ -327,7 +327,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                   onExpansionChanged:
                                                       (val){
                                                     setState((){
-                                                      val?cardHeight+=68:cardHeight-=68;
+                                                      val?cardHeight+=50:cardHeight-=50;
                                                     });
                                                   },
                                                   title:Row(
@@ -884,7 +884,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                             ),
                                           ),
                                           SizedBox(
-                                            height: 10,
+                                            height: 6,
                                           ),
                                           Row(
                                             mainAxisAlignment:
