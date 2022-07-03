@@ -65,6 +65,9 @@ dependencies:
   flutter_spinkit:
     git: https://github.91chi.fun//https://github.com/jogboms/flutter_spinkit.git
   auto_size_text: ^3.0.0
+  google_mlkit_text_recognition: ^0.3.0
+  google_mlkit_image_labeling: ^0.3.0
+  get_it: ^7.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

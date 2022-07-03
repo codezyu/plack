@@ -42,7 +42,7 @@ Future<void> main() async {
            theme: ThemeData(
              fontFamily: 'Montserrat',
            ),
-           initialRoute: '/init',
+           initialRoute: '/camera',
            getPages: [
              GetPage(name: '/login', page: () => SignInScreen()),
              GetPage(name: '/main', page: () => mainPage()),

@@ -9,7 +9,7 @@ bool isHomeOpen = false;
 bool isSettingsOpen = false;
 bool isFavouriteOpen=false;
 bool openedAfterDbUpdate = false;
-bool isCameraOpen=false;
+bool isCameraOpen=true;
 List<CameraDescription> cameras = [];
 DisplayMode? selected;
 bool? isContrast = false;
