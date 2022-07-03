@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:plack/function/MachineLearning/label/labelImage.dart';
 
 import '../component/Loading.dart';
 import '../component/Net/Ocr.dart';
@@ -121,6 +122,9 @@ class ocrController extends GetxController{
       Loading.show(context);
       localCreatePage(context);
       Loading.dismiss(context);
+    }
+    else if(name=="不懂问我"){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>ImageLabelView()));
     }
   }
   Future pickImage() async{
