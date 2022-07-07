@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:google_mlkit_commons/google_mlkit_commons.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../common/config.dart';
+import '../../common/constants.dart';
 
 enum ScreenMode { liveFeed, gallery }
 
@@ -80,7 +82,7 @@ class _CameraViewState extends State<CameraView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black,
         title: Text(widget.title,
           style: TextStyle(
             color: Colors.amber
@@ -193,44 +195,143 @@ class _CameraViewState extends State<CameraView> {
   }
 
   Widget _galleryBody() {
-    return ListView(shrinkWrap: true, children: [
-      _image != null
-          ? SizedBox(
-        height: 400,
-        width: 400,
-        child: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            Image.file(_image!),
-            if (widget.customPaint != null) widget.customPaint!,
+    double logoAnim=0;
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: backgroundC[0],
+        borderRadius: BorderRadius.circular(isAboutOpen ? 0 : 28),
+      ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(child: SizedBox(),
+            flex: 13,),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  logoAnim = 30;
+                });
+              },
+              child: AnimatedContainer(
+                curve: Curves.elasticIn,
+                onEnd: () {
+                  setState(() {
+                    logoAnim = 0;
+                  });
+                },
+                width: 250 + logoAnim,
+                height: 250 + logoAnim,
+                decoration: BoxDecoration(
+                  color: backgroundC[0],
+                  borderRadius:
+                  BorderRadius.circular(150 + logoAnim / 2),
+                  boxShadow: [
+                    BoxShadow(
+                        color: shadowC[0],
+                        offset: Offset(8, 6),
+                        blurRadius: 12),
+                    BoxShadow(
+                        color: lightShadowC[0],
+                        offset: Offset(-8, -6),
+                        blurRadius: 12),
+                  ],
+                ),
+                duration: Duration(milliseconds: 600),
+                child: ClipOval(
+                  child: Icon(
+                    Icons.image_search,
+                    size: 60,
+                    color: Colors.blueGrey,
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 13,
+              child: SizedBox(),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () => _getImage(ImageSource.camera),
+                  child: Container(
+                    width:
+                    MediaQuery.of(context).size.width / 2-20,
+                    padding: EdgeInsets.only(
+                        top: 20,  bottom: 20),
+                    decoration: BoxDecoration(
+                      color: backgroundC[0],
+                      borderRadius: BorderRadius.circular(32),
+                      boxShadow: [
+                        BoxShadow(
+                            color: shadowC[1],
+                            offset: Offset(8, 6),
+                            blurRadius: 12),
+                        BoxShadow(
+                            color: lightShadowC[0],
+                            offset: Offset(-8, -6),
+                            blurRadius: 12),
+                      ],
+                    ),
+                    child: Center(
+                        child: AutoSizeText(
+                          '使用相机',
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff35a79c)
+                          ),
+                        )
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => _getImage(ImageSource.gallery),
+                  child: Container(
+                    width:
+                    MediaQuery.of(context).size.width / 2-20,
+                    padding: EdgeInsets.only(
+                        top: 20,  bottom: 20),
+                    decoration: BoxDecoration(
+                      color: backgroundC[0],
+                      borderRadius: BorderRadius.circular(32),
+                      boxShadow: [
+                        BoxShadow(
+                            color: shadowC[1],
+                            offset: Offset(8, 6),
+                            blurRadius: 12),
+                        BoxShadow(
+                            color: lightShadowC[0],
+                            offset: Offset(-8, -6),
+                            blurRadius: 12),
+                      ],
+                    ),
+                    child: Center(
+                        child: AutoSizeText(
+                          '使用图库',
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff4d648d),
+                          ),
+                        )
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              flex: 13,
+              child: SizedBox(),
+            ),
           ],
         ),
-      )
-          : Icon(
-        Icons.image,
-        size: 200,
-      ),
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: ElevatedButton(
-          child: Text('From Gallery'),
-          onPressed: () => _getImage(ImageSource.gallery),
-        ),
-      ),
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: ElevatedButton(
-          child: Text('Take a picture'),
-          onPressed: () => _getImage(ImageSource.camera),
-        ),
-      ),
-      if (_image != null)
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-              '${_path == null ? '' : 'Image path: $_path'}\n\n${widget.text ?? ''}'),
-        ),
-    ]);
+    );
   }
 
   Future _getImage(ImageSource source) async {

@@ -1,10 +1,7 @@
-import 'package:plack/models/Data.dart';
-import 'package:plack/models/UserInfo.dart';
 
-import 'NewsList.dart';
 
 /// errno : 0
-/// data : {"NewsList":[{"id":1,"creatorId":1,"creatorName":null,"modifierId":null,"modifierName":null,"gmtCreate":"2022-06-25 16:25:17","gmtModified":null,"newsTitle":"测试","newsType":"Business","author":"测试","content":"测试"},{"id":3,"creatorId":null,"creatorName":null,"modifierId":null,"modifierName":null,"gmtCreate":"2022-06-27 06:59:33","gmtModified":null,"newsTitle":"测试1","newsType":"Business","author":"不是测试","content":"你觉得回收好吗"},{"id":4,"creatorId":null,"creatorName":null,"modifierId":null,"modifierName":null,"gmtCreate":"2022-06-27 06:59:37","gmtModified":null,"newsTitle":"真的不是测试","newsType":"Business","author":"cc","content":"你觉得你很幽默？"}],"total":3,"size":3,"current":1,"orders":[],"optimizeCountSql":true,"searchCount":true,"countId":null,"maxLimit":null,"pages":1}
+/// data : {"NewsList":[{"id":1,"creatorId":1,"creatorName":null,"modifierId":null,"modifierName":null,"gmtCreate":"2022-06-25 16:25:17","gmtModified":null,"newsTitle":"测试","newsType":"finance","author":"测试","content":"测试"},{"id":3,"creatorId":null,"creatorName":null,"modifierId":null,"modifierName":null,"gmtCreate":"2022-06-27 06:59:33","gmtModified":null,"newsTitle":"测试1","newsType":"finance","author":"不是测试","content":"你觉得回收好吗"},{"id":4,"creatorId":null,"creatorName":null,"modifierId":null,"modifierName":null,"gmtCreate":"2022-06-27 06:59:37","gmtModified":null,"newsTitle":"真的不是测试","newsType":"finance","author":"cc","content":"你觉得你很幽默？"}],"total":3,"size":3,"current":1,"orders":[],"optimizeCountSql":true,"searchCount":true,"countId":null,"maxLimit":null,"pages":1}
 /// errmsg : "成功"
 
 class MyResponse {

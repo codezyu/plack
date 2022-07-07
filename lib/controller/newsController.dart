@@ -1,46 +1,98 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/response/response.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:plack/component/Net/News.dart';
 
-import '../common/config.dart';
-import '../common/constants.dart';
 import '../models/News.dart';
 
 class newsController extends GetxController{
-  var _type="Business";
-  Map<int,String> cate={
-    0:'Business'
-  };
+  var _type="娱乐";
   Map<String,int> page={
-    'Business':1,
-    'Entertainment':1,
-    'General':1,
-    'Health':1,
-    'Science':1,
-    'Sports':1,
-    'Technology':1,
+    '金融':1,
+    '娱乐':1,
+    '世界':1,
+    '健康':1,
+    '科学':1,
+    '运动':1,
+    '技术':1,
+    '军事':1,
+    '汽车':1,
+    '时尚':1,
+    '游戏':1,
+    '文化':1,
   };
   Map<String,List<News>> newslist={
-    'Business':List.filled(1, getTemplate()),
-    'Entertainment':List.filled(1, getTemplate()),
-    'General':List.filled(1, getTemplate()),
-    'Health':List.filled(1, getTemplate()),
-    'Science':List.filled(1, getTemplate()),
-    'Sports':List.filled(1, getTemplate()),
-    'Technology':List.filled(1, getTemplate()),
+    '金融':List.filled(1, getTemplate()),
+    '娱乐':List.filled(1, getTemplate()),
+    '世界':List.filled(1, getTemplate()),
+    '军事':List.filled(1, getTemplate()),
+    '健康':List.filled(1, getTemplate()),
+    '科学':List.filled(1, getTemplate()),
+    '运动':List.filled(1, getTemplate()),
+    '技术':List.filled(1, getTemplate()),
+    '汽车':List.filled(1, getTemplate()),
+    '时尚':List.filled(1, getTemplate()),
+    '游戏':List.filled(1, getTemplate()),
+    '文化':List.filled(1, getTemplate()),
   };
   Map<String,List<int>> userNewsList={
     '/xihuan':[],
     '/shoucang':[],
     '/liulan':[],
   };
+  static String typeConvert(String type){
+    if(type=='军事')
+      return 'milite';
+    else if(type=='金融')
+      return 'finance';
+    else if(type=='世界')
+      return 'world';
+    else if(type=='娱乐')
+      return 'ent';
+    else if(type=='技术')
+      return 'tech';
+    else if(type=='汽车')
+      return 'auto';
+    else if(type=='时尚')
+      return 'fashion';
+    else if(type=='游戏')
+      return 'games';
+    else if(type=='文化')
+      return 'cul';
+    else if(type=='健康')
+      return 'health';
+    else
+      return type;
+  }
+  static String typeReConvert(String type){
+    if(type=='milite')
+      return '军事';
+    else if(type=='finance')
+      return '金融';
+    else if(type=='world')
+      return '世界';
+    else if(type=='ent')
+      return '娱乐';
+    else if(type=='tech')
+      return '技术';
+    else if(type=='auto')
+      return '汽车';
+    else if(type=='fashion')
+      return '时尚';
+    else if(type=='games')
+      return '游戏';
+    else if(type=='cul')
+      return '文化';
+    else if(type=='health')
+      return '健康';
+    else if(type=='Health')
+      return '健康';
+    else
+      return type;
+  }
+
   late List<News> news=(List.generate(1, (index)=>getTemplate())).obs;
   void getNewsbyCategory(int pageindex){
-    getNews(_type,pageindex).then((value) {
+    getNews(typeConvert(_type),pageindex).then((value) {
      if(value.length!=0)
        {
            news=value;
@@ -62,11 +114,10 @@ class newsController extends GetxController{
   Future<News> getSpeciedNews(int id) async {
       return await getNewByid(id);
   }
-  void getNewsIdByUserId(int userId,String type){
-    getNewsConnects(type, userId).then((value){
-      if(value.length>0)
-        userNewsList[type]=value;
-    });
+  Future<void> getNewsIdByUserId(int userId,String type) async {
+    var value=await getNewsConnects(type, userId);
+    if(value.length>0)
+      userNewsList[type]=value;
   }
   void setType(String type){
     _type=type;

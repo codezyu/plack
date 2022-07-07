@@ -1,6 +1,5 @@
 import 'package:camera/camera.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
-import 'package:plack/common/SharedPref.dart';
 
 const perPixel = 0.0025641025641026;
 bool isDrawerOpen = false;
@@ -9,7 +8,7 @@ bool isHomeOpen = false;
 bool isSettingsOpen = false;
 bool isFavouriteOpen=false;
 bool openedAfterDbUpdate = false;
-bool isCameraOpen=true;
+bool isCameraOpen=false;
 List<CameraDescription> cameras = [];
 DisplayMode? selected;
 bool? isContrast = false;
@@ -25,7 +24,6 @@ const Map<String, int> Menu = {
 };
 const version='1.0.0';
 late String token;
-SharedPref localStore=SharedPref();
 String ip='http://47.99.200.3';
 String port='8081';
 String signupUrl='/users';
@@ -47,5 +45,7 @@ var headers = {"Access-Control-Allow-Origin": "*"};
 const String userInfo='plack_userinfo';
 const String userToken='plack_userToken';
 const String userName='plack_userName';
-
+const String userPassword='plack_password';
+const String userFace='plack_userFace';
+const String userContrast='plack_setting';
 

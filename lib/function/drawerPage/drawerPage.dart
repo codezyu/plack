@@ -101,6 +101,7 @@ class _drawerPageState extends State<drawerPage> {
                                   SizedBox(width: screenWidth / 20),
                                   Text(
                                     '新闻',
+                                    semanticsLabel: '查看新闻，和世界沟通',
                                     style: TextStyle(
                                       fontFamily: 'MontserratBold',
                                       color: indexOfMenu.value == Menu['home']! ? Colors.blue[500] : Colors.white70,
@@ -142,6 +143,7 @@ class _drawerPageState extends State<drawerPage> {
                                   SizedBox(width: screenWidth / 20),
                                   Text(
                                     '主页',
+                                    semanticsLabel: '查看我的足迹',
                                     style: TextStyle(
                                       fontFamily: 'MontserratBold',
                                       color: indexOfMenu.value == Menu['favourite']! ? Colors.yellow[200] : Colors.white70,
@@ -183,6 +185,7 @@ class _drawerPageState extends State<drawerPage> {
                                   SizedBox(width: screenWidth / 20),
                                   Text(
                                     '辅助功能',
+                                    semanticsLabel: '使用plack辅助功能',
                                     style: TextStyle(
                                       fontFamily: 'MontserratBold',
                                       color:indexOfMenu.value == Menu['camera']! ? Colors.greenAccent[200] : Colors.white70,
@@ -223,6 +226,7 @@ class _drawerPageState extends State<drawerPage> {
                                   SizedBox(width: screenWidth / 20),
                                   Text(
                                     '关于',
+                                    semanticsLabel: '我们和你在一起',
                                     style: TextStyle(
                                       fontFamily: 'MontserratBold',
                                       color: indexOfMenu.value == Menu['about']! ? Colors.deepPurpleAccent[200] : Colors.white70,

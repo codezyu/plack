@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 final drawerAnimDur = 350;
 ValueNotifier<int> indexOfMenu =
-    ValueNotifier<int>(2);
+    ValueNotifier<int>(0);
 const kTextStyle = TextStyle(
   letterSpacing: 2.0,
   fontSize: 20,
@@ -33,10 +33,11 @@ List lightShadowC = [
   Color.fromRGBO(27, 27, 27, 1),
 ];
 
-const List textC = [
-  Color(0xFF707070),
+List textC = [
+  Colors.black87,
   Color(0xFFF1F2F6),
 ];
+double textSize=26;
 const Color backgroundNewsColor = Color(0xFFF2F2F2);
 
 const turqoiseGradient = [
@@ -81,13 +82,3 @@ const Color lightShadow = Color.fromRGBO(210, 230, 201, 1);
 
 const double appPadding = 30;
 Dio dio=Dio();
-Map<String,String> myConvert={
-  'Business':'商业',
-  'Entertainment':'娱乐',
-  'General':'推荐',
-  'Health':'健康',
-  'Science':'科学',
-  'Sports':'运动',
-  "Technology":'技术',
-  "无":'警告',
-};

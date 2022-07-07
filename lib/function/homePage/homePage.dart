@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -184,8 +182,9 @@ class _HomePageState extends State<HomePage>{
                                         builder: (context, value, child) {
                                           return Text(
                                             _titleName.value,
+                                            semanticsLabel: '新闻',
                                             style: TextStyle(
-                                              color: textColor,
+                                              color: Colors.black87,
                                               letterSpacing: 2.0,
                                               fontSize: 30,
                                               fontWeight: FontWeight.bold,
@@ -200,7 +199,8 @@ class _HomePageState extends State<HomePage>{
                                           ico: Icon(
                                             Icons.menu_rounded,
                                             size: 30,
-                                            color: textColor,
+                                            color: Colors.black87,
+                                            semanticLabel: '回到菜单，体验更多功能',
                                           ),
                                           onPress: (() {
                                             setState(() {
@@ -265,12 +265,11 @@ class _HomePageState extends State<HomePage>{
                                 ),
                               ),
                               Expanded(
-                                flex: 1,
                                 child: SizedBox(),
                               ),
                               //新闻推荐
                               Expanded(
-                                  flex: 30,
+                                  flex: 40,
                                   child: NotificationListener(
                                       child: GetBuilder<newsController>(
                                         builder: (controller){
@@ -315,7 +314,7 @@ class _HomePageState extends State<HomePage>{
                                                                 title: logic.news[index].newsTitle!,
                                                                 author: logic.news[index].author==null?"":logic.news[index].author!,
                                                                 content: logic.news[index].content!,
-                                                                type:  myConvert[logic.news[index].newsType!]!,
+                                                                type:  logic.news[index].newsType!,
                                                               );
                                                             }));
                                                   },
@@ -357,10 +356,12 @@ class _HomePageState extends State<HomePage>{
                                                           alignment: Alignment.centerLeft,
                                                           child:Text(
                                                             logic.news[index].newsTitle!,
+                                                            maxLines: 3,
+                                                            overflow: TextOverflow.ellipsis,
                                                             style: TitleTextStyle.copyWith(
-                                                              color: textColor,
-                                                              fontWeight: FontWeight.bold,
+                                                              color: Colors.black87,
                                                               fontSize: 20,
+                                                              fontFamily: 'Medium',
                                                             ),
                                                           ),
                                                         ),
@@ -374,16 +375,18 @@ class _HomePageState extends State<HomePage>{
                                                               '分类:',
                                                               style: TextStyle(
                                                                 color: Colors.lightGreen,
-                                                                fontWeight: FontWeight.w500,
+                                                                fontWeight: FontWeight.w700,
+                                                                fontSize: 20,
                                                               ),
                                                             ),
                                                             SizedBox(
                                                               width: 10,
                                                             ),
                                                             Text(
-                                                              myConvert[logic.news[index].newsType!]!,
+                                                             logic.news[index].newsType!,
                                                               style: TextStyle(
                                                                 fontWeight:FontWeight.bold,
+                                                                fontSize: 20,
                                                               ),
                                                             ),
                                                             Expanded(

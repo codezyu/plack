@@ -19,7 +19,7 @@ class HeadText extends StatelessWidget {
         children: [
           SizedBox(height: size.height * 0.05),
           Text('Welcome I\'m Plack',style: TextStyle(
-            fontSize: 24,
+            fontSize: 30,
             fontWeight: FontWeight.w600,
           ),),
           Text('登录',style: TextStyle(

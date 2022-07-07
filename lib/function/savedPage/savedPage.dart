@@ -1,9 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:plack/common/constants.dart';
@@ -11,6 +8,7 @@ import 'package:plack/component/Loading.dart';
 import 'package:plack/controller/newsController.dart';
 import 'package:plack/controller/userInfoController.dart';
 import 'package:plack/function/newsPage/newsPage.dart';
+
 import '../../common/providers.dart';
 import '../../models/News.dart';
 

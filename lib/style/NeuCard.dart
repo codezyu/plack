@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:plack/function/homePage/CategoryCard.dart';
 
 class NeumorphicCard extends StatelessWidget {
   late Widget content;

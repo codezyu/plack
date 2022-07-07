@@ -29,7 +29,7 @@ class ModeTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return NeumorphicButton(
       onTap: this.onTap,
-      width: 120,
+      width: 150,
       disabled: disabled,
       margin: const EdgeInsets.only(
         left: GLOBAL_EDGE_MARGIN_VALUE,
@@ -57,18 +57,10 @@ class ModeTile extends StatelessWidget {
               child: Text(
                 name,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 30,
                   color: CustomColors.primaryTextColor,
                   fontWeight: FontWeight.w700,
                 ),
-              ),
-            ),
-            Text(
-              introduction,
-              style: TextStyle(
-                fontSize: 13,
-                color: CustomColors.secondaryTextColor,
-                fontWeight: FontWeight.w400,
               ),
             ),
           ],

@@ -1,9 +1,11 @@
 import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get/get_core/src/get_main.dart';
 import 'package:plack/models/NewsConnectList.dart';
+
 import '../../common/config.dart';
 import '../../common/constants.dart';
 import '../../models/News.dart';
@@ -13,7 +15,7 @@ import '../../models/myResponse.dart';
 Future<List<News>> getNews(String type,int page) async {
   Map<String,dynamic> params=Map();
   params['page']=page;
-  params['pageSize']=3;
+  params['pageSize']=2;
   String url=ip+':'+port+categoryNewsUrl+"/"+type;
   Response response = await dio.get(url,queryParameters: params);
   if(response.statusCode!=200){

@@ -1,7 +1,6 @@
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:plack/common/config.dart';
 import 'package:plack/controller/dataController.dart';
 import 'package:plack/models/UserInfo.dart';
 
@@ -56,6 +55,8 @@ class userInfoController extends GetxController{
   }
   Future<bool> signUp(String name,String password) async {
     await signup(name, password).then((value) async {
+      store.setUserName(name);
+      store.setPassword(password);
       await signIn(name, password);
     });
     if(_token.isNotEmpty){

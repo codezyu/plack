@@ -7,7 +7,6 @@ import 'package:plack/common/scaleFactor.dart';
 import 'package:plack/function/aboutPage/aboutPage.dart';
 import 'package:plack/function/cameraPage/cameraPage.dart';
 import 'package:plack/function/favouritePage/FavoritePage.dart';
-import 'package:plack/function/newsPage/newsPage.dart';
 import 'package:plack/function/settingPage/settingPage.dart';
 
 import '../../common/config.dart';

@@ -1,26 +1,18 @@
-import 'dart:math';
-
 import 'package:back_button_interceptor/back_button_interceptor.dart';
-import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:plack/controller/ocrController.dart';
 import 'package:plack/function/cameraPage/model/service_locator.dart';
 import 'package:plack/function/cameraPage/shared/colors.dart';
-import 'package:plack/function/cameraPage/shared/consts.dart';
 import 'package:plack/function/cameraPage/shared/mode.dart';
-import 'package:plack/function/newsPage/newsPage.dart';
-import 'dart:io';
+
 import '../../common/config.dart';
 import '../../common/constants.dart';
 import '../../common/providers.dart';
-import '../../component/Loading.dart';
 import '../../style/NeuButton.dart';
 import 'Indicator.dart';
 import 'component/mode_tile.dart';
@@ -232,7 +224,7 @@ class _CameraPageState extends State<CameraPage> {
                                 ),
                               ),
                               Expanded(
-                                child:SizedBox(height: 10),
+                                child:SizedBox(height: 4),
                               ),
                               Expanded(
                                 flex:40,
@@ -242,12 +234,12 @@ class _CameraPageState extends State<CameraPage> {
                                       Positioned(
                                         right: 0,
                                         child: Transform.translate(
-                                          offset: Offset(100, 60),
+                                          offset: Offset(100, 10),
                                           child: GetBuilder<ocrController>(
                                             builder: (logic){
                                               return RollCase(
-                                                width: 300,
-                                                height: 300,
+                                                width: 250,
+                                                height: 250,
                                                 icon: logic.getIcon(),
                                               );
                                             },
@@ -260,28 +252,16 @@ class _CameraPageState extends State<CameraPage> {
                                           Padding(
                                             padding: ocrController.margin,
                                             child: Text(
-                                              'Plack',
+                                              'Plack Assitant',
                                               style: TextStyle(
-                                                fontSize: 28,
+                                                fontSize: 22,
                                                 color: CustomColors.primaryTextColor,
                                                 fontWeight: FontWeight.w800,
                                               ),
                                             ),
                                           ),
-                                          Expanded(child: SizedBox(height: 2),),
-                                          Padding(
-                                            padding: ocrController.margin,
-                                            child: Text(
-                                              'with you',
-                                              style: TextStyle(
-                                                fontSize: 26,
-                                                color: CustomColors.primaryTextColor,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
                                           Expanded(
-                                            flex:5,
+                                            flex:3,
                                             child:SizedBox(height: 5),),
                                           Expanded(
                                             flex:3,
@@ -297,23 +277,23 @@ class _CameraPageState extends State<CameraPage> {
                                                 )
                                             ),),
                                           Expanded(
-                                            flex:10,
-                                            child:SizedBox(height: 10),),
+                                            flex:5,
+                                            child:SizedBox(height: 5),),
                                           Expanded(
-                                            flex:10,
+                                            flex:20,
                                             child:  Padding(
                                               padding: ocrController.margin,
                                               child: GetBuilder<ocrController>(
                                                 builder: (logic){
                                                   return  ConstrainedBox(
                                                       constraints:BoxConstraints(
-                                                        maxWidth: 100,
+                                                        maxWidth: 150,
                                                       ),
                                                     child:
                                                       Text(
                                                     logic.selectedMode!.introduction,
                                                     style: TextStyle(
-                                                      fontSize: 16,
+                                                      fontSize: 25,
                                                       color: CustomColors.primaryTextColor,
                                                       fontWeight: FontWeight.w400,
                                                     ),
@@ -322,12 +302,12 @@ class _CameraPageState extends State<CameraPage> {
                                               )
                                           ),),
                                           Expanded(
-                                            flex:5,
+                                            flex:1,
                                             child:
-                                            SizedBox(height: 40),
+                                            SizedBox(height: 10),
                                           ),
                                           Expanded(
-                                            flex:35,
+                                            flex:40,
                                             child: _ModesList(),),
                                         ],
                                       ),
@@ -347,12 +327,6 @@ class _CameraPageState extends State<CameraPage> {
     );
   }
 }
-class cameraBlinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.put<ocrController>(ocrController());
-  }
-}
 class _ModesList extends StatelessWidget {
   const _ModesList({Key? key}) : super(key: key);
 
@@ -368,7 +342,7 @@ class _ModesList extends StatelessWidget {
             child: Text(
               '功能',
               style: TextStyle(
-                fontSize: 23,
+                fontSize: 28,
                 color: CustomColors.primaryTextColor,
                 fontWeight: FontWeight.w700,
               ),

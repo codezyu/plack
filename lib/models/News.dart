@@ -1,3 +1,5 @@
+import 'package:plack/controller/newsController.dart';
+
 /// id : 1
 /// creatorId : 1
 /// creatorName : ""
@@ -6,7 +8,7 @@
 /// gmtCreate : "2022-06-25 16:25:17"
 /// gmtModified : ""
 /// newsTitle : "测试"
-/// newsType : "Business"
+/// newsType : "finance"
 /// author : "测试"
 /// content : "测试"
 
@@ -33,7 +35,7 @@ class News {
     gmtCreate = json['gmtCreate'];
     gmtModified = json['gmtModified'];
     newsTitle = json['newsTitle'];
-    newsType = json['newsType'];
+    newsType = newsController.typeReConvert(json['newsType']);
     author = json['author'];
     content = json['content'];
   }

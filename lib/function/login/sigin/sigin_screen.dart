@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
 import '../../../common/constants.dart';
+import '../../../controller/dataController.dart';
 import 'components/credentials.dart';
 import 'components/head_text.dart';
 import 'components/social.dart';
@@ -10,6 +14,8 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    dataController logic=Get.find();
+    var data=logic.getFace();
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -30,6 +36,7 @@ class SignInScreen extends StatelessWidget {
               HeadText(),
               Credentials(),
               Social(),
+
             ],
           ),
         ),

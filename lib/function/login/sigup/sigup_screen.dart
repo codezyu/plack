@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import '../../../common/constants.dart';
-import 'components/social.dart';
+import 'components/Facesocial.dart';
 import 'components/credentials.dart';
 import 'components/head_text.dart';
+import 'components/social.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -30,6 +32,7 @@ class SignUpScreen extends StatelessWidget {
               HeadText(),
               Credentials(),
               Social(),
+              FaceSocial(),
             ],
           ),
         ),

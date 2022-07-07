@@ -13,7 +13,7 @@ class AccountCheck extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          login ? "Don't have an Account?" : "Already have an Account?",
+          login ? "还没有账户?" : "已有账户?",
           style: TextStyle(fontSize: 16),
         ),
         GestureDetector(

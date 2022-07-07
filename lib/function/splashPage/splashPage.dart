@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/bindings_interface.dart';
 import 'package:plack/controller/dataController.dart';
 import 'package:plack/controller/userInfoController.dart';
+
 import '../../common/scaleFactor.dart';
 import '../../component/Loading.dart';
 import '../../controller/initController.dart';
@@ -25,15 +26,7 @@ class splashPage  extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Loading(),
-          SizedBox(height: 20,),
-          Text(
-            'loading...',
-            style: TextStyle(
-              color: Colors.black45,
-              decoration: TextDecoration.none,
-              fontSize: 30,
-            ),
-          ),
+          SizedBox(height: 20,)
         ],
       ),
     );

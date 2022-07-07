@@ -21,9 +21,10 @@ class RectangularInputField extends StatelessWidget {
         controller: this.controller,
         decoration: InputDecoration(
           hintText: hintText,
+          contentPadding: const EdgeInsets.symmetric(vertical: 20.0),
           helperStyle: TextStyle(
-            color: black.withOpacity(0.7),
-            fontSize: 18,
+            color: black.withOpacity(1),
+            fontSize: 20,
           ),
           prefixIcon: Icon(icon,color: black.withOpacity(0.7),size: 20,),
           border: InputBorder.none,

@@ -1,27 +1,23 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:plack/controller/dataController.dart';
-import 'package:plack/function/aboutPage/aboutPage.dart';
 import 'package:plack/function/cameraPage/cameraPage.dart';
 import 'package:plack/function/drawerPage/drawerPage.dart';
 import 'package:plack/function/login/Sigin/sigin_screen.dart';
+import 'package:plack/function/login/face/sign-in.dart';
+import 'package:plack/function/login/locator.dart';
 import 'package:plack/function/login/sigup/sigup_screen.dart';
 import 'package:plack/function/mainPage/mainpage.dart';
 import 'package:plack/function/newsPage/newsPage.dart';
-import 'package:plack/function/savedPage/savedPage.dart';
-import 'package:plack/function/settingPage/settingPage.dart';
 import 'package:plack/function/splashPage/splashPage.dart';
 
 import 'common/config.dart';
+import 'function/favouritePage/FavoritePage.dart';
 import 'function/homePage/homePage.dart';
 
 Future<void> main() async {
@@ -29,9 +25,11 @@ Future<void> main() async {
     await Hive.initFlutter();
     // Hive.registerAdapter(ContactAdapter());
     await Hive.openBox(userInfo);
+    await Hive.openBox<List>("faceinfo");
     //初始化相机
     WidgetsFlutterBinding.ensureInitialized();
     cameras = await availableCameras();
+    setupServices();
   }catch(e){
   }
   runApp(
@@ -42,15 +40,17 @@ Future<void> main() async {
            theme: ThemeData(
              fontFamily: 'Montserrat',
            ),
-           initialRoute: '/camera',
+           initialRoute: '/init',
            getPages: [
              GetPage(name: '/login', page: () => SignInScreen()),
+             GetPage(name: '/signup', page: () => SignUpScreen()),
              GetPage(name: '/main', page: () => mainPage()),
              GetPage(name: '/drawer', page: ()=>drawerPage()),
              GetPage(name: '/home', page: ()=>HomePage()),
              GetPage(name:'/init',page:()=>splashPage(),binding: SplashBinding()),
-             GetPage(name:'/camera',page:()=>CameraPage(),binding: cameraBlinding()),
-             GetPage(name: '/news', page: ()=>NewsPage(id: 1, title: '1', author: '1', type: '1', content: '1')),
+             GetPage(name:'/camera',page:()=>CameraPage()),
+             GetPage(name:'/face',page:()=>SignIn()),
+             GetPage(name:'/favourite',page:()=>FavoritePage()),
            ],
          )
      ))

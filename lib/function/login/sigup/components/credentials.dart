@@ -1,14 +1,9 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:plack/component/Net/User.dart';
 import 'package:plack/function/mainPage/mainpage.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-import '../../../../common/config.dart';
 import '../../../../common/constants.dart';
 import '../../../../component/Loading.dart';
 import '../../../../controller/userInfoController.dart';

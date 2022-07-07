@@ -1,12 +1,16 @@
 import 'dart:async';
+
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:markdown_widget/markdown_toc.dart';
+import 'package:markdown_widget/markdown_widget.dart' as MKWidget;
+import 'package:markdown_widget/tags/video.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
 import '../../common/constants.dart';
-import '../../common/myRadialMenu.dart';
 import '../../controller/newsController.dart';
 import '../../controller/userInfoController.dart';
 //新闻页面
@@ -37,22 +41,24 @@ class _NewsPageState extends State<NewsPage>{
   }
   @override
   Widget build(BuildContext context) {
+    final TocController tocController = TocController();
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           leading: new IconButton(
             icon: new Icon(Icons.arrow_back),
-            color: Colors.black54,
+            color: Colors.black87,
             onPressed: () => {
               Navigator.of(context).pop('刷新')
             },
-            iconSize: 30,
+            iconSize: 50,
           ),
           elevation: 0,
           backgroundColor: Colors.transparent,
         ),
         floatingActionButton: widget.id!=-1?FabCircularMenu(
-          ringDiameter: 150,
+          fabSize: 100,
+          ringDiameter: 200,
           children: [
             IconButton(
                 icon: Icon(widget.isLike?Icons.favorite:Icons.favorite_border,color: Colors.redAccent,), onPressed: () {
@@ -86,7 +92,7 @@ class _NewsPageState extends State<NewsPage>{
                           h1: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
-                            fontFamily: 'TitleFont',
+                            fontFamily: 'Bold',
                           ),
                         ),
                       ),
@@ -96,26 +102,36 @@ class _NewsPageState extends State<NewsPage>{
                         shrinkWrap: true,
                         styleSheet: MarkdownStyleSheet(
                           p: TextStyle(
-                            fontSize: 12,
+                            fontSize: 18,
                             color: Colors.lightBlueAccent,
                           ),
                           h6: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontFamily: 'Regular'
                           ),
                         ),
                       ),
-                      Markdown(
+                      MKWidget.MarkdownWidget(
                         data: widget.content,
+                        padding: const EdgeInsets.all(16.0),
                         physics: new NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        styleSheet: MarkdownStyleSheet(
-                          p: TextStyle(
-                            fontFamily: 'TitleFont',
-                            letterSpacing: 4,
+                        styleConfig: MKWidget.StyleConfig(
+                          pConfig:MKWidget.PConfig(
+                            textStyle: TextStyle(
+                              letterSpacing: 8,
+                              fontSize: 22,
+                              height: 1.5,
+                              fontFamily: 'Medium'
+                            )
                           ),
-                        ),
+                          videoConfig: VideoConfig(autoInitialize: true),
+
+                        )
                       ),
+
+
                     ],
                   )
               ),

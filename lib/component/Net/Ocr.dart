@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 
 import '../../common/config.dart';
 import '../../common/constants.dart';
-import '../../models/myResponse.dart';
 
 
 Future<String?> ocr(String base64) async {

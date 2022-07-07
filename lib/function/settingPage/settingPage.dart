@@ -6,9 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
-import '../../common/SharedPref.dart';
+
 import '../../common/colorEllipse.dart';
 import '../../common/config.dart';
 import '../../common/constants.dart';
@@ -27,7 +26,6 @@ class _SettingsPageState extends State<SettingsPage> {
   List<FocusedMenuItem> deviceModeFocused = <FocusedMenuItem>[];
   List<DisplayMode> modes = <DisplayMode>[];
   //保存数据
-  SharedPref savedData = SharedPref();
   bool isBackPressed = false;
   Future? _refreshFunc;
   bool isRefresh = false;
@@ -78,7 +76,6 @@ class _SettingsPageState extends State<SettingsPage> {
               backgroundColor: Colors.transparent,
               onPressed: () async {
                 await FlutterDisplayMode.setPreferredMode(element);
-                await savedData.saveInt('deviceModeId', element.id);
                 Scaffold.of(context).showSnackBar(new SnackBar(
                     content: new Text(
                         'Please Restart the app to apply the changes')));
@@ -369,252 +366,6 @@ class _SettingsPageState extends State<SettingsPage> {
                                     ),
                                   ),
                                 ),
-                                // Expanded(flex: 2, child: SizedBox()),
-                                // Expanded(
-                                //   flex: isRefresh ? 14 : 16,
-                                //   child: ClipRRect(
-                                //     borderRadius:
-                                //     BorderRadius.all(Radius.circular(30)),
-                                //     child: BackdropFilter(
-                                //       filter: ImageFilter.blur(
-                                //         sigmaX: 10,
-                                //         sigmaY: 10,
-                                //       ),
-                                //       child: Container(
-                                //         width: MediaQuery.of(context).size.width -
-                                //             60,
-                                //         decoration: BoxDecoration(
-                                //             gradient: LinearGradient(
-                                //                 begin: Alignment.topLeft,
-                                //                 end: Alignment.bottomRight,
-                                //                 colors: [
-                                //                   Colors.white.withOpacity(0.4),
-                                //                   Colors.white.withOpacity(0.01),
-                                //                 ]),
-                                //             borderRadius: BorderRadius.all(
-                                //                 Radius.circular(30)),
-                                //             border: Border.all(
-                                //               color:
-                                //               Colors.white.withOpacity(0.8),
-                                //             )),
-                                //         child: Column(
-                                //           mainAxisAlignment:
-                                //           MainAxisAlignment.spaceBetween,
-                                //           crossAxisAlignment:
-                                //           CrossAxisAlignment.start,
-                                //           children: [
-                                //             Expanded(
-                                //               flex: 1,
-                                //               child: Padding(
-                                //                 padding: const EdgeInsets.only(
-                                //                     left: 30, top: 30),
-                                //                 child: Text(
-                                //                   '夜间模式',
-                                //                   style: TextStyle(
-                                //                     color: textColor,
-                                //                     letterSpacing: 2.0,
-                                //                     fontSize: 30,
-                                //                     fontWeight: FontWeight.bold,
-                                //                   ),
-                                //                 ),
-                                //               ),
-                                //             ),
-                                //             Expanded(
-                                //               flex: 1,
-                                //               child: Padding(
-                                //                 padding: const EdgeInsets.only(
-                                //                     bottom: 15),
-                                //                 child: Row(
-                                //                   mainAxisAlignment:
-                                //                   MainAxisAlignment
-                                //                       .spaceEvenly,
-                                //                   crossAxisAlignment:
-                                //                   CrossAxisAlignment.start,
-                                //                   children: [
-                                //                     Expanded(
-                                //                       flex: 1,
-                                //                       child: SizedBox(),
-                                //                     ),
-                                //                     Expanded(
-                                //                       flex: 10,
-                                //                       //检测
-                                //                       child: GestureDetector(
-                                //                         onTap: (() async {
-                                //                           print(isDark);
-                                //                           _refreshFunc =
-                                //                               _getRefresh(
-                                //                                   textColor,
-                                //                                   backgroundColor);
-                                //                           await savedData
-                                //                               .saveBool('isDark',
-                                //                               false);
-                                //                           setState(() {
-                                //                             isDark = false;
-                                //                             backgroundColor =
-                                //                             backgroundC[isDark
-                                //                                 ? 1
-                                //                                 : 0];
-                                //                             shadowColor = shadowC[
-                                //                             isDark ? 1 : 0];
-                                //                             lightShadowColor =
-                                //                             lightShadowC[
-                                //                             isDark
-                                //                                 ? 1
-                                //                                 : 0];
-                                //                             textColor =
-                                //                             isContrast!
-                                //                                 ? Colors.black
-                                //                                 : textC[isDark
-                                //                                 ? 1
-                                //                                 : 0];
-                                //                           });
-                                //                         }),
-                                //                         child: AnimatedContainer(
-                                //                           duration: Duration(
-                                //                               milliseconds: 200),
-                                //                           curve:
-                                //                           Curves.easeOutQuint,
-                                //                           width: (MediaQuery.of(
-                                //                               context)
-                                //                               .size
-                                //                               .width -
-                                //                               60) /
-                                //                               3 -
-                                //                               15,
-                                //                           height: 70,
-                                //                           decoration:
-                                //                           BoxDecoration(
-                                //                             color: !isDark
-                                //                                 ? textColor
-                                //                                 .withOpacity(
-                                //                                 0.5)
-                                //                                 : Colors
-                                //                                 .transparent,
-                                //                             border: Border.all(
-                                //                                 width: 1,
-                                //                                 color: Colors
-                                //                                     .white
-                                //                                     .withOpacity(
-                                //                                     0.8)),
-                                //                             borderRadius:
-                                //                             BorderRadius
-                                //                                 .circular(20),
-                                //                           ),
-                                //                           child: Center(
-                                //                             child: Text(
-                                //                               'Light',
-                                //                               style: TextStyle(
-                                //                                 color: !isDark
-                                //                                     ? backgroundColor
-                                //                                     : textColor,
-                                //                                 letterSpacing:
-                                //                                 2.0,
-                                //                                 fontSize: 20,
-                                //                                 fontWeight:
-                                //                                 FontWeight
-                                //                                     .bold,
-                                //                               ),
-                                //                             ),
-                                //                           ),
-                                //                         ),
-                                //                       ),
-                                //                     ),
-                                //                     Expanded(
-                                //                       flex: 1,
-                                //                       child: SizedBox(),
-                                //                     ),
-                                //                     Expanded(
-                                //                       flex: 10,
-                                //                       child: GestureDetector(
-                                //                         onTap: (() async {
-                                //                           _refreshFunc =
-                                //                               _getRefresh(
-                                //                                   textColor,
-                                //                                   backgroundColor);
-                                //                           await savedData
-                                //                               .saveBool(
-                                //                               'isDark', true);
-                                //                           setState(() {
-                                //                             isDark = true;
-                                //                             backgroundColor =
-                                //                             backgroundC[isDark
-                                //                                 ? 1
-                                //                                 : 0];
-                                //                             shadowColor = shadowC[
-                                //                             isDark ? 1 : 0];
-                                //                             lightShadowColor =
-                                //                             lightShadowC[
-                                //                             isDark
-                                //                                 ? 1
-                                //                                 : 0];
-                                //                             textColor = textC[
-                                //                             isDark ? 1 : 0];
-                                //                           });
-                                //                         }),
-                                //                         child: AnimatedContainer(
-                                //                           duration: Duration(
-                                //                               milliseconds: 200),
-                                //                           curve:
-                                //                           Curves.easeOutQuint,
-                                //                           width: (MediaQuery.of(
-                                //                               context)
-                                //                               .size
-                                //                               .width -
-                                //                               60) /
-                                //                               3 -
-                                //                               15,
-                                //                           height: 70,
-                                //                           decoration:
-                                //                           BoxDecoration(
-                                //                             color: isDark
-                                //                                 ? textColor
-                                //                                 .withOpacity(
-                                //                                 0.5)
-                                //                                 : Colors
-                                //                                 .transparent,
-                                //                             border: Border.all(
-                                //                                 width: 1,
-                                //                                 color: Colors
-                                //                                     .white
-                                //                                     .withOpacity(
-                                //                                     0.8)),
-                                //                             borderRadius:
-                                //                             BorderRadius
-                                //                                 .circular(20),
-                                //                           ),
-                                //                           child: Center(
-                                //                             child: Text(
-                                //                               'Dark',
-                                //                               style: TextStyle(
-                                //                                 color: isDark
-                                //                                     ? backgroundColor
-                                //                                     : textColor,
-                                //                                 letterSpacing:
-                                //                                 2.0,
-                                //                                 fontSize: 20,
-                                //                                 fontWeight:
-                                //                                 FontWeight
-                                //                                     .bold,
-                                //                               ),
-                                //                             ),
-                                //                           ),
-                                //                         ),
-                                //                       ),
-                                //                     ),
-                                //                     Expanded(
-                                //                       flex: 1,
-                                //                       child: SizedBox(),
-                                //                     ),
-                                //                   ],
-                                //                 ),
-                                //               ),
-                                //             )
-                                //           ],
-                                //         ),
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
                                 Expanded(flex: 2, child: SizedBox()),
                                 Expanded(
                                   flex: isRefresh ? 14 : 16,
@@ -676,13 +427,13 @@ class _SettingsPageState extends State<SettingsPage> {
                                                       left: 30,
                                                       top: 30),
                                                   child: Text(
-                                                    '高对比度模式',
+                                                    '超高对比度模式',
                                                     overflow: TextOverflow
                                                         .ellipsis,
                                                     style: TextStyle(
                                                       color: textColor,
                                                       letterSpacing: 1.0,
-                                                      fontSize: 26,
+                                                      fontSize: textSize,
                                                       fontWeight:
                                                       FontWeight.bold,
                                                     ),
@@ -712,19 +463,10 @@ class _SettingsPageState extends State<SettingsPage> {
                                                         child:
                                                         GestureDetector(
                                                           onTap: (() async {
-                                                            _refreshFunc =
-                                                                _getRefresh(
-                                                                    textColor,
-                                                                    backgroundColor);
-                                                            await savedData
-                                                                .saveBool(
-                                                                'isContrast',
-                                                                false);
-                                                            setState(() {
-                                                              isContrast =
-                                                              false;
-                                                              textColor =
-                                                              textC[0];
+                                                            setState((){
+                                                              textC[0]=Colors.black87;
+                                                              textSize=26;
+                                                              isContrast=false;
                                                             });
                                                           }),
                                                           child:
@@ -788,20 +530,10 @@ class _SettingsPageState extends State<SettingsPage> {
                                                         child:
                                                         GestureDetector(
                                                           onTap: (() async {
-                                                            _refreshFunc =
-                                                                _getRefresh(
-                                                                    textColor,
-                                                                    backgroundColor);
-                                                            await savedData
-                                                                .saveBool(
-                                                                'isContrast',
-                                                                true);
-                                                            setState(() {
-                                                              isContrast =
-                                                              true;
-                                                              textColor =
-                                                                  Colors
-                                                                      .black;
+                                                            setState((){
+                                                              textC[0]=Colors.black;
+                                                              textSize=30;
+                                                              isContrast=true;
                                                             });
                                                           }),
                                                           child:
@@ -871,132 +603,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                     ),
                                   ),
                                 ),
-                                Expanded(flex: 2, child: SizedBox()),
-                                Expanded(
-                                  flex: isRefresh ? 7 : 0,
-                                  child: FutureBuilder(
-                                      future: _refreshFunc,
-                                      builder: (context, snapshot) {
-                                        if (snapshot.hasData) {
-                                          if (modes.length > 1) {
-                                            isRefresh = true;
-                                          }
-                                          return modes.length > 1
-                                              ? FocusedMenuHolder(
-                                            menuBoxDecoration:
-                                            BoxDecoration(
-                                                gradient: LinearGradient(
-                                                    begin: Alignment
-                                                        .topLeft,
-                                                    end: Alignment
-                                                        .bottomRight,
-                                                    colors: [
-                                                      Colors.white
-                                                          .withOpacity(
-                                                          0.4),
-                                                      Colors.white
-                                                          .withOpacity(
-                                                          0.01),
-                                                    ]),
-                                                borderRadius:
-                                                BorderRadius.all(
-                                                    Radius.circular(
-                                                        30)),
-                                                border: Border.all(
-                                                  color: Colors.white
-                                                      .withOpacity(0.8),
-                                                )),
-                                            menuWidth:
-                                            MediaQuery.of(context)
-                                                .size
-                                                .width -
-                                                30 * 2,
-                                            menuItemExtent: 55,
-                                            menuItems: snapshot.data
-                                            as List<FocusedMenuItem>,
-                                            blurBackgroundColor:
-                                            backgroundColor,
-                                            menuOffset: 20,
-                                            openWithTap: true,
-                                            onPressed: () {},
-                                            child: ClipRRect(
-                                              borderRadius:
-                                              BorderRadius.all(
-                                                  Radius.circular(30)),
-                                              child: BackdropFilter(
-                                                filter: ImageFilter.blur(
-                                                  sigmaX: 10,
-                                                  sigmaY: 10,
-                                                ),
-                                                child: Container(
-                                                  width:
-                                                  MediaQuery.of(context)
-                                                      .size
-                                                      .width -
-                                                      60,
-                                                  decoration: BoxDecoration(
-                                                      gradient: LinearGradient(
-                                                          begin: Alignment
-                                                              .topLeft,
-                                                          end: Alignment
-                                                              .bottomRight,
-                                                          colors: [
-                                                            Colors.white
-                                                                .withOpacity(
-                                                                0.4),
-                                                            Colors.white
-                                                                .withOpacity(
-                                                                0.01),
-                                                          ]),
-                                                      borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius
-                                                              .circular(
-                                                              30)),
-                                                      border: Border.all(
-                                                        color: Colors.white
-                                                            .withOpacity(
-                                                            0.8),
-                                                      )),
-                                                  child: Padding(
-                                                    padding:
-                                                    const EdgeInsets
-                                                        .symmetric(
-                                                        vertical: 15,
-                                                        horizontal: 20),
-                                                    child: Center(
-                                                      child: FittedBox(
-                                                        fit: BoxFit
-                                                            .fitHeight,
-                                                        child: Text(
-                                                          'Refresh Rate',
-                                                          style: TextStyle(
-                                                            fontFamily:
-                                                            'MontserratBold',
-                                                            color:
-                                                            textColor,
-                                                            letterSpacing:
-                                                            1.5,
-                                                            fontSize: 26,
-                                                            fontWeight:
-                                                            FontWeight
-                                                                .bold,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                              : Container();
-                                        }
-                                        return Container();
-                                      }),
-                                ),
-                                Expanded(
-                                    flex: isRefresh ? 1 : 3, child: SizedBox()),
+                                Expanded(flex: 20, child: SizedBox()),
                               ]),
                         ],
                       ),

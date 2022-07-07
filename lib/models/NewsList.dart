@@ -2,7 +2,7 @@ import 'package:plack/models/Data.dart';
 
 import 'News.dart';
 
-/// News : [{"id":1,"creatorId":null,"creatorName":null,"modifierId":null,"modifierName":null,"gmtCreate":"2022-06-25 16:25:17","gmtModified":null,"newsTitle":"测试","newsType":"Business","author":"测试","content":"测试"}]
+/// News : [{"id":1,"creatorId":null,"creatorName":null,"modifierId":null,"modifierName":null,"gmtCreate":"2022-06-25 16:25:17","gmtModified":null,"newsTitle":"测试","newsType":"finance","author":"测试","content":"测试"}]
 /// total : 3
 /// size : 1
 /// current : 1

@@ -6,9 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:plack/function/homePage/homePage.dart';
 import 'package:plack/function/login/edit/edit_screen.dart';
-import 'package:plack/function/mainPage/mainpage.dart';
 import 'package:plack/function/savedPage/savedPage.dart';
 
 import '../../common/config.dart';
@@ -33,7 +31,7 @@ class _FavoritePageState extends State<FavoritePage>{
   TextEditingController dialogController = TextEditingController();
   double _opacity = 1;
   late double screenWidth;
-  late double cardHeight=MediaQuery.of(context).size.height/5*4;
+  late double cardHeight=MediaQuery.of(context).size.height/6*5;
   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
@@ -170,6 +168,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                             Icons.menu_rounded,
                                             size: 30,
                                             color: textColor,
+                                            semanticLabel: '回到菜单，探索plack世界',
                                           ),
                                           onPress: (() {
                                             setState(() {
@@ -220,7 +219,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                 child: SizedBox(),
                               ),
                               Expanded(
-                                flex:40,
+                                flex:60,
                                 child:NotificationListener(
                                   child: AnimatedContainer(
                                       duration: Duration(milliseconds: 300),
@@ -255,28 +254,31 @@ class _FavoritePageState extends State<FavoritePage>{
                                         CrossAxisAlignment.center,
                                         children: [
                                           Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
                                             children: [
                                               Expanded(
                                                 flex:15,
-                                                child: Text(
-                                                  logic.userInfo.userName!,
-                                                  style: kTextStyle.copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 25,
-                                                    color: Colors.amber,
+                                                child: Container(
+                                                  alignment: Alignment.center,
+                                                  child: AutoSizeText(
+                                                    logic.userInfo.userName!,
+                                                    semanticsLabel: '您的用户名为'+logic.userInfo.userName!,
+                                                    style: kTextStyle.copyWith(
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 50,
+                                                      color: Colors.amber[500],
+                                                    ),
+                                                    textAlign: TextAlign.center,
                                                   ),
-                                                  textAlign: TextAlign.center,
-                                                ),
+                                                )
                                               ),
                                               Expanded(
                                                 flex:4,
                                                 child: NeuButton(
                                                   ico: Icon(
                                                     Icons.edit_note,
-                                                    size: 30,
+                                                    size: 35,
                                                     color: textColor,
+                                                    semanticLabel: '退出登录',
                                                   ),
                                                   onPress: (){
                                                     Navigator.push(context, MaterialPageRoute(
@@ -340,13 +342,15 @@ class _FavoritePageState extends State<FavoritePage>{
                                                             textAlign:
                                                             TextAlign
                                                                 .center,
-                                                            '阅读数:',
+                                                            '阅读:',
+                                                            semanticsLabel: '阅读的新闻数为',
                                                             style: kTextStyle.copyWith(
                                                               color: isDark ? Colors.white : Colors.black,
                                                             ),
                                                           )),
                                                       Text(
                                                         logic.userNumber.browseCount.toString(),
+                                                        semanticsLabel: logic.userNumber.browseCount.toString()+',点击展开按钮',
                                                         style: kTextStyle.copyWith(
                                                           fontWeight: FontWeight.bold,
                                                           fontSize: 20,
@@ -376,6 +380,9 @@ class _FavoritePageState extends State<FavoritePage>{
                                                                 .fill,
                                                             child: Text(
                                                               'More:',
+                                                              style: TextStyle(
+                                                                fontFamily: 'Bold'
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
@@ -420,6 +427,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                                 child:
                                                                 Text(
                                                                   '探索',
+                                                                  semanticsLabel: '点击探索更多感兴趣新闻',
                                                                   style:
                                                                   TextStyle(
                                                                     color:  textColor,
@@ -476,6 +484,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                                 AutoSizeText(
                                                                   '历史浏览',
                                                                   maxLines: 1,
+                                                                  semanticsLabel: '查看您历史浏览的新闻',
                                                                   style:
                                                                   TextStyle(
                                                                     color:  textColor,
@@ -558,12 +567,14 @@ class _FavoritePageState extends State<FavoritePage>{
                                                             TextAlign
                                                                 .center,
                                                             '收藏:',
+                                                            semanticsLabel: '您收藏的新闻数为',
                                                             style: kTextStyle.copyWith(
                                                               color: isDark ? Colors.white : Colors.black,
                                                             ),
                                                           )),
                                                       Text(
                                                         logic.userNumber.collectCount.toString(),
+                                                        semanticsLabel:  logic.userNumber.collectCount.toString()+',点击查看您的收藏夹',
                                                         style: kTextStyle.copyWith(
                                                           fontWeight: FontWeight.bold,
                                                           fontSize: 20,
@@ -593,6 +604,9 @@ class _FavoritePageState extends State<FavoritePage>{
                                                                 .fill,
                                                             child: Text(
                                                               'More:',
+                                                              style: TextStyle(
+                                                                  fontFamily: 'Bold'
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
@@ -718,12 +732,14 @@ class _FavoritePageState extends State<FavoritePage>{
                                                             TextAlign
                                                                 .center,
                                                             '喜爱:',
+                                                            semanticsLabel: '您喜欢的新闻数目为',
                                                             style: kTextStyle.copyWith(
                                                               color: isDark ? Colors.white : Colors.black,
                                                             ),
                                                           )),
                                                       Text(
                                                         logic.userNumber.favorCount.toString(),
+                                                        semanticsLabel:logic.userNumber.favorCount.toString()+',点击展开查看更多' ,
                                                         style: kTextStyle.copyWith(
                                                           fontWeight: FontWeight.bold,
                                                           fontSize: 20,
@@ -753,6 +769,9 @@ class _FavoritePageState extends State<FavoritePage>{
                                                                 .fill,
                                                             child: Text(
                                                               'More:',
+                                                              style: TextStyle(
+                                                                  fontFamily: 'Bold'
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
@@ -768,7 +787,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                             onTap:
                                                             (() async {
                                                               newsController logic=Get.find();
-                                                              logic.setType("Business");
+                                                              logic.setType("金融");
                                                               isHomeOpen=false;
                                                               indexOfMenu.value=Menu['home']!;
                                                             }),
@@ -799,6 +818,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                                 child:
                                                                 Text(
                                                                   '尝试',
+                                                                  semanticsLabel: '去探索更多主题的新闻',
                                                                   style:
                                                                   TextStyle(
                                                                     color:  textColor,
@@ -854,6 +874,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                                 child:
                                                                 Text(
                                                                   '历史点赞',
+                                                                  semanticsLabel: '查看您历史点赞的新闻',
                                                                   style:
                                                                   TextStyle(
                                                                     color:  textColor,
@@ -934,7 +955,7 @@ class _FavoritePageState extends State<FavoritePage>{
   }
   void createPage(String type) async{
     Loading.show(context);
-    data.getNewsIdByUserId(logic.userInfo.id!, type);
+    await data.getNewsIdByUserId(logic.userInfo.id!, type);
     Loading.dismiss(context);
     Navigator.push(context, MaterialPageRoute(
       builder: (context) {

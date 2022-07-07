@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../../../common/constants.dart';
 import '../../sigup/sigup_screen.dart';
 import '../../widgets/account_check.dart';
-import '../../widgets/rounded_button.dart';
 
 class Social extends StatelessWidget {
   const Social({Key? key}) : super(key: key);

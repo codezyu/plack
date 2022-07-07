@@ -1,6 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'dart:math';
 import 'package:vector_math/vector_math.dart' show radians;
 class myRadialMenu extends StatefulWidget {
   // will take in list of buttons
