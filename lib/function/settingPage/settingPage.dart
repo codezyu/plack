@@ -311,7 +311,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                       MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          'Settings',
+                                          '设置',
                                           style: TextStyle(
                                             color: textColor,
                                             letterSpacing: 2.0,
@@ -502,7 +502,8 @@ class _SettingsPageState extends State<SettingsPage> {
                                                             ),
                                                             child: Center(
                                                               child: Text(
-                                                                'Off',
+                                                                '关闭',
+                                                                semanticsLabel: '关闭超高对比度模式',
                                                                 style:
                                                                 TextStyle(
                                                                   color: !isContrast!
@@ -569,7 +570,8 @@ class _SettingsPageState extends State<SettingsPage> {
                                                             ),
                                                             child: Center(
                                                               child: Text(
-                                                                'On',
+                                                                '开启',
+                                                                semanticsLabel: '开启超高对比度模式',
                                                                 style:
                                                                 TextStyle(
                                                                   color: isContrast!

@@ -183,6 +183,7 @@ class _AboutPageState extends State<AboutPage> {
                                   Icons.menu_rounded,
                                   size: 30,
                                   color: textColor,
+                                  semanticLabel: '回到菜单',
                                 ),
                                 onPress: (() {
                                   setState(() {

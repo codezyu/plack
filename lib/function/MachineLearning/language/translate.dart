@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:google_mlkit_translation/google_mlkit_translation.dart';
+import 'package:plack/controller/speechController.dart';
 
 import '../activity_indicator/activity_indicator.dart';
 
@@ -21,16 +24,18 @@ class _LanguageTranslatorViewState extends State<LanguageTranslatorView> {
   var _targetLanguage = TranslateLanguage.chinese;
   late final _onDeviceTranslator = OnDeviceTranslator(
       sourceLanguage: _sourceLanguage, targetLanguage: _targetLanguage);
-
+  speechController speech=Get.find();
   @override
   void dispose() {
     _languageIdentifier.close();
     _onDeviceTranslator.close();
+    speech.flutterTts.stop();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    _downloadTargetModel();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -79,7 +84,7 @@ class _LanguageTranslatorViewState extends State<LanguageTranslatorView> {
               SizedBox(height: 30),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 ElevatedButton(
-                    onPressed: (){_downloadSourceModel();_identifyLanguage();_downloadTargetModel();_translateText();}, child: Text('开始翻译'))
+                    onPressed: (){_downloadSourceModel();_identifyLanguage();_translateText();speech.flutterTts.speak(_translatedText??"");}, child: Text('开始翻译'))
               ]),
               SizedBox(height: 20),
               Row(

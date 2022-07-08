@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:plack/component/Loading.dart';
+import 'package:plack/controller/speechController.dart';
 import 'package:plack/function/mainPage/mainpage.dart';
 
+import '../../../../common/config.dart';
 import '../../../../common/constants.dart';
 import '../../../../controller/userInfoController.dart';
 import '../../widgets/rectangular_button.dart';
@@ -23,7 +25,7 @@ class Credentials extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           RectangularInputField(
-            hintText: 'username',
+            hintText: '用户名',
             icon: Icons.person,
             obscureText: false,
             controller: username,
@@ -32,7 +34,7 @@ class Credentials extends StatelessWidget {
             height: appPadding / 2,
           ),
           RectangularInputField(
-            hintText: 'Password',
+            hintText: '密码',
             icon: Icons.lock,
             obscureText: true,
             controller: password,
@@ -51,19 +53,16 @@ class Credentials extends StatelessWidget {
           // ),
           RectangularButton(text: 'Connect the world',
               press: () async {
+               speechController speech=Get.find();
                 Loading.show(context);
                 logic.signIn(username.text, password.text).then((value){
                   if(value==true){
+                    speech.flutterTts.speak("欢迎使用");
                     Get.snackbar('欢迎', 'I\'m Plack Have a nice day');
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return mainPage();
-                        },
-                      ),
-                    );
+                    indexOfMenu.value=Menu['favourite']!;
+                    Get.offNamed('/main');
                   }else{
+                    speech.flutterTts.speak("错误,请检查你的用户名和密码");
                     Get.snackbar('错误', '请检查你的用户名和密码');
                   }
                 });

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:plack/component/Loading.dart';
+import 'package:plack/controller/speechController.dart';
 import 'package:plack/function/mainPage/mainpage.dart';
 
 import '../../../../common/constants.dart';
@@ -42,7 +43,9 @@ class Credentials extends StatelessWidget {
           ),
           RectangularButton(text: 'ReConnect the World',
               press: () async {
+            speechController speech=Get.find();
                 if(username.text==password.text){
+                  speech.flutterTts.speak('注意，新旧密码不能相同');
                   Get.snackbar('提示', '新旧密码不能相同');
                   return;
                 }

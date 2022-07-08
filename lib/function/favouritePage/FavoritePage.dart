@@ -278,7 +278,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                     Icons.edit_note,
                                                     size: 35,
                                                     color: textColor,
-                                                    semanticLabel: '退出登录',
+                                                    semanticLabel: '修改您的密码',
                                                   ),
                                                   onPress: (){
                                                     Navigator.push(context, MaterialPageRoute(
@@ -925,6 +925,7 @@ class _FavoritePageState extends State<FavoritePage>{
                                                     },
                                                     ico: Icon(
                                                       Icons.logout,
+                                                      semanticLabel: '退出登录',
                                                       size: 30,
                                                       color: textColor,
                                                     ),

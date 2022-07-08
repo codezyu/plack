@@ -8,6 +8,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:markdown_widget/markdown_toc.dart';
 import 'package:markdown_widget/markdown_widget.dart' as MKWidget;
 import 'package:markdown_widget/tags/video.dart';
+import 'package:plack/controller/speechController.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../common/constants.dart';
@@ -29,8 +30,10 @@ class NewsPage extends StatefulWidget{
 class _NewsPageState extends State<NewsPage>{
   //网页加载
   final Completer<WebViewController> _controller = Completer<WebViewController>();
-  final logic=Get.put(newsController());
-  final userLogic=Get.put(userInfoController());
+  newsController logic=Get.find();
+  userInfoController userLogic=Get.find();
+  speechController speech=Get.find();
+
   @override
   void initState(){
     print(widget.id);
@@ -61,12 +64,14 @@ class _NewsPageState extends State<NewsPage>{
           ringDiameter: 200,
           children: [
             IconButton(
-                icon: Icon(widget.isLike?Icons.favorite:Icons.favorite_border,color: Colors.redAccent,), onPressed: () {
-              setState((){widget.isLike=true;});
+                icon: Icon(widget.isLike?Icons.favorite:Icons.favorite_border,color: Colors.redAccent,semanticLabel: '点击为文章点赞',), onPressed: () {
+              speech.flutterTts.speak('感谢您的点赞');
+                  setState((){widget.isLike=true;});
               logic.setLove(widget.id,userLogic.userInfo.id!);
               Get.snackbar('点赞成功', '感谢您的点赞');
             }),
-            IconButton(icon: Icon(widget.isStar?Icons.star:Icons.star_outline,color: Colors.amberAccent,), onPressed: () {
+            IconButton(icon: Icon(widget.isStar?Icons.star:Icons.star_outline,color: Colors.amberAccent,semanticLabel: '点击收藏文章',), onPressed: () {
+              speech.flutterTts.speak('感谢您的收藏');
               setState((){widget.isStar=true;});
               logic.setCollection(widget.id,userLogic.userInfo.id!);
               Get.snackbar('收藏成功', '感谢您的收藏');

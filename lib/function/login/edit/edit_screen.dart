@@ -30,7 +30,6 @@ class EditScreen extends StatelessWidget {
             children: [
               HeadText(),
               Credentials(),
-              Social(),
             ],
           ),
         ),

@@ -56,6 +56,7 @@ class ModeTile extends StatelessWidget {
             Center(
               child: Text(
                 name,
+                semanticsLabel: name+','+introduction,
                 style: TextStyle(
                   fontSize: 30,
                   color: CustomColors.primaryTextColor,

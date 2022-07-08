@@ -134,10 +134,10 @@ class ocrController extends GetxController{
       Navigator.push(context, MaterialPageRoute(builder: (context)=>TextRecognizerView()));
     }
     else if(name=="物体分类"){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>ImageLabelView()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>ObjectDetectorView()));
     }
     else if(name=="不懂找我"){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>ObjectDetectorView()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>ImageLabelView()));
     }
     else if(name=="条形码扫描"){
       Navigator.push(context, MaterialPageRoute(builder: (context)=>BarcodeScannerView()));

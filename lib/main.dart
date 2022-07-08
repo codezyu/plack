@@ -12,13 +12,13 @@ import 'package:plack/function/login/Sigin/sigin_screen.dart';
 import 'package:plack/function/login/face/sign-in.dart';
 import 'package:plack/function/login/locator.dart';
 import 'package:plack/function/login/sigup/sigup_screen.dart';
-import 'package:plack/function/mainPage/mainpage.dart';
-import 'package:plack/function/newsPage/newsPage.dart';
 import 'package:plack/function/splashPage/splashPage.dart';
 
 import 'common/config.dart';
+import 'function/cameraPage/model/service_locator.dart';
 import 'function/favouritePage/FavoritePage.dart';
 import 'function/homePage/homePage.dart';
+import 'function/mainPage/mainPage.dart';
 
 Future<void> main() async {
   try{
@@ -30,6 +30,7 @@ Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
     cameras = await availableCameras();
     setupServices();
+    ServiceLocator.init();
   }catch(e){
   }
   runApp(

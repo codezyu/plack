@@ -4,11 +4,14 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../common/config.dart';
 import '../../common/constants.dart';
+import '../../controller/speechController.dart';
 
 enum ScreenMode { liveFeed, gallery }
 
@@ -44,6 +47,7 @@ class _CameraViewState extends State<CameraView> {
   double zoomLevel = 0.0, minZoomLevel = 0.0, maxZoomLevel = 0.0;
   final bool _allowPicker = true;
   bool _changingCameraLens = false;
+  speechController speech=Get.find();
 
   @override
   void initState() {
@@ -75,6 +79,7 @@ class _CameraViewState extends State<CameraView> {
   @override
   void dispose() {
     _stopLiveFeed();
+    speech.flutterTts.stop();
     super.dispose();
   }
 
@@ -195,7 +200,8 @@ class _CameraViewState extends State<CameraView> {
   }
 
   Widget _galleryBody() {
-    double logoAnim=0;
+    if(widget.text!=null)
+      speech.flutterTts.speak(widget.text!);
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -203,57 +209,44 @@ class _CameraViewState extends State<CameraView> {
         color: backgroundC[0],
         borderRadius: BorderRadius.circular(isAboutOpen ? 0 : 28),
       ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
+            shrinkWrap: true,
           children: [
-            Expanded(child: SizedBox(),
-            flex: 13,),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  logoAnim = 30;
-                });
-              },
-              child: AnimatedContainer(
-                curve: Curves.elasticIn,
-                onEnd: () {
-                  setState(() {
-                    logoAnim = 0;
-                  });
-                },
-                width: 250 + logoAnim,
-                height: 250 + logoAnim,
-                decoration: BoxDecoration(
-                  color: backgroundC[0],
-                  borderRadius:
-                  BorderRadius.circular(150 + logoAnim / 2),
-                  boxShadow: [
-                    BoxShadow(
-                        color: shadowC[0],
-                        offset: Offset(8, 6),
-                        blurRadius: 12),
-                    BoxShadow(
-                        color: lightShadowC[0],
-                        offset: Offset(-8, -6),
-                        blurRadius: 12),
+            Expanded(
+              flex: 23,
+              child: SizedBox(height: 100,),
+            ),
+            Expanded(flex:40,child: Container(
+              child: _image != null
+                  ? SizedBox(
+                height: 400,
+                width: 400,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: <Widget>[
+                    Image.file(_image!),
+                    if (widget.customPaint != null) widget.customPaint!,
                   ],
                 ),
-                duration: Duration(milliseconds: 600),
-                child: ClipOval(
-                  child: Icon(
-                    Icons.image_search,
-                    size: 60,
-                    color: Colors.blueGrey,
-                  ),
-                ),
-              ),
-            ),
+              )
+                  :null
+            ),),
             Expanded(
               flex: 13,
+              child: SizedBox(height: 50,),
+            ),
+            if (_image != null)
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                    '${_path == null ? '' : 'Image path: $_path'}\n\n${widget.text ?? ''}'),
+              ),
+            Expanded(
+              flex: 10,
               child: SizedBox(),
             ),
-            Row(
+            Expanded(flex: 40,
+            child:Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -282,16 +275,16 @@ class _CameraViewState extends State<CameraView> {
                         child: AutoSizeText(
                           '使用相机',
                           style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff35a79c)
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff35a79c)
                           ),
                         )
                     ),
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => _getImage(ImageSource.gallery),
+                  onTap: (){ _getImage(ImageSource.gallery);},
                   child: Container(
                     width:
                     MediaQuery.of(context).size.width / 2-20,
@@ -324,7 +317,7 @@ class _CameraViewState extends State<CameraView> {
                   ),
                 ),
               ],
-            ),
+            ),),
             Expanded(
               flex: 13,
               child: SizedBox(),

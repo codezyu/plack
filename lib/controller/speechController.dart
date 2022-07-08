@@ -6,6 +6,6 @@ class speechController extends GetxController{
   @override
   void onReady(){
     flutterTts.setLanguage("ch");
-    flutterTts.setSpeechRate(0.4);
+    flutterTts.setSpeechRate(2);
   }
 }

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/bindings_interface.dart';
 import 'package:plack/controller/dataController.dart';
+import 'package:plack/controller/speechController.dart';
 import 'package:plack/controller/userInfoController.dart';
 
 import '../../common/scaleFactor.dart';
@@ -41,5 +42,6 @@ class SplashBinding extends Bindings {
     Get.put<userInfoController>(userInfoController());
     Get.put<newsController>(newsController());
     Get.put<ocrController>(ocrController());
+    Get.put<speechController>(speechController());
   }
 }

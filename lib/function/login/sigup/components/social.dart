@@ -12,11 +12,8 @@ class Social extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'OR',
+          '或者',
           style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
-        ),
-        SizedBox(
-          height: appPadding,
         ),
         AccountCheck(
           login: false,

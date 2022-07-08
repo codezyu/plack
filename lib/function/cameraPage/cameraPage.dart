@@ -63,7 +63,6 @@ class _CameraPageState extends State<CameraPage> {
   }
   @override
   void initState(){
-    ServiceLocator.init();
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
     //后退拦截
@@ -186,6 +185,7 @@ class _CameraPageState extends State<CameraPage> {
                                       NeuButton(
                                         ico: Icon(
                                           Icons.menu_rounded,
+                                          semanticLabel: '回到菜单',
                                           size: 30,
                                           color: textColor,
                                         ),

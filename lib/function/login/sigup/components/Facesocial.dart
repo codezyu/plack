@@ -10,12 +10,12 @@ class FaceSocial extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          'OR',
-          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
-        ),
         SizedBox(
           height: appPadding,
+        ),
+        Text(
+          '或者',
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

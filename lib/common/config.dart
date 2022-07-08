@@ -24,8 +24,8 @@ const Map<String, int> Menu = {
 };
 const version='1.0.0';
 late String token;
-String ip='http://47.99.200.3';
-String port='8081';
+String ip='http://36.133.76.148';
+String port='23221';
 String signupUrl='/users';
 String signinUrl='/oauth/token';
 String userUpdateUrl='user/update';

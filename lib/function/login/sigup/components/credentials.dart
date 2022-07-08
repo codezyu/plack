@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:plack/controller/speechController.dart';
 import 'package:plack/function/mainPage/mainpage.dart';
 
 import '../../../../common/constants.dart';
@@ -24,7 +25,7 @@ class Credentials extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           RectangularInputField(
-            hintText: 'Username',
+            hintText: '用户名',
             icon: Icons.person,
             obscureText: false,
             controller: username,
@@ -33,7 +34,7 @@ class Credentials extends StatelessWidget {
             height: appPadding / 2,
           ),
           RectangularInputField(
-            hintText: 'Password',
+            hintText: '密码',
             icon: Icons.lock,
             obscureText: true,
             controller: password,
@@ -41,20 +42,16 @@ class Credentials extends StatelessWidget {
           SizedBox(
             height: appPadding / 2,
           ),
-          RectangularButton(text: 'Let\'s Start', press: ()async{
+          RectangularButton(text: '让我们开始吧', press: ()async{
             Loading.show(context);
+            speechController speech=Get.find();
            logic.signUp(username.text, password.text).then((value) {
              if (value) {
+               speech.flutterTts.speak('欢迎,'+'I\'m Plack Have a nice day');
                Get.snackbar('欢迎', 'I\'m Plack Have a nice day');
-               Navigator.push(
-                       context,
-                       MaterialPageRoute(
-                         builder: (context) {
-                           return mainPage();
-                         },
-                       ),
-                     );
+               Get.offNamed('/main');
              } else {
+               speech.flutterTts.speak('注意,'+'请检查您的网络');
                Get.snackbar('错误', '网络连接错误');
              }
            });
